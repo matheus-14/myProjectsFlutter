@@ -1,0 +1,120 @@
+* https://brasilapi.com.br/
+CNPJ
+
+* ReceitaWs
+- CNPJ
+https://www.receitaws.com.br/ (3 cnpj gratuitos por minuto)
+
+
+
+Classe CNPJ única
+Classe CNPJ brasilapi
+Classe CNPJ receitaws
+
+Quando consultar brasilapi ou receitaws, deve retornar a classe CNPJ única
+Depois, exibir os dados
+
+pacote DIO
+
+
+
+
+
+
+
+
+
+
+
+* https://www.consultamais.com.br/consulta/essencial
+CPF e CNPJ
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+* CPF.CNPJ
+- CNPJ e CPF
+https://www.cpfcnpj.com.br/pacotes.html
+
+* InfoSimples
+- CNPJ e CPF
+https://infosimples.com/
+
+* NFE.io
+- CNPJ e CPF
+https://nfe.io/docs/integracoes/
+
+* HUBDEV
+- CNPJ e CPF
+https://www.hubdodesenvolvedor.com.br/#pricing-table
+
+* SintegraWs
+- CNPJ e CPF
+https://www.sintegraws.com.br/api/documentacao-api-receita-federal.php
+
+
+
+
+
+--
+BigDataCorp
+https://www.solucoes.bigdatacorp.com.br/
+
+
+
+
+
+
+
+
+
+
+
+
+
+{
+  "cep": "30130-151",
+  "logradouro": "Rua Pernambuco",
+  "complemento": "até 399 - lado ímpar",
+  "bairro": "Funcionários",
+  "localidade": "Belo Horizonte",
+  "uf": "MG",
+  "ibge": "3106200",
+  "gia": "",
+  "ddd": "31",
+  "siafi": "4123"
+}
+
+
+{
+  "cep": "30130-151",
+  "logradouro": "Rua Pernambuco",
+  "complemento": "até 399 - lado ímpar",
+  "bairro": "Funcionários",
+  "localidade": "Belo Horizonte",
+  "uf": "MG",
+  "ibge": "3106200"
+}
+
+
+
+
+
+
+
+
+
+

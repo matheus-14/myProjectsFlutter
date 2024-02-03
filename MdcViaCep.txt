@@ -1,0 +1,80 @@
+// ignore_for_file: file_names, non_constant_identifier_names
+
+import 'dart:convert';
+import 'package:json_annotation/json_annotation.dart';
+import 'package:vip12/fClasses/MCepViaCepCidade.dart';
+import 'package:vip12/funcoes/fJson.dart';
+
+part 'MCepViaCep.g.dart';
+
+@JsonSerializable(explicitToJson: true)
+class MCepViaCep {
+  String? cep = "";
+  String? tipoLogradouro = "";
+  String? logradouro = "";
+  String? complemento = "";
+  String? bairro = "";
+  String? localidade = "";
+  String? ibge = "";
+  String? uf = "";
+  String? ddd = "";
+  String? cidade = "";
+  String? estado = "";
+  MCepViaCepCidade? cidade_info = MCepViaCepCidade();
+
+  MCepViaCep({
+    this.cep = "",
+    this.tipoLogradouro = "",
+    this.logradouro = "",
+    this.complemento = "",
+    this.bairro = "",
+    this.localidade = "",
+    this.ibge = "",
+    this.uf = "",
+    this.ddd = "",
+    this.cidade = "",
+    this.estado = "",
+    this.cidade_info,
+  });
+
+  MCepViaCep copyWith({
+    String? cep,
+    String? tipoLogradouro,
+    String? logradouro,
+    String? complemento,
+    String? bairro,
+    String? localidade,
+    String? ibge,
+    String? uf,
+    String? ddd,
+    String? cidade,
+    String? estado,
+    MCepViaCepCidade? cidade_info,
+  }) {
+    return MCepViaCep(
+      cep: cep ?? this.cep,
+      tipoLogradouro: tipoLogradouro ?? this.tipoLogradouro,
+      logradouro: logradouro ?? this.logradouro,
+      complemento: complemento ?? this.complemento,
+      bairro: bairro ?? this.bairro,
+      localidade: localidade ?? this.localidade,
+      ibge: ibge ?? this.ibge,
+      uf: uf ?? this.uf,
+      ddd: ddd ?? this.ddd,
+      cidade: cidade ?? this.cidade,
+      estado: estado ?? this.estado,
+      cidade_info: cidade_info ?? this.cidade_info,
+    );
+  }
+
+  factory MCepViaCep.fromJson(Map<String, dynamic> json) => _$MCepViaCepFromJson(json);
+  Map<String, dynamic> toJson() => _$MCepViaCepToJson(this);
+
+  factory MCepViaCep.fromJsonString(String jsonS) => MCepViaCep.fromJson(jsonDecode(jsonS));
+  String toJsonString() => jsonEncode(_$MCepViaCepToJson(this));
+
+  static List<MCepViaCep> lMCepViaCepFromJson(String str) => List<MCepViaCep>.from(jsonDecode(str).map((x) => MCepViaCep.fromJson(x)));
+  static List<MCepViaCep> lMCepViaCepFromMap(List<Map<String, Object?>> lMap) => lMap.map((x) => MCepViaCep.fromJson(x)).toList();
+
+  static String lMCepViaCepToJson(List<MCepViaCep> data) => jsonEncode(List<dynamic>.from(data.map((x) => x.toJson())), toEncodable: FJson.dataHoraSeralizer);
+}

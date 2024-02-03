@@ -1,0 +1,75 @@
+  static Future<MCepViaCep> pesquisarCep(String sCep, {CancelToken? tokenCancel, List<String>? listaTipos, int iOpcaoSite = 1}) async {
+    Response? response;
+    MCepViaCep viaCep = MCepViaCep();
+    String sContent = "";
+    String sMensagem = "";
+    String sUrl = "";
+    if (iOpcaoSite == 2) {
+      iOpcaoSite = 3;
+    }
+    if (iOpcaoSite != 2) {
+      if (iOpcaoSite == 1) {
+        sUrl = "https://viacep.com.br/ws/${sCep.trim().replaceAll('.', '').replaceAll('-', '').replaceAll('--', '')}/json";
+      } else if (iOpcaoSite == 3) {
+        sUrl = "https://opencep.com/v1/${sCep.trim().replaceAll('.', '').replaceAll('-', '').replaceAll('--', '')}";
+      }
+      response = await RestClient.executarGetASync(url: sUrl, jsonType: true, cancelToken: tokenCancel, bComSenha: false, bComHeadersNormais: false);
+
+      if (response.statusCode != 200) {
+        sMensagem = "Não foi possível consultar os dados.\n\nVerifque os logs do servidor de serviços.${FGeral.enderecosWS()}";
+        sMensagem += "\n(${response.statusCode})";
+        String respData = "";
+        if (response.data != null) {
+          respData = response.data;
+        }
+        if (respData.isNotEmpty) {
+          sMensagem += "\n$respData";
+        }
+        if (response.statusMessage!.isNotEmpty) {
+          sMensagem += "\n${response.statusMessage!}";
+        }
+        sContent = "";
+      } else {
+        if (response.data != null) {
+          sContent = response.data;
+        }
+        viaCep = MCepViaCep.fromJsonString(sContent.replaceAll("{\"payload\": ", "").replaceAll("}}", "}"));
+        if (viaCep.uf == "") {
+          viaCep.uf = viaCep.estado!.toUpperCase();
+        }
+
+        if (viaCep.localidade == "") {
+          viaCep.localidade = viaCep.cidade!.toUpperCase();
+        }
+
+        if (viaCep.ibge == "") {
+          viaCep.ibge = "${viaCep.cidade_info!.codigo_ibge}";
+        }
+
+        if (listaTipos != null && viaCep.tipoLogradouro == "") {
+          List<String> lEnd = viaCep.logradouro!.split(' ');
+          String ten;
+          if (lEnd.length > 1) {
+            ten = "${lEnd[0]} ${lEnd[1]}";
+            if (listaTipos.contains(ten)) {
+              viaCep.tipoLogradouro = ten;
+              viaCep.logradouro = viaCep.logradouro!.replaceAll("$ten ", "");
+            }
+          }
+          if (viaCep.tipoLogradouro == "" && lEnd.isNotEmpty) {
+            ten = lEnd[0];
+            if (listaTipos.contains(ten.toUpperCase())) {
+              viaCep.tipoLogradouro = ten.toUpperCase();
+              viaCep.logradouro = viaCep.logradouro!.replaceAll("$ten ", "");
+            }
+          }
+        }
+      }
+
+      if (sMensagem != "") {
+        FGeral.showMessage(sMensagem);
+      }
+    }
+
+    return viaCep;
+  }

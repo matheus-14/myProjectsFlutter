@@ -1,0 +1,122 @@
+// ignore_for_file: non_constant_identifier_names, file_names, empty_catches
+
+import 'dart:developer';
+
+import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
+
+class RestClient {
+  static Future<Response> executarGetASync({
+    String url = "",
+    String jsonContent = "",
+    bool jsonType = false,
+    CancelToken? cancelToken,
+    AtivacaoAcesso? oAtivacaoAcesso,
+    String sUsuario = "",
+    Map<String, String>? headersOutros,
+    bool bLogar = false,
+    bool bComSenha = true,
+    bool bComHeadersNormais = true,
+  }) async {
+    cancelToken ??= CancelToken();
+    String sMessageError = "";
+    // String messageCode = "";
+
+    // if (cancelToken == null) {
+    //   cancelToken = CancelToken();
+    // }
+
+    if (cancelToken.isCancelled) {
+      return CancelRequest();
+    }
+
+    if (url.isEmpty) {
+      return CancelRequest("O endereço não é válido.");
+    }
+
+    try {
+      Uri uri = Uri.parse(url);
+
+      Dio client = Dio();
+      client.options.connectTimeout = const Duration(seconds: 5);
+      client.options.receiveTimeout = const Duration(seconds: 120);
+      // client.options.sendTimeout = const Duration(seconds: 5);
+      if (1 == 2 && jsonType) {
+        client.options.responseType = ResponseType.json;
+      } else {
+        client.options.responseType = ResponseType.plain;
+      }
+
+      // client.options.contentType = Headers.formUrlEncodedContentType;
+
+      // new(new HttpClientHandler { AutomaticDecompression = System.Net.DecompressionMethods.GZip | System.Net.DecompressionMethods.Deflate });
+
+      if (cancelToken.isCancelled) {
+        // client.CancelPendingRequests();
+        return CancelRequest();
+      }
+
+      if (jsonType) {
+        // client.options.contentType = Headers.formUrlEncodedContentType;
+      }
+
+      try {
+        Response response;
+
+        ///
+        ///
+        /// GET request with a body data are not support on the web platform. Use POST/PUT instead.
+        ///
+        ///
+
+        // if (jsonContent.isNotEmpty) {
+        //   response = await client.getUri(uri, data: jsonContent);
+        // } else {
+        //   response = await client.getUri(uri);
+        // }
+        if (jsonContent.isNotEmpty) {
+          debugger();
+        }
+        response = await client.getUri(uri);
+
+        if (response.statusCode == 200) {
+          return response;
+        } else {
+          // String content = response.data;
+          // Response retorno = Response()..statusCode = response.statusCode;
+        }
+      } on DioException catch (e) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx and is also not 304.
+        if (e.response != null) {
+          if (kDebugMode) {
+            print(e.response!.data);
+            print(e.response!.headers);
+            print(e.response!.requestOptions);
+          }
+          sMessageError = "${e.response!.statusCode} \n${e.response!.statusMessage} \n${e.response!.requestOptions}";
+          // messageCode = "${e.response!.statusCode}";
+          return e.response!;
+        } else if (e.error != null) {
+          if (kDebugMode) {
+            print(e.error);
+          }
+          sMessageError = e.error.toString();
+          // messageCode = "${e.response!.statusCode}";
+        } else {
+          // Something happened in setting up or sending the request that triggered an Error
+          if (kDebugMode) {
+            print(e.requestOptions);
+            print(e.message);
+          } else if (e.message != null) {
+            sMessageError = e.message!;
+          }
+        }
+      }
+    } catch (e, stacktrace) {
+      // await FGeral.gerarLogOnline("Comando: RestClient.executarGetASync\n${e.toString()}\n${stacktrace.toString()}");
+    }
+
+    return CancelRequest(sMessageError);
+  }
+}
