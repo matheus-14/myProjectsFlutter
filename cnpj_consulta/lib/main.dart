@@ -3,6 +3,8 @@ import 'package:dio/dio.dart';
 import 'cnpj.dart';
 import 'cnpj_brasilapi.dart';
 import 'cnpj_receitaws.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -39,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text('Insira o CNPJ:', style: TextStyle(fontSize: 18),
+            Text('Insira o Cnpj:', style: TextStyle(fontSize: 18),
             ),
             SizedBox(height: 10),
             TextField(
@@ -49,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 });
               },
               decoration: InputDecoration(
-                hintText: 'Digite o CNPJ',
+                hintText: 'Digite o Cnpj',
                 border: OutlineInputBorder(),
               ),
             ),
@@ -84,7 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Future<void> _consultarCNPJ() async {
+ Future<void> _consultarCNPJ() async {
     try {
       if (selectedAPI == 'BrasilAPI') {
         final data = await CNPJBrasilAPI.consultarCNPJ(cnpjInput);
@@ -101,8 +103,8 @@ class _MyHomePageState extends State<MyHomePage> {
       setState(() {
         cnpjData = null;
       });
-      // Trate a exceção de forma apropriada, exibindo uma mensagem de erro ao usuário, por exemplo.
-      print('Erro ao consultar CNPJ: $e');
+
+        // Tratar quando não for possivel consultar - talvez snackbar
     }
   }
 }
