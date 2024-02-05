@@ -1,35 +1,49 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:json_annotation/json_annotation.dart';
-
-import 'cnpj.dart';
-
-part 'CNPJBrasilAPI.g.dart';
-
-@JsonSerializable(explicitToJson: true)
+import '../funcoes/fJson.dart';
 
 
+//import 'cnpj.dart';
+//part 'CNPJBrasilAPI.g.dart';
+
+part 'cnpj_brasilapi.g.dart';
 
 //-------------------------
+@JsonSerializable(explicitToJson: true)
 class CnaesSecundarios {
   int? codigo;
   String? descricao;
 
-  CnaesSecundarios({this.codigo, this.descricao});
+	CnaesSecundarios({
+		  this.codigo,
+		  this.descricao = "",
+  });
 
-  CnaesSecundarios.fromJson(Map<String, dynamic> json) {
-    codigo = json['codigo'];
-    descricao = json['descricao'];
-  }
+  CnaesSecundarios copyWith({
+        int? codigo,
+        String? descricao,
+    }) {
+      return CnaesSecundarios(
+        codigo: codigo ?? this.codigo,
+        descricao: descricao ?? this.descricao,
+    );
+    }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['codigo'] = this.codigo;
-    data['descricao'] = this.descricao;
-    return data;
-  }
+  factory CnaesSecundarios.fromJson(Map<String, dynamic> json) => _$CnaesSecundariosFromJson(json);
+  Map<String, dynamic> toJson() => _$CnaesSecundariosToJson(this);
+
+  factory CnaesSecundarios.fromJsonString(String jsonS) => CnaesSecundarios.fromJson(jsonDecode(jsonS));
+  String toJsonString() => jsonEncode(_$CnaesSecundariosToJson(this));
+
+  static List<CnaesSecundarios> lCnaesSecundariosFromJson(String str) => List<CnaesSecundarios>.from(jsonDecode(str).map((x) => CnaesSecundarios.fromJson(x)));
+  static List<CnaesSecundarios> lCnaesSecundariosFromMap(List<Map<String, Object?>> lMap) => lMap.map((x) => CnaesSecundarios.fromJson(x)).toList();
+
+  static String lCnaesSecundariosToJson(List<CnaesSecundarios> data) => jsonEncode(List<dynamic>.from(data.map((x) => x.toJson())), toEncodable: FJson.dataHoraSeralizer);
+
 }
 
+@JsonSerializable(explicitToJson: true)
 class Qsa {
   int? identificadorDeSocio;
   String? nomeSocio;
@@ -37,36 +51,61 @@ class Qsa {
   int? codigoQualificacaoSocio;
   int? percentualCapitalSocial;
   String? dataEntradaSociedade;
-  Null? cpfRepresentanteLegal;
-  Null? nomeRepresentanteLegal;
-  Null? codigoQualificacaoRepresentanteLegal;
+  String? cpfRepresentanteLegal;
+  String? nomeRepresentanteLegal;
+  String? codigoQualificacaoRepresentanteLegal;  //Pergunta: String mesmo ou 
 
   Qsa(
       {this.identificadorDeSocio,
-      this.nomeSocio,
-      this.cnpjCpfDoSocio,
+      this.nomeSocio = "",
+      this.cnpjCpfDoSocio = "",
       this.codigoQualificacaoSocio,
       this.percentualCapitalSocial,
-      this.dataEntradaSociedade,
-      this.cpfRepresentanteLegal,
-      this.nomeRepresentanteLegal,
-      this.codigoQualificacaoRepresentanteLegal});
+      this.dataEntradaSociedade = "",
+      this.cpfRepresentanteLegal = "",
+      this.nomeRepresentanteLegal = "",
+      this.codigoQualificacaoRepresentanteLegal = "",
+      });
 
-  Qsa.fromJson(Map<String, dynamic> json) {
-    identificadorDeSocio = json['identificador_de_socio'];
-    nomeSocio = json['nome_socio'];
-    cnpjCpfDoSocio = json['cnpj_cpf_do_socio'];
-    codigoQualificacaoSocio = json['codigo_qualificacao_socio'];
-    percentualCapitalSocial = json['percentual_capital_social'];
-    dataEntradaSociedade = json['data_entrada_sociedade'];
-    cpfRepresentanteLegal = json['cpf_representante_legal'];
-    nomeRepresentanteLegal = json['nome_representante_legal'];
-    codigoQualificacaoRepresentanteLegal =
-        json['codigo_qualificacao_representante_legal'];
-  }
+  Qsa copyWith({
+    int? identificadorDeSocio,
+    String? nomeSocio,
+    String? cnpjCpfDoSocio,
+    int? codigoQualificacaoSocio,
+    int? percentualCapitalSocial,
+    String? dataEntradaSociedade,
+    String? cpfRepresentanteLegal,
+    String? nomeRepresentanteLegal,
+    String? codigoQualificacaoRepresentanteLegal,
+	}) {
+	  return Qsa(
+      identificadorDeSocio: identificadorDeSocio ?? this.identificadorDeSocio,
+      nomeSocio: nomeSocio ?? this.nomeSocio,
+      cnpjCpfDoSocio: cnpjCpfDoSocio ?? this.cnpjCpfDoSocio,
+      codigoQualificacaoSocio: codigoQualificacaoSocio ?? this.codigoQualificacaoSocio,
+      percentualCapitalSocial: percentualCapitalSocial ?? this.percentualCapitalSocial,
+      dataEntradaSociedade: dataEntradaSociedade ?? this.dataEntradaSociedade,
+      cpfRepresentanteLegal: cpfRepresentanteLegal ?? this.cpfRepresentanteLegal,
+      nomeRepresentanteLegal: nomeRepresentanteLegal ?? this.nomeRepresentanteLegal,
+      codigoQualificacaoRepresentanteLegal: codigoQualificacaoRepresentanteLegal ?? this.codigoQualificacaoRepresentanteLegal,
+	);
+	}
+
+  factory Qsa.fromJson(Map<String, dynamic> json) => _$QsaFromJson(json);
+  Map<String, dynamic> toJson() => _$QsaToJson(this);
+
+  factory Qsa.fromJsonString(String jsonS) => Qsa.fromJson(jsonDecode(jsonS));
+  String toJsonString() => jsonEncode(_$QsaToJson(this));
+
+  static List<Qsa> lQsaFromJson(String str) => List<Qsa>.from(jsonDecode(str).map((x) => Qsa.fromJson(x)));
+  static List<Qsa> lQsaFromMap(List<Map<String, Object?>> lMap) => lMap.map((x) => Qsa.fromJson(x)).toList();
+
+  static String lQsaToJson(List<Qsa> data) => jsonEncode(List<dynamic>.from(data.map((x) => x.toJson())), toEncodable: FJson.dataHoraSeralizer);
 }
 //-------------------------
 
+
+@JsonSerializable(explicitToJson: true)
 class CNPJBrasilAPI {
 
   String? cnpj;

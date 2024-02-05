@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:dio/dio.dart';
-import 'cnpj.dart';
+//import 'package:dio/dio.dart';
+//import 'cnpj.dart';
 import 'cnpj_brasilapi.dart';
 import 'cnpj_receitaws.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+//import 'package:fluttertoast/fluttertoast.dart';
 
 
 void main() {
@@ -28,7 +28,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   String selectedAPI = 'BrasilAPI'; // Valor padrão
   String cnpjInput = '';
-  CNPJ? cnpjData;
+  dynamic cnpjData;
 
   @override
   Widget build(BuildContext context) {
@@ -89,14 +89,14 @@ class _MyHomePageState extends State<MyHomePage> {
  Future<void> _consultarCNPJ() async {
     try {
       if (selectedAPI == 'BrasilAPI') {
-        final data = await CNPJBrasilAPI.consultarCNPJ(cnpjInput);
+        final cnpjbrasil = await CNPJBrasilAPI.consultarCNPJ(cnpjInput);
         setState(() {
-          cnpjData = data;
+          cnpjData = cnpjbrasil;
         });
       } else if (selectedAPI == 'ReceitaWS') {
-        final data = await CNPJReceitaWS.consultarCNPJ(cnpjInput);
+        final cnpjReceita = await CNPJReceitaWS.consultarCNPJ(cnpjInput);
         setState(() {
-          cnpjData = data;
+          cnpjData = cnpjReceita;
         });
       }
     } catch (e) {

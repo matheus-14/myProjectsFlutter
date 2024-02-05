@@ -1,106 +1,163 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:json_annotation/json_annotation.dart';
+import '../funcoes/fJson.dart';
 
-import 'cnpj.dart';
 
-part 'CNPJReceitaWS.g.dart';
+//import 'cnpj.dart';
+//part 'CNPJReceitaWS.g.dart';
 
-@JsonSerializable(explicitToJson: true)
+part 'cnpj_receitaws.g.dart';
 
 //-----------------------------
+@JsonSerializable(explicitToJson: true)
 class AtividadePrincipal {
-      String? code;
-      String? text;
-
-      AtividadePrincipal({this.code, this.text});
-
-      AtividadePrincipal.fromJson(Map<String, dynamic> json) {
-        code = json['code'];
-        text = json['text'];
-      }
-
-      Map<String, dynamic> toJson() {
-        final Map<String, dynamic> data = new Map<String, dynamic>();
-        data['code'] = this.code;
-        data['text'] = this.text;
-        return data;
-      }
-    }
-
-  class AtividadesSecundarias {
   String? code;
   String? text;
 
-  AtividadesSecundarias({this.code, this.text});
+	AtividadePrincipal({
+		  this.code = "",
+		  this.text = "",
+  });
 
-  AtividadesSecundarias.fromJson(Map<String, dynamic> json) {
-    code = json['code'];
-    text = json['text'];
-  }
+  AtividadePrincipal copyWith({
+	    String? code,
+		  String? text,
+	}) {
+	  return AtividadePrincipal(
+		  code: code ?? this.code,
+		  text: text ?? this.text,
+	);
+	}
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['code'] = this.code;
-    data['text'] = this.text;
-    return data;
-  }
+  factory AtividadePrincipal.fromJson(Map<String, dynamic> json) => _$AtividadePrincipalFromJson(json);
+  Map<String, dynamic> toJson() => _$AtividadePrincipalToJson(this);
+
+  factory AtividadePrincipal.fromJsonString(String jsonS) => AtividadePrincipal.fromJson(jsonDecode(jsonS));
+  String toJsonString() => jsonEncode(_$AtividadePrincipalToJson(this));
+
+  static List<AtividadePrincipal> lAtividadePrincipalFromJson(String str) => List<AtividadePrincipal>.from(jsonDecode(str).map((x) => AtividadePrincipal.fromJson(x)));
+  static List<AtividadePrincipal> lAtividadePrincipalFromMap(List<Map<String, Object?>> lMap) => lMap.map((x) => AtividadePrincipal.fromJson(x)).toList();
+
+  static String lAtividadePrincipalToJson(List<AtividadePrincipal> data) => jsonEncode(List<dynamic>.from(data.map((x) => x.toJson())), toEncodable: FJson.dataHoraSeralizer);
+
 }
 
-    class Qsa {
-      String? nome;
-      String? qual;
-      String? paisOrigem;
-      String? nomeRepLegal;
-      String? qualRepLegal;
 
-      Qsa(
-          {this.nome,
-          this.qual,
-          this.paisOrigem,
-          this.nomeRepLegal,
-          this.qualRepLegal});
+@JsonSerializable(explicitToJson: true)
+class AtividadesSecundarias {
+  String? code;
+  String? text;
 
-      Qsa.fromJson(Map<String, dynamic> json) {
-        nome = json['nome'];
-        qual = json['qual'];
-        paisOrigem = json['pais_origem'];
-        nomeRepLegal = json['nome_rep_legal'];
-        qualRepLegal = json['qual_rep_legal'];
-      }
+	AtividadesSecundarias({
+		  this.code = "",
+		  this.text = "",
+    });
 
-      Map<String, dynamic> toJson() {
-        final Map<String, dynamic> data = new Map<String, dynamic>();
-        data['nome'] = this.nome;
-        data['qual'] = this.qual;
-        data['pais_origem'] = this.paisOrigem;
-        data['nome_rep_legal'] = this.nomeRepLegal;
-        data['qual_rep_legal'] = this.qualRepLegal;
-        return data;
-      }
-    }
+  AtividadesSecundarias copyWith({
+	    String? code,
+		  String? text,
+	}) {
+	  return AtividadesSecundarias(
+		  code: code ?? this.code,
+		  text: text ?? this.text,
+	);
+	}
 
-    class Billing {
-      bool? free;
-      bool? database;
+  factory AtividadesSecundarias.fromJson(Map<String, dynamic> json) => _$AtividadesSecundariasFromJson(json);
+  Map<String, dynamic> toJson() => _$AtividadesSecundariasToJson(this);
 
-      Billing({this.free, this.database});
+  factory AtividadesSecundarias.fromJsonString(String jsonS) => AtividadesSecundarias.fromJson(jsonDecode(jsonS));
+  String toJsonString() => jsonEncode(_$AtividadesSecundariasToJson(this));
 
-      Billing.fromJson(Map<String, dynamic> json) {
-        free = json['free'];
-        database = json['database'];
-      }
+  static List<AtividadesSecundarias> lAtividadesSecundariasFromJson(String str) => List<AtividadesSecundarias>.from(jsonDecode(str).map((x) => AtividadesSecundarias.fromJson(x)));
+  static List<AtividadesSecundarias> lAtividadesSecundariasFromMap(List<Map<String, Object?>> lMap) => lMap.map((x) => AtividadesSecundarias.fromJson(x)).toList();
 
-      Map<String, dynamic> toJson() {
-        final Map<String, dynamic> data = new Map<String, dynamic>();
-        data['free'] = this.free;
-        data['database'] = this.database;
-        return data;
-      }
-    }
+  static String lAtividadesSecundariasToJson(List<AtividadesSecundarias> data) => jsonEncode(List<dynamic>.from(data.map((x) => x.toJson())), toEncodable: FJson.dataHoraSeralizer);
+
+}
+
+
+@JsonSerializable(explicitToJson: true)
+class Qsa {
+  String? nome;
+  String? qual;
+  String? paisOrigem;
+  String? nomeRepLegal;
+  String? qualRepLegal;
+
+  Qsa({
+    this.nome = "",
+    this.qual = "",
+    this.paisOrigem = "",
+    this.nomeRepLegal = "",
+    this.qualRepLegal = "",
+	});
+
+  Qsa copyWith({
+	  String? nome,
+    String? qual,
+    String? paisOrigem,
+    String? nomeRepLegal,
+    String? qualRepLegal,
+	}) {
+	  return Qsa(
+		nome: nome ?? this.nome,
+		qual: qual ?? this.qual,
+		paisOrigem: paisOrigem ?? this.paisOrigem,
+		nomeRepLegal: nomeRepLegal ?? this.nomeRepLegal,
+		qualRepLegal: qualRepLegal ?? this.qualRepLegal,
+	);
+	}
+  
+  factory Qsa.fromJson(Map<String, dynamic> json) => _$QsaFromJson(json);
+  Map<String, dynamic> toJson() => _$QsaToJson(this);
+
+  factory Qsa.fromJsonString(String jsonS) => Qsa.fromJson(jsonDecode(jsonS));
+  String toJsonString() => jsonEncode(_$QsaToJson(this));
+
+  static List<Qsa> lQsaFromJson(String str) => List<Qsa>.from(jsonDecode(str).map((x) => Qsa.fromJson(x)));
+  static List<Qsa> lQsaFromMap(List<Map<String, Object?>> lMap) => lMap.map((x) => Qsa.fromJson(x)).toList();
+
+  static String lQsaToJson(List<Qsa> data) => jsonEncode(List<dynamic>.from(data.map((x) => x.toJson())), toEncodable: FJson.dataHoraSeralizer);
+}
+
+@JsonSerializable(explicitToJson: true)
+class Billing {
+  bool? free;
+  bool? database;
+
+  Billing({
+    this.free,
+    this.database,
+	});
+
+  Billing copyWith({
+	  bool? free,
+    bool? database,
+	}) {
+	  return Billing(
+		  free: free ?? this.free,
+		  database: database ?? this.database,
+	  );
+	}
+
+  factory Billing.fromJson(Map<String, dynamic> json) => _$BillingFromJson(json);
+  Map<String, dynamic> toJson() => _$BillingToJson(this);
+
+  factory Billing.fromJsonString(String jsonS) => Billing.fromJson(jsonDecode(jsonS));
+  String toJsonString() => jsonEncode(_$BillingToJson(this));
+
+  static List<Billing> lBillingFromJson(String str) => List<Billing>.from(jsonDecode(str).map((x) => Billing.fromJson(x)));
+  static List<Billing> lBillingFromMap(List<Map<String, Object?>> lMap) => lMap.map((x) => Billing.fromJson(x)).toList();
+
+  static String lBillingToJson(List<Billing> data) => jsonEncode(List<dynamic>.from(data.map((x) => x.toJson())), toEncodable: FJson.dataHoraSeralizer);
+
+}
 //-----------------------------
 
 
+@JsonSerializable(explicitToJson: true)
 class CNPJReceitaWS {
   String? status;
   String? ultimaAtualizacao;
