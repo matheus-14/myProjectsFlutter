@@ -187,10 +187,10 @@ CNPJBrasilAPI({
       this.qsa});
 
   CNPJBrasilAPI copyWith({
-    String? cnpj,
+    String? cnpj,  //
     int? identificadorMatrizFilial,
-    String? descricaoMatrizFilial,
-    String? razaoSocial,
+    String? descricaoMatrizFilial, //--
+    String? razaoSocial, //
     String? nomeFantasia,
     int? situacaoCadastral,
     String? descricaoSituacaoCadastral,
@@ -293,9 +293,49 @@ CNPJBrasilAPI({
       cnpjbrasil = CNPJBrasilAPI.fromJsonString(response.body);
 
       // CNPJNormal cnpjNormal = CNPJNormal();
-      // cnpjNormal.cnpj = cnpjbrasil.cnpj
-      // cnpjNormal.nome = cnpjbrasil.nomeFantasia;
-      // cnpjNormal.razao = cnpjbrasil.razaoSocial;
+
+      // CNPJNormal.cnpj = cnpjbrasil.cnpj;
+      // CNPJNormal.identificadorMatrizFilial = cnpjbrasil.identificadorMatrizFilial;
+      // CNPJNormal.MatrizFilial = cnpjbrasil.descricaoMatrizFilial;
+      // CNPJNormal.razao = cnpjbrasil.razaoSocial;
+      // CNPJNormal.nome = cnpjbrasil.nomeFantasia;
+      // CNPJNormal.situacaoCadastral = cnpjbrasil.situacaoCadastral;
+      // CNPJNormal.descricaoSituacaoCadastral = cnpjbrasil.descricaoSituacaoCadastral;
+      // CNPJNormal.dataSituacaoCadastral = cnpjbrasil.dataSituacaoCadastral;
+      // CNPJNormal.motivoSituacaoCadastral = cnpjbrasil.motivoSituacaoCadastral;
+      // CNPJNormal.nomeCidadeExterior = cnpjbrasil.nomeCidadeExterior;
+      // CNPJNormal.codigoNaturezaJuridica = cnpjbrasil.codigoNaturezaJuridica;
+      // CNPJNormal.dataInicioAtividade = cnpjbrasil.dataInicioAtividade;
+      // CNPJNormal.cnaeFiscal = cnpjbrasil.cnaeFiscal;
+      // CNPJNormal.cnaeFiscalDescricao = cnpjbrasil.cnaeFiscalDescricao;
+      // CNPJNormal.descricaoTipoLogradouro = cnpjbrasil.descricaoTipoLogradouro;
+      // CNPJNormal.logradouro = cnpjbrasil.logradouro;
+      // CNPJNormal.numero = cnpjbrasil.numero;
+      // CNPJNormal.complemento = cnpjbrasil.complemento;
+      // CNPJNormal.bairro = cnpjbrasil.bairro;
+      // CNPJNormal.cep = cnpjbrasil.cep;
+      // CNPJNormal.uf = cnpjbrasil.uf;
+      // CNPJNormal.codigoMunicipio = cnpjbrasil.codigoMunicipio;
+      // CNPJNormal.municipio = cnpjbrasil.municipio;
+      // CNPJNormal.dddTelefone1 = cnpjbrasil.dddTelefone1;
+      // CNPJNormal.dddTelefone2 = cnpjbrasil.dddTelefone2;
+      // CNPJNormal.dddFax = cnpjbrasil.dddFax;
+      // CNPJNormal.qualificacaoDoResponsavel = cnpjbrasil.qualificacaoDoResponsavel;
+      // CNPJNormal.capitalSocial = cnpjbrasil.capitalSocial;
+      // CNPJNormal.porte = cnpjbrasil.porte;
+      // CNPJNormal.descricaoPorte = cnpjbrasil.descricaoPorte;
+      // CNPJNormal.opcaoPeloSimples = cnpjbrasil.opcaoPeloSimples;
+      // CNPJNormal.dataOpcaoPeloSimples = cnpjbrasil.dataOpcaoPeloSimples;
+      // CNPJNormal.dataExclusaoDoSimples = cnpjbrasil.dataExclusaoDoSimples;
+      // CNPJNormal.opcaoPeloMei = cnpjbrasil.opcaoPeloMei;
+      // CNPJNormal.situacaoEspecial = cnpjbrasil.situacaoEspecial;
+      // CNPJNormal.dataSituacaoEspecial = cnpjbrasil.dataSituacaoEspecial;
+      // CNPJNormal.cnaesSecundarios = cnpjbrasil.cnaesSecundarios;
+      // CNPJNormal.qsa = cnpjbrasil.qsa;
+
+
+
+
       } catch (e) {
         debugger();
       }

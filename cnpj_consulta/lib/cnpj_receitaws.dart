@@ -193,11 +193,11 @@ class CNPJReceitaWS {
   CNPJReceitaWS({
       this.status = "",
       this.ultimaAtualizacao = "",
-      this.cnpj = "",
-      this.tipo = "",
+      this.cnpj = "",  //
+      this.tipo = "", //-
       this.porte = "",
-      this.nome = "",
-      this.fantasia = "",
+      this.nome = "", //
+      this.fantasia = "", //
       this.abertura = "",
       this.atividadePrincipal,
       this.atividadesSecundarias,
@@ -309,9 +309,10 @@ class CNPJReceitaWS {
 cnpjReceita = CNPJReceitaWS.fromJsonString(response.body);        
 
       // CNPJNormal cnpjNormal = CNPJNormal();
-      // cnpjNormal.cnpj = cnpjReceita.cnpj
+      // cnpjNormal.cnpj = cnpjReceita.cnpj;
       // cnpjNormal.nome = cnpjReceita.fantasia;
       // cnpjNormal.razao = cnpjReceita.nome;
+      // cnpjNormal.MatrizFilial = cnpjReceita.tipo;
 
       } catch (e) {
         debugger();
