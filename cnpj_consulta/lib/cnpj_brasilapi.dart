@@ -1,10 +1,9 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:http/http.dart' as http;
 import 'package:json_annotation/json_annotation.dart';
 import '../funcoes/fJson.dart';
 
-
-//import 'cnpj.dart';
 //part 'CNPJBrasilAPI.g.dart';
 
 part 'cnpj_brasilapi.g.dart';
@@ -127,7 +126,7 @@ class CNPJBrasilAPI {
   String? numero;
   String? complemento;
   String? bairro;
-  int? cep;
+  String? cep;
   String? uf;
   int? codigoMunicipio;
   String? municipio;
@@ -136,7 +135,7 @@ class CNPJBrasilAPI {
   String? dddFax;
   int? qualificacaoDoResponsavel;
   int? capitalSocial;
-  int? porte;
+  String? porte;
   String? descricaoPorte;
   bool? opcaoPeloSimples;
   DateTime? dataOpcaoPeloSimples;
@@ -167,7 +166,7 @@ CNPJBrasilAPI({
       this.numero = "",
       this.complemento = "",
       this.bairro = "",
-      this.cep,
+      this.cep = "",
       this.uf = "",
       this.codigoMunicipio,
       this.municipio = "",
@@ -176,7 +175,7 @@ CNPJBrasilAPI({
       this.dddFax = "",
       this.qualificacaoDoResponsavel,
       this.capitalSocial,
-      this.porte,
+      this.porte = "",
       this.descricaoPorte = "",
       this.opcaoPeloSimples,
       this.dataOpcaoPeloSimples,
@@ -207,7 +206,7 @@ CNPJBrasilAPI({
     String? numero,
     String? complemento,
     String? bairro,
-    int? cep,
+    String? cep,
     String? uf,
     int? codigoMunicipio,
     String? municipio,
@@ -216,7 +215,7 @@ CNPJBrasilAPI({
     String? dddFax,
     int? qualificacaoDoResponsavel,
     int? capitalSocial,
-    int? porte,
+    String? porte,
     String? descricaoPorte,
     bool? opcaoPeloSimples,
     DateTime? dataOpcaoPeloSimples,
@@ -282,12 +281,24 @@ CNPJBrasilAPI({
 
   static Future<CNPJBrasilAPI> consultarCNPJ(String cnpj) async {
 
-    final url = Uri.parse("https://brasilapi.com.br/api/cnpj/v1/{cnpj.trim().replaceAll('.', '').replaceAll('-', '').replaceAll('/', '')}");
+
+    final url = Uri.parse("https://brasilapi.com.br/api/cnpj/v1/${cnpj.trim().replaceAll('.', '').replaceAll('-', '').replaceAll('/', '')}");
 
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
-      CNPJBrasilAPI cnpjbrasil = CNPJBrasilAPI.fromJsonString(response.body);
+      CNPJBrasilAPI cnpjbrasil = CNPJBrasilAPI();
+      try {
+        
+      cnpjbrasil = CNPJBrasilAPI.fromJsonString(response.body);
+
+      // CNPJNormal cnpjNormal = CNPJNormal();
+      // cnpjNormal.cnpj = cnpjbrasil.cnpj
+      // cnpjNormal.nome = cnpjbrasil.nomeFantasia;
+      // cnpjNormal.razao = cnpjbrasil.razaoSocial;
+      } catch (e) {
+        debugger();
+      }
       return cnpjbrasil;
     } else {
       throw Exception('Aconteceu uma falha ao consultar o Cnpj na BrasilAPI.');

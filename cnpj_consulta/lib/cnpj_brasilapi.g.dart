@@ -66,7 +66,7 @@ CNPJBrasilAPI _$CNPJBrasilAPIFromJson(Map<String, dynamic> json) =>
       numero: json['numero'] as String? ?? "",
       complemento: json['complemento'] as String? ?? "",
       bairro: json['bairro'] as String? ?? "",
-      cep: json['cep'] as int?,
+      cep: json['cep'] as String? ?? "",
       uf: json['uf'] as String? ?? "",
       codigoMunicipio: json['codigoMunicipio'] as int?,
       municipio: json['municipio'] as String? ?? "",
@@ -75,7 +75,7 @@ CNPJBrasilAPI _$CNPJBrasilAPIFromJson(Map<String, dynamic> json) =>
       dddFax: json['dddFax'] as String? ?? "",
       qualificacaoDoResponsavel: json['qualificacaoDoResponsavel'] as int?,
       capitalSocial: json['capitalSocial'] as int?,
-      porte: json['porte'] as int?,
+      porte: json['porte'] as String? ?? "",
       descricaoPorte: json['descricaoPorte'] as String? ?? "",
       opcaoPeloSimples: json['opcaoPeloSimples'] as bool?,
       dataOpcaoPeloSimples: json['dataOpcaoPeloSimples'] == null

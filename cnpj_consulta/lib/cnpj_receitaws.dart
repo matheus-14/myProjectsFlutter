@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:http/http.dart' as http;
 import 'package:json_annotation/json_annotation.dart';
 import '../funcoes/fJson.dart';
@@ -298,12 +299,23 @@ class CNPJReceitaWS {
  
   static Future<CNPJReceitaWS> consultarCNPJ(String cnpj) async {
 
-    final url = Uri.parse("https://receitaws.com.br/v1/cnpj/{cnpj.trim().replaceAll('.', '').replaceAll('-', '').replaceAll('/', '')}");
+    final url = Uri.parse("https://receitaws.com.br/v1/cnpj/${cnpj.trim().replaceAll('.', '').replaceAll('-', '').replaceAll('/', '')}");
 
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
-      CNPJReceitaWS cnpjReceita = CNPJReceitaWS.fromJsonString(response.body);
+      CNPJReceitaWS cnpjReceita = CNPJReceitaWS();
+      try {
+cnpjReceita = CNPJReceitaWS.fromJsonString(response.body);        
+
+      // CNPJNormal cnpjNormal = CNPJNormal();
+      // cnpjNormal.cnpj = cnpjReceita.cnpj
+      // cnpjNormal.nome = cnpjReceita.fantasia;
+      // cnpjNormal.razao = cnpjReceita.nome;
+
+      } catch (e) {
+        debugger();
+      }
       return cnpjReceita;
     } else {
       throw Exception('Aconteceu uma falha ao consultar o Cnpj na ReceitaWS.');

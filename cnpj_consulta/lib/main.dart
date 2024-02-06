@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 //import 'package:dio/dio.dart';
 //import 'cnpj.dart';
@@ -26,8 +28,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String selectedAPI = 'BrasilAPI'; // Valor padrão
-  String cnpjInput = '';
+  String selecionadaAPI = 'BrasilAPI'; // Valor padrão
+  String cnpjEntrada = '';
   dynamic cnpjData;
 
   @override
@@ -41,23 +43,23 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text('Insira o Cnpj:', style: TextStyle(fontSize: 18),
+            const Text('Insira o Cnpj:', style: TextStyle(fontSize: 18),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             TextField(
               onChanged: (value) {
                 setState(() {
-                  cnpjInput = value;
+                  cnpjEntrada = value;
                 });
               },
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'Digite o Cnpj',
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             DropdownButton<String>(
-              value: selectedAPI,
+              value: selecionadaAPI,
               items: ['BrasilAPI', 'ReceitaWS']
                   .map((api) => DropdownMenuItem<String>(
                         value: api,
@@ -66,18 +68,18 @@ class _MyHomePageState extends State<MyHomePage> {
                   .toList(),
               onChanged: (value) {
                 setState(() {
-                  selectedAPI = value!;
+                  selecionadaAPI = value!;
                 });
               },
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 _consultarCNPJ();
               },
-              child: Text('Consultar'),
+              child: const Text('Consultar'),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             if (cnpjData != null)
               Text('CNPJ consultado: ${cnpjData!.cnpj}'),
           ],
@@ -88,13 +90,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
  Future<void> _consultarCNPJ() async {
     try {
-      if (selectedAPI == 'BrasilAPI') {
-        final cnpjbrasil = await CNPJBrasilAPI.consultarCNPJ(cnpjInput);
+      debugger();
+      if (selecionadaAPI == 'BrasilAPI') {
+        final cnpjbrasil = await CNPJBrasilAPI.consultarCNPJ(cnpjEntrada);
         setState(() {
           cnpjData = cnpjbrasil;
         });
-      } else if (selectedAPI == 'ReceitaWS') {
-        final cnpjReceita = await CNPJReceitaWS.consultarCNPJ(cnpjInput);
+      } else if (selecionadaAPI == 'ReceitaWS') {
+        final cnpjReceita = await CNPJReceitaWS.consultarCNPJ(cnpjEntrada);
         setState(() {
           cnpjData = cnpjReceita;
         });
@@ -104,7 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
         cnpjData = null;
       });
 
-        // Tratar quando não for possivel consultar - talvez snackbar
+        // Tratar 
     }
   }
 }
