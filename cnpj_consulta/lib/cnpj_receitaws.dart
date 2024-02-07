@@ -126,8 +126,8 @@ class Billing {
   bool? database;
 
   Billing({
-    this.free,
-    this.database,
+    this.free = true,
+    this.database = true,
 	});
 
   Billing copyWith({
@@ -325,7 +325,7 @@ class CNPJReceitaWS {
 //equivalentes
       // CNPJNormal.nome = CNPJReceitaWS.nome;
       // CNPJNormal.tipoMatrizFilial = CNPJReceitaWS.tipo;
-      // CNPJNormal.naturezaJuridica = CNPJReceitaWS.codigoNaturezaJuridica;
+      // CNPJNormal.naturezaJuridica = int.parse(CNPJReceitaWS.codigoNaturezaJuridica.split(' ')[0].replaceAll('_', '').trim());
       // CNPJNormal.abertura = CNPJReceitaWS.abertura;
       // CNPJNormal.telefone = CNPJReceitaWS.telefone;
       // CNPJNormal.situacaoCadastral = CNPJReceitaWS.situacao;

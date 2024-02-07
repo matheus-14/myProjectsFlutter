@@ -23,26 +23,27 @@ class CNPJNormal {
   String? situacaoEspecial;
   String? dataSituacaoEspecial;
   String? tipoMatrizFilial;
-  String? naturezaJuridica;
+  int? naturezaJuridica;
   String? abertura;
   String? telefone;
   String? situacaoCadastral;
   String? dataSituacaoCadastral;
   String? descricaoMotivoSituacaoCadastral;
-  String? identificadorMatrizFilial;
-  String? codigoMunicipio;
-  String? motivoSituacaoCadastral;
+  int? identificadorMatrizFilial;
+  int? codigoMunicipio;
+  int? motivoSituacaoCadastral;
   String? nomeCidadeExterior;
   String? descricaoTipoLogradouro;
   String? dddTelefone2;
   String? dddFax;
   String? qualificacaoDoResponsavel;
   String? descricaoPorte;
-  String? opcaoPeloSimples;
-  String? dataOpcaoPeloSimples;
-  String? dataExclusaoDoSimples;
+  bool? opcaoPeloSimples;
+  DateTime? dataOpcaoPeloSimples;
+  DateTime? dataExclusaoDoSimples;
   String? opcaoPeloMei;
   String? cnaesSecundarios;
+
   String? cnaeFiscal;
   String? cnaeFiscalDescricao;
 
@@ -63,24 +64,24 @@ class CNPJNormal {
     this.situacaoEspecial = "",
     this.dataSituacaoEspecial = "",
     this.tipoMatrizFilial = "",
-    this.naturezaJuridica = "",
+    this.naturezaJuridica,
     this.abertura = "",
     this.telefone = "",
     this.situacaoCadastral = "",
     this.dataSituacaoCadastral = "",
     this.descricaoMotivoSituacaoCadastral = "",
-    this.identificadorMatrizFilial = "",
-    this.codigoMunicipio = "",
-    this.motivoSituacaoCadastral = "",
+    this.identificadorMatrizFilial,
+    this.codigoMunicipio,
+    this.motivoSituacaoCadastral,
     this.nomeCidadeExterior = "",
     this.descricaoTipoLogradouro = "",
     this.dddTelefone2 = "",
     this.dddFax = "",
     this.qualificacaoDoResponsavel = "",
     this.descricaoPorte = "",
-    this.opcaoPeloSimples = "",
-    this.dataOpcaoPeloSimples = "",
-    this.dataExclusaoDoSimples = "",
+    this.opcaoPeloSimples,
+    this.dataOpcaoPeloSimples,
+    this.dataExclusaoDoSimples,
     this.opcaoPeloMei = "",
     this.cnaesSecundarios = "",
     this.cnaeFiscal = "",
@@ -104,24 +105,24 @@ class CNPJNormal {
     String? situacaoEspecial,
     String? dataSituacaoEspecial,
     String? tipoMatrizFilial,
-    String? naturezaJuridica,
+    int? naturezaJuridica,
     String? abertura,
     String? telefone,
     String? situacaoCadastral,
     String? dataSituacaoCadastral,
     String? descricaoMotivoSituacaoCadastral,
-    String? identificadorMatrizFilial,
-    String? codigoMunicipio,
-    String? motivoSituacaoCadastral,
+    int? identificadorMatrizFilial,
+    int? codigoMunicipio,
+    int? motivoSituacaoCadastral,
     String? nomeCidadeExterior,
     String? descricaoTipoLogradouro,
     String? dddTelefone2,
     String? dddFax,
     String? qualificacaoDoResponsavel,
     String? descricaoPorte,
-    String? opcaoPeloSimples,
-    String? dataOpcaoPeloSimples,
-    String? dataExclusaoDoSimples,
+    bool? opcaoPeloSimples,
+    DateTime? dataOpcaoPeloSimples,
+    DateTime? dataExclusaoDoSimples,
     String? opcaoPeloMei,
     String? cnaesSecundarios,
     String? cnaeFiscal,

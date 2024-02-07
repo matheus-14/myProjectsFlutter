@@ -52,7 +52,7 @@ FALTAM:
 
 - CNPJNormal.tipoMatrizFilial > descricaoMatrizFilial (string) == tipo (string) 
 
-- CNPJNormal.naturezaJuridica > codigoNaturezaJuridica (int) == naturezaJuridica (string)
+- CNPJNormal.naturezaJuridica (int )> codigoNaturezaJuridica (int) == naturezaJuridica (string)
 
 - CNPJNormal.dataSituacaoEspecial > dataSituacaoEspecial (datetime)  == dataSituacaoEspecial (string)
 

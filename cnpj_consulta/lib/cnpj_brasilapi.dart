@@ -311,7 +311,7 @@ CNPJBrasilAPI({
       // CNPJNormal.qsa = CNPJBrasilAPI.qsa;
       // CNPJNormal.situacaoEspecial = CNPJBrasilAPI.situacaoEspecial;
       // CNPJNormal.dataSituacaoEspecial = CNPJBrasilAPI.dataSituacaoEspecial;
-//equivalentes
+//equivalentes 
       // CNPJNormal.nome = CNPJBrasilAPI.nomeFantasia;
       // CNPJNormal.tipoMatrizFilial = CNPJBrasilAPI.descricaoMatrizFilial;
       // CNPJNormal.naturezaJuridica = CNPJBrasilAPI.codigoNaturezaJuridica;
@@ -322,7 +322,7 @@ CNPJBrasilAPI({
       // CNPJNormal.descricaoMotivoSituacaoCadastral = CNPJBrasilAPI.descricaoMotivoSituacaoCadastral;
       // CNPJNormal.dataSituacaoCadastral = CNPJBrasilAPI.dataSituacaoCadastral;
 
-//particular
+//particular --- podem ficar vazios no caso de ser a outra api?
       // CNPJNormal.identificadorMatrizFilial = CNPJBrasilAPI.identificadorMatrizFilial;
       // CNPJNormal.codigoMunicipio = CNPJBrasilAPI.codigoMunicipio;
       // CNPJNormal.motivoSituacaoCadastral = CNPJBrasilAPI.motivoSituacaoCadastral;

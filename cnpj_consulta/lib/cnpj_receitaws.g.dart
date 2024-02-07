@@ -49,8 +49,8 @@ Map<String, dynamic> _$QsaToJson(Qsa instance) => <String, dynamic>{
     };
 
 Billing _$BillingFromJson(Map<String, dynamic> json) => Billing(
-      free: json['free'] as bool?,
-      database: json['database'] as bool?,
+      free: json['free'] as bool? ?? true,
+      database: json['database'] as bool? ?? true,
     );
 
 Map<String, dynamic> _$BillingToJson(Billing instance) => <String, dynamic>{
