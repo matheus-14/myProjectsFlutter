@@ -1,10 +1,11 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-//import 'package:dio/dio.dart';
-//import 'cnpj.dart';
+import 'package:dio/dio.dart';
+import 'cnpj_normal.dart';
 import 'cnpj_brasilapi.dart';
 import 'cnpj_receitaws.dart';
+
 //import 'package:fluttertoast/fluttertoast.dart';
 
 

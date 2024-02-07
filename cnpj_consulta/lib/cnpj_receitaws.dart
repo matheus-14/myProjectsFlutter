@@ -3,10 +3,7 @@ import 'dart:developer';
 import 'package:http/http.dart' as http;
 import 'package:json_annotation/json_annotation.dart';
 import '../funcoes/fJson.dart';
-
-
-//import 'cnpj.dart';
-//part 'CNPJReceitaWS.g.dart';
+//import 'cnpj_normal.dart';
 
 part 'cnpj_receitaws.g.dart';
 
@@ -219,7 +216,8 @@ class CNPJReceitaWS {
       this.dataSituacaoEspecial = "",
       this.capitalSocial = "",
       this.qsa,
-      this.billing});
+      this.billing
+      });
 
   CNPJReceitaWS copyWith({
     String? status,
@@ -306,13 +304,41 @@ class CNPJReceitaWS {
     if (response.statusCode == 200) {
       CNPJReceitaWS cnpjReceita = CNPJReceitaWS();
       try {
-cnpjReceita = CNPJReceitaWS.fromJsonString(response.body);        
+      cnpjReceita = CNPJReceitaWS.fromJsonString(response.body);        
 
       // CNPJNormal cnpjNormal = CNPJNormal();
-      // cnpjNormal.cnpj = cnpjReceita.cnpj;
-      // cnpjNormal.nome = cnpjReceita.fantasia;
-      // cnpjNormal.razao = cnpjReceita.nome;
-      // cnpjNormal.MatrizFilial = cnpjReceita.tipo;
+//iguais
+      // CNPJNormal.cnpj = cnpjreceita.cnpj;
+      // CNPJNormal.porte = cnpjreceita.porte;
+      // CNPJNormal.razao = cnpjreceita.razaoSocial;
+      // CNPJNormal.nome = cnpjreceita.nome;
+      // CNPJNormal.logradouro = cnpjreceita.logradouro;
+      // CNPJNormal.numero = cnpjreceita.numero;
+      // CNPJNormal.complemento = cnpjreceita.complemento;
+      // CNPJNormal.bairro = cnpjreceita.bairro;
+      // CNPJNormal.cep = cnpjreceita.cep;
+      // CNPJNormal.uf = cnpjreceita.uf;
+      // CNPJNormal.municipio = cnpjreceita.municipio;
+      // CNPJNormal.capitalSocial = cnpjreceita.capitalSocial;
+      // CNPJNormal.qsa = cnpjreceita.qsa;
+      // CNPJNormal.situacaoEspecial = cnpjreceita.situacaoEspecial;
+      // CNPJNormal.dataSituacaoEspecial = cnpjreceita.dataSituacaoEspecial;
+//equivalentes
+      // CNPJNormal.tipoMatrizFilial = cnpjreceita.tipo;
+      // CNPJNormal.naturezaJuridica = cnpjreceita.codigoNaturezaJuridica;
+//particular  --- ainda precisa colocar na classe CNPJNormal ---
+      // CNPJNormal.status = cnpjreceita.status;
+      // CNPJNormal.ultimaAtualizacao = cnpjreceita.ultimaAtualizacao;
+      // CNPJNormal.abertura = cnpjreceita.abertura;
+      // CNPJNormal.atividadePrincipal = cnpjreceita.atividadePrincipal;
+      // CNPJNormal.atividadesSecundarias = cnpjreceita.atividadesSecundarias;
+      // CNPJNormal.email = cnpjreceita.email;
+      // CNPJNormal.telefone = cnpjreceita.telefone;
+      // CNPJNormal.efr = cnpjreceita.efr;
+      // CNPJNormal.situacao = cnpjreceita.situacao;
+      // CNPJNormal.dataSituacao = cnpjreceita.dataSituacao;
+      // CNPJNormal.motivoSituacao = cnpjreceita.motivoSituacao;
+      // CNPJNormal.billing = cnpjreceita.billing;      
 
       } catch (e) {
         debugger();
