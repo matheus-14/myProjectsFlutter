@@ -9,6 +9,7 @@ part 'cnpj_normal.g.dart';
 class CNPJNormal {
   String? cnpj;
   String? porte;
+  String? razao;
   String? nome;
   String? logradouro;
   String? numero;
@@ -16,14 +17,39 @@ class CNPJNormal {
   String? bairro;
   String? cep;
   String? uf;
+  String? municipio;
   String? capitalSocial;
   String? qsa;
   String? situacaoEspecial;
   String? dataSituacaoEspecial;
+  String? tipoMatrizFilial;
+  String? naturezaJuridica;
+  String? abertura;
+  String? telefone;
+  String? situacaoCadastral;
+  String? dataSituacaoCadastral;
+  String? descricaoMotivoSituacaoCadastral;
+  String? identificadorMatrizFilial;
+  String? codigoMunicipio;
+  String? motivoSituacaoCadastral;
+  String? nomeCidadeExterior;
+  String? descricaoTipoLogradouro;
+  String? dddTelefone2;
+  String? dddFax;
+  String? qualificacaoDoResponsavel;
+  String? descricaoPorte;
+  String? opcaoPeloSimples;
+  String? dataOpcaoPeloSimples;
+  String? dataExclusaoDoSimples;
+  String? opcaoPeloMei;
+  String? cnaesSecundarios;
+  String? cnaeFiscal;
+  String? cnaeFiscalDescricao;
 
   CNPJNormal({
     this.cnpj = "",
     this.porte = "",
+    this.razao = "",
     this.nome = "",
     this.logradouro = "",
     this.numero = "",
@@ -31,15 +57,40 @@ class CNPJNormal {
     this.bairro = "",
     this.cep = "",
     this.uf = "",
+    this.municipio = "",
     this.capitalSocial = "",
     this.qsa = "",
     this.situacaoEspecial = "",
     this.dataSituacaoEspecial = "",
+    this.tipoMatrizFilial = "",
+    this.naturezaJuridica = "",
+    this.abertura = "",
+    this.telefone = "",
+    this.situacaoCadastral = "",
+    this.dataSituacaoCadastral = "",
+    this.descricaoMotivoSituacaoCadastral = "",
+    this.identificadorMatrizFilial = "",
+    this.codigoMunicipio = "",
+    this.motivoSituacaoCadastral = "",
+    this.nomeCidadeExterior = "",
+    this.descricaoTipoLogradouro = "",
+    this.dddTelefone2 = "",
+    this.dddFax = "",
+    this.qualificacaoDoResponsavel = "",
+    this.descricaoPorte = "",
+    this.opcaoPeloSimples = "",
+    this.dataOpcaoPeloSimples = "",
+    this.dataExclusaoDoSimples = "",
+    this.opcaoPeloMei = "",
+    this.cnaesSecundarios = "",
+    this.cnaeFiscal = "",
+    this.cnaeFiscalDescricao = "",
   });
 
   CNPJNormal copyWit({
     String? cnpj,
     String? porte,
+    String? razao,
     String? nome,
     String? logradouro,
     String? numero,
@@ -47,15 +98,40 @@ class CNPJNormal {
     String? bairro,
     String? cep,
     String? uf,
+    String? municipio,
     String? capitalSocial,
     String? qsa,
     String? situacaoEspecial,
     String? dataSituacaoEspecial,
+    String? tipoMatrizFilial,
+    String? naturezaJuridica,
+    String? abertura,
+    String? telefone,
+    String? situacaoCadastral,
+    String? dataSituacaoCadastral,
+    String? descricaoMotivoSituacaoCadastral,
+    String? identificadorMatrizFilial,
+    String? codigoMunicipio,
+    String? motivoSituacaoCadastral,
+    String? nomeCidadeExterior,
+    String? descricaoTipoLogradouro,
+    String? dddTelefone2,
+    String? dddFax,
+    String? qualificacaoDoResponsavel,
+    String? descricaoPorte,
+    String? opcaoPeloSimples,
+    String? dataOpcaoPeloSimples,
+    String? dataExclusaoDoSimples,
+    String? opcaoPeloMei,
+    String? cnaesSecundarios,
+    String? cnaeFiscal,
+    String? cnaeFiscalDescricao
 
   }) {
     return CNPJNormal(
       cnpj: cnpj ?? this.cnpj,
       porte: porte ?? this.porte,
+      razao: razao ?? this.razao,
       nome: nome ?? this.nome,
       logradouro: logradouro ?? this.logradouro,
       numero: numero ?? this.numero,
@@ -63,10 +139,34 @@ class CNPJNormal {
       bairro: bairro ?? this.bairro,
       cep: cep ?? this.cep,
       uf: uf ?? this.uf,
+      municipio: municipio ?? this.municipio,
       capitalSocial: capitalSocial ?? this.capitalSocial,
       qsa: qsa ?? this.qsa,
       situacaoEspecial: situacaoEspecial ?? this.situacaoEspecial,
       dataSituacaoEspecial: dataSituacaoEspecial ?? this.dataSituacaoEspecial,
+      tipoMatrizFilial: tipoMatrizFilial ?? this.tipoMatrizFilial,
+      naturezaJuridica: naturezaJuridica ?? this.naturezaJuridica,
+      abertura: abertura ?? this.abertura,
+      telefone: telefone ?? this.telefone,
+      situacaoCadastral: situacaoCadastral ?? this.situacaoCadastral,
+      dataSituacaoCadastral: dataSituacaoCadastral ?? this.dataSituacaoCadastral,
+      descricaoMotivoSituacaoCadastral: descricaoMotivoSituacaoCadastral ?? this.descricaoMotivoSituacaoCadastral,
+      identificadorMatrizFilial: identificadorMatrizFilial ?? this.identificadorMatrizFilial,
+      codigoMunicipio: codigoMunicipio ?? this.codigoMunicipio,
+      motivoSituacaoCadastral: motivoSituacaoCadastral ?? this.motivoSituacaoCadastral,
+      nomeCidadeExterior: nomeCidadeExterior ?? this.nomeCidadeExterior,
+      descricaoTipoLogradouro: descricaoTipoLogradouro ?? this.descricaoTipoLogradouro,
+      dddTelefone2: dddTelefone2 ?? this.dddTelefone2,
+      dddFax: dddFax ?? this.dddFax,
+      qualificacaoDoResponsavel: qualificacaoDoResponsavel ?? this.qualificacaoDoResponsavel,
+      descricaoPorte: descricaoPorte ?? this.descricaoPorte,
+      opcaoPeloSimples: opcaoPeloSimples ?? this.opcaoPeloSimples,
+      dataOpcaoPeloSimples: dataOpcaoPeloSimples ?? this.dataOpcaoPeloSimples,
+      dataExclusaoDoSimples: dataExclusaoDoSimples ?? this.dataExclusaoDoSimples,
+      opcaoPeloMei: opcaoPeloMei ?? this.opcaoPeloMei,
+      cnaesSecundarios: cnaesSecundarios ?? this.cnaesSecundarios,
+      cnaeFiscal: cnaeFiscal ?? this.cnaeFiscal,
+      cnaeFiscalDescricao: cnaeFiscalDescricao ?? this.cnaeFiscalDescricao,
     );
   }
 

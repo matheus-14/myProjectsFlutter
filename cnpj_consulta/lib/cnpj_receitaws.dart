@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:http/http.dart' as http;
 import 'package:json_annotation/json_annotation.dart';
 import '../funcoes/fJson.dart';
-//import 'cnpj_normal.dart';
+import 'cnpj_normal.dart';
 
 part 'cnpj_receitaws.g.dart';
 
@@ -190,11 +190,11 @@ class CNPJReceitaWS {
   CNPJReceitaWS({
       this.status = "",
       this.ultimaAtualizacao = "",
-      this.cnpj = "",  //
-      this.tipo = "", //-
+      this.cnpj = "",  
+      this.tipo = "", 
       this.porte = "",
-      this.nome = "", //
-      this.fantasia = "", //
+      this.nome = "", 
+      this.fantasia = "", 
       this.abertura = "",
       this.atividadePrincipal,
       this.atividadesSecundarias,
@@ -216,7 +216,7 @@ class CNPJReceitaWS {
       this.dataSituacaoEspecial = "",
       this.capitalSocial = "",
       this.qsa,
-      this.billing
+      this.billing,
       });
 
   CNPJReceitaWS copyWith({
@@ -308,37 +308,44 @@ class CNPJReceitaWS {
 
       // CNPJNormal cnpjNormal = CNPJNormal();
 //iguais
-      // CNPJNormal.cnpj = cnpjreceita.cnpj;
-      // CNPJNormal.porte = cnpjreceita.porte;
-      // CNPJNormal.razao = cnpjreceita.razaoSocial;
-      // CNPJNormal.nome = cnpjreceita.nome;
-      // CNPJNormal.logradouro = cnpjreceita.logradouro;
-      // CNPJNormal.numero = cnpjreceita.numero;
-      // CNPJNormal.complemento = cnpjreceita.complemento;
-      // CNPJNormal.bairro = cnpjreceita.bairro;
-      // CNPJNormal.cep = cnpjreceita.cep;
-      // CNPJNormal.uf = cnpjreceita.uf;
-      // CNPJNormal.municipio = cnpjreceita.municipio;
-      // CNPJNormal.capitalSocial = cnpjreceita.capitalSocial;
-      // CNPJNormal.qsa = cnpjreceita.qsa;
-      // CNPJNormal.situacaoEspecial = cnpjreceita.situacaoEspecial;
-      // CNPJNormal.dataSituacaoEspecial = cnpjreceita.dataSituacaoEspecial;
+      // CNPJNormal.cnpj = CNPJReceitaWS.cnpj;
+      // CNPJNormal.porte = CNPJReceitaWS.porte;
+      // CNPJNormal.razao = CNPJReceitaWS.razaoSocial;
+      // CNPJNormal.logradouro = CNPJReceitaWS.logradouro;
+      // CNPJNormal.numero = CNPJReceitaWS.numero;
+      // CNPJNormal.complemento = CNPJReceitaWS.complemento;
+      // CNPJNormal.bairro = CNPJReceitaWS.bairro;
+      // CNPJNormal.cep = CNPJReceitaWS.cep;
+      // CNPJNormal.uf = CNPJReceitaWS.uf;
+      // CNPJNormal.municipio = CNPJReceitaWS.municipio;
+      // CNPJNormal.capitalSocial = CNPJReceitaWS.capitalSocial;
+      // CNPJNormal.qsa = CNPJReceitaWS.qsa;
+      // CNPJNormal.situacaoEspecial = CNPJReceitaWS.situacaoEspecial;
+      // CNPJNormal.dataSituacaoEspecial = CNPJReceitaWS.dataSituacaoEspecial;
 //equivalentes
-      // CNPJNormal.tipoMatrizFilial = cnpjreceita.tipo;
-      // CNPJNormal.naturezaJuridica = cnpjreceita.codigoNaturezaJuridica;
-//particular  --- ainda precisa colocar na classe CNPJNormal ---
-      // CNPJNormal.status = cnpjreceita.status;
-      // CNPJNormal.ultimaAtualizacao = cnpjreceita.ultimaAtualizacao;
-      // CNPJNormal.abertura = cnpjreceita.abertura;
-      // CNPJNormal.atividadePrincipal = cnpjreceita.atividadePrincipal;
-      // CNPJNormal.atividadesSecundarias = cnpjreceita.atividadesSecundarias;
-      // CNPJNormal.email = cnpjreceita.email;
-      // CNPJNormal.telefone = cnpjreceita.telefone;
-      // CNPJNormal.efr = cnpjreceita.efr;
-      // CNPJNormal.situacao = cnpjreceita.situacao;
-      // CNPJNormal.dataSituacao = cnpjreceita.dataSituacao;
-      // CNPJNormal.motivoSituacao = cnpjreceita.motivoSituacao;
-      // CNPJNormal.billing = cnpjreceita.billing;      
+      // CNPJNormal.nome = CNPJReceitaWS.nome;
+      // CNPJNormal.tipoMatrizFilial = CNPJReceitaWS.tipo;
+      // CNPJNormal.naturezaJuridica = CNPJReceitaWS.codigoNaturezaJuridica;
+      // CNPJNormal.abertura = CNPJReceitaWS.abertura;
+      // CNPJNormal.telefone = CNPJReceitaWS.telefone;
+      // CNPJNormal.situacaoCadastral = CNPJReceitaWS.situacao;
+      // CNPJNormal.dataSituacaoCadastral = CNPJReceitaWS.dataSituacao;
+      // CNPJNormal.descricaoMotivoSituacaoCadastral = CNPJReceitaWS.motivoSituacao;
+      // CNPJNormal.dataSituacaoCadastral = CNPJReceitaWS.abertura;
+
+//particular  
+      // CNPJNormal.status = CNPJReceitaWS.status;
+      // CNPJNormal.ultimaAtualizacao = CNPJReceitaWS.ultimaAtualizacao;
+      // CNPJNormal.efr = CNPJReceitaWS.efr;
+      // CNPJNormal.email = CNPJReceitaWS.email;
+      // CNPJNormal.billing = CNPJReceitaWS.billing; 
+
+      // CNPJNormal.atividadePrincipal = CNPJReceitaWS.atividadePrincipal; ***
+      // CNPJNormal.atividadesSecundarias = CNPJReceitaWS.atividadesSecundarias; ***
+      
+      // CNPJNormal.qualificacaoDoResponsavel = CNPJReceitaWS.qsa; //* */
+
+     
 
       } catch (e) {
         debugger();

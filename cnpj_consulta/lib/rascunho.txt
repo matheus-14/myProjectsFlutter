@@ -56,12 +56,34 @@ FALTAM:
 
 - CNPJNormal.dataSituacaoEspecial > dataSituacaoEspecial (datetime)  == dataSituacaoEspecial (string)
 
+- CNPJNormal.abertura > dataInicioAtividade (string) == abertura (string)
+
+- CNPJNormal.telefone > dddTelefone1 (string) == telefone (string)
+
+- CNPJNormal.situacaoCadastral > descricaoSituacaoCadastral (string) == situacao (string)
+
+- CNPJNormal.dataSituacaoCadastral > dataSituacaoCadastral (string) == dataSituacao (string)
+
+- CNPJNormal.descricaoMotivoSituacaoCadastral > descricaoMotivoSituacaoCadastral (string) == motivoSituacao (string)
+
+- CNPJNormal.dataSituacaoCadastral > dataSituacaoCadastral (string) == abertura (string)
+
+//----------
+.			                          brasilApi x receitaWs
+
+/-
+CNPJNormal.cnaeAtvPrincipal > cnae_fiscal (int) == atividadePrincipal (code) (string)
+
+CNPJNormal.cnaeAtvPrincipalDescricao > cnaeFiscalDescricao == atividadePrincipal (text) (string)
+/-
+
+
+CNPJNormal.qualificacaoDoResponsavel > qualificacaoDoResponsavel (int) == qsa (qual) (string)
 
 //----------
 03637885000122  - cnpj versa
 
 //---------------
 
-
-
+cnpjreceita.abertura duas vezes
 

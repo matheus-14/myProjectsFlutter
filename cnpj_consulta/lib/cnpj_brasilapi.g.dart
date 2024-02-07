@@ -28,7 +28,7 @@ Qsa _$QsaFromJson(Map<String, dynamic> json) => Qsa(
       cpfRepresentanteLegal: json['cpfRepresentanteLegal'] as String? ?? "",
       nomeRepresentanteLegal: json['nomeRepresentanteLegal'] as String? ?? "",
       codigoQualificacaoRepresentanteLegal:
-          json['codigoQualificacaoRepresentanteLegal'] as String? ?? "",
+          json['codigoQualificacaoRepresentanteLegal'] as int?,
     );
 
 Map<String, dynamic> _$QsaToJson(Qsa instance) => <String, dynamic>{
@@ -56,6 +56,8 @@ CNPJBrasilAPI _$CNPJBrasilAPIFromJson(Map<String, dynamic> json) =>
           json['descricaoSituacaoCadastral'] as String? ?? "",
       dataSituacaoCadastral: json['dataSituacaoCadastral'] as String? ?? "",
       motivoSituacaoCadastral: json['motivoSituacaoCadastral'] as int?,
+      descricaoMotivoSituacaoCadastral:
+          json['descricaoMotivoSituacaoCadastral'] as String? ?? "",
       nomeCidadeExterior: json['nomeCidadeExterior'] as String? ?? "",
       codigoNaturezaJuridica: json['codigoNaturezaJuridica'] as int?,
       dataInicioAtividade: json['dataInicioAtividade'] as String? ?? "",
@@ -108,6 +110,8 @@ Map<String, dynamic> _$CNPJBrasilAPIToJson(CNPJBrasilAPI instance) =>
       'descricaoSituacaoCadastral': instance.descricaoSituacaoCadastral,
       'dataSituacaoCadastral': instance.dataSituacaoCadastral,
       'motivoSituacaoCadastral': instance.motivoSituacaoCadastral,
+      'descricaoMotivoSituacaoCadastral':
+          instance.descricaoMotivoSituacaoCadastral,
       'nomeCidadeExterior': instance.nomeCidadeExterior,
       'codigoNaturezaJuridica': instance.codigoNaturezaJuridica,
       'dataInicioAtividade': instance.dataInicioAtividade,

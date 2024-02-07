@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:http/http.dart' as http;
 import 'package:json_annotation/json_annotation.dart';
 import '../funcoes/fJson.dart';
-//import 'cnpj_normal.dart';
+import 'cnpj_normal.dart';
 
 part 'cnpj_brasilapi.g.dart';
 
@@ -51,7 +51,7 @@ class Qsa {
   String? dataEntradaSociedade;
   String? cpfRepresentanteLegal;
   String? nomeRepresentanteLegal;
-  String? codigoQualificacaoRepresentanteLegal;  //Pergunta: String mesmo ou 
+  int? codigoQualificacaoRepresentanteLegal;  //Pergunta: String mesmo ou 
 
   Qsa(
       {this.identificadorDeSocio,
@@ -62,7 +62,7 @@ class Qsa {
       this.dataEntradaSociedade = "",
       this.cpfRepresentanteLegal = "",
       this.nomeRepresentanteLegal = "",
-      this.codigoQualificacaoRepresentanteLegal = "",
+      this.codigoQualificacaoRepresentanteLegal,
       });
 
   Qsa copyWith({
@@ -74,7 +74,7 @@ class Qsa {
     String? dataEntradaSociedade,
     String? cpfRepresentanteLegal,
     String? nomeRepresentanteLegal,
-    String? codigoQualificacaoRepresentanteLegal,
+    int? codigoQualificacaoRepresentanteLegal,
 	}) {
 	  return Qsa(
       identificadorDeSocio: identificadorDeSocio ?? this.identificadorDeSocio,
@@ -115,7 +115,8 @@ class CNPJBrasilAPI {
   String? descricaoSituacaoCadastral;
   String? dataSituacaoCadastral;
   int? motivoSituacaoCadastral;
-  String? nomeCidadeExterior; //***** */
+  String? descricaoMotivoSituacaoCadastral; //aparece no retorno, mas na descricao do site nao
+  String? nomeCidadeExterior; 
   int? codigoNaturezaJuridica;
   String? dataInicioAtividade;
   int? cnaeFiscal;
@@ -125,7 +126,7 @@ class CNPJBrasilAPI {
   String? numero;
   String? complemento;
   String? bairro;
-  String? cep;  // int ou string?
+  String? cep;
   String? uf;
   int? codigoMunicipio;
   String? municipio;
@@ -134,7 +135,7 @@ class CNPJBrasilAPI {
   String? dddFax;
   int? qualificacaoDoResponsavel;
   int? capitalSocial;
-  String? porte;  // int ou string?
+  String? porte;
   String? descricaoPorte;
   bool? opcaoPeloSimples;
   DateTime? dataOpcaoPeloSimples;
@@ -142,7 +143,7 @@ class CNPJBrasilAPI {
   bool? opcaoPeloMei;
   String? situacaoEspecial;
   DateTime? dataSituacaoEspecial;
-  List<CnaesSecundarios>? cnaesSecundarios;
+  List<CnaesSecundarios>? cnaesSecundarios;  // codigo(int) - descricao(string)
   List<Qsa>? qsa;
 
 CNPJBrasilAPI({
@@ -155,6 +156,7 @@ CNPJBrasilAPI({
       this.descricaoSituacaoCadastral = "",
       this.dataSituacaoCadastral = "",
       this.motivoSituacaoCadastral,
+      this.descricaoMotivoSituacaoCadastral = "", // ******
       this.nomeCidadeExterior = "",
       this.codigoNaturezaJuridica,
       this.dataInicioAtividade = "",
@@ -195,6 +197,7 @@ CNPJBrasilAPI({
     String? descricaoSituacaoCadastral,
     String? dataSituacaoCadastral,
     int? motivoSituacaoCadastral,
+    String? descricaoMotivoSituacaoCadastral,
     String? nomeCidadeExterior,
     int? codigoNaturezaJuridica,
     String? dataInicioAtividade,
@@ -235,6 +238,7 @@ CNPJBrasilAPI({
       descricaoSituacaoCadastral: descricaoSituacaoCadastral ?? this.descricaoSituacaoCadastral,
       dataSituacaoCadastral: dataSituacaoCadastral ?? this.dataSituacaoCadastral,
       motivoSituacaoCadastral: motivoSituacaoCadastral ?? this.motivoSituacaoCadastral,
+      descricaoMotivoSituacaoCadastral: descricaoMotivoSituacaoCadastral ?? this.descricaoMotivoSituacaoCadastral,
       nomeCidadeExterior: nomeCidadeExterior ?? this.nomeCidadeExterior,
       codigoNaturezaJuridica: codigoNaturezaJuridica ?? this.codigoNaturezaJuridica,
       dataInicioAtividade: dataInicioAtividade ?? this.dataInicioAtividade,
@@ -293,46 +297,50 @@ CNPJBrasilAPI({
 
       // CNPJNormal cnpjNormal = CNPJNormal();
 //iguais
-      // CNPJNormal.cnpj = cnpjbrasil.cnpj;
-      // CNPJNormal.porte = cnpjbrasil.porte;
-      // CNPJNormal.razao = cnpjbrasil.razaoSocial;
-      // CNPJNormal.nome = cnpjbrasil.nomeFantasia;
-      // CNPJNormal.logradouro = cnpjbrasil.logradouro;
-      // CNPJNormal.numero = cnpjbrasil.numero;
-      // CNPJNormal.complemento = cnpjbrasil.complemento;
-      // CNPJNormal.bairro = cnpjbrasil.bairro;
-      // CNPJNormal.cep = cnpjbrasil.cep;
-      // CNPJNormal.uf = cnpjbrasil.uf;
-      // CNPJNormal.municipio = cnpjbrasil.municipio;
-      // CNPJNormal.capitalSocial = cnpjbrasil.capitalSocial;
-      // CNPJNormal.qsa = cnpjbrasil.qsa;
-      // CNPJNormal.situacaoEspecial = cnpjbrasil.situacaoEspecial;
-      // CNPJNormal.dataSituacaoEspecial = cnpjbrasil.dataSituacaoEspecial;
+      // CNPJNormal.cnpj = CNPJBrasilAPI.cnpj;
+      // CNPJNormal.porte = CNPJBrasilAPI.porte;
+      // CNPJNormal.razao = CNPJBrasilAPI.razaoSocial;
+      // CNPJNormal.logradouro = CNPJBrasilAPI.logradouro;
+      // CNPJNormal.numero = CNPJBrasilAPI.numero;
+      // CNPJNormal.complemento = CNPJBrasilAPI.complemento;
+      // CNPJNormal.bairro = CNPJBrasilAPI.bairro;
+      // CNPJNormal.cep = CNPJBrasilAPI.cep;
+      // CNPJNormal.uf = CNPJBrasilAPI.uf;
+      // CNPJNormal.municipio = CNPJBrasilAPI.municipio;
+      // CNPJNormal.capitalSocial = CNPJBrasilAPI.capitalSocial;
+      // CNPJNormal.qsa = CNPJBrasilAPI.qsa;
+      // CNPJNormal.situacaoEspecial = CNPJBrasilAPI.situacaoEspecial;
+      // CNPJNormal.dataSituacaoEspecial = CNPJBrasilAPI.dataSituacaoEspecial;
 //equivalentes
-      // CNPJNormal.tipoMatrizFilial = cnpjbrasil.descricaoMatrizFilial;
-      // CNPJNormal.naturezaJuridica = cnpjbrasil.codigoNaturezaJuridica;
+      // CNPJNormal.nome = CNPJBrasilAPI.nomeFantasia;
+      // CNPJNormal.tipoMatrizFilial = CNPJBrasilAPI.descricaoMatrizFilial;
+      // CNPJNormal.naturezaJuridica = CNPJBrasilAPI.codigoNaturezaJuridica;
+      // CNPJNormal.abertura = CNPJBrasilAPI.dataInicioAtividade;
+      // CNPJNormal.telefone = CNPJBrasilAPI.dddTelefone1;
+      // CNPJNormal.situacaoCadastral = CNPJBrasilAPI.descricaoSituacaoCadastral;
+      // CNPJNormal.dataSituacaoCadastral = CNPJBrasilAPI.dataSituacaoCadastral;
+      // CNPJNormal.descricaoMotivoSituacaoCadastral = CNPJBrasilAPI.descricaoMotivoSituacaoCadastral;
+      // CNPJNormal.dataSituacaoCadastral = CNPJBrasilAPI.dataSituacaoCadastral;
+
 //particular
-      // CNPJNormal.identificadorMatrizFilial = cnpjbrasil.identificadorMatrizFilial;
-      // CNPJNormal.codigoMunicipio = cnpjbrasil.codigoMunicipio;
-      // CNPJNormal.situacaoCadastral = cnpjbrasil.situacaoCadastral;
-      // CNPJNormal.descricaoSituacaoCadastral = cnpjbrasil.descricaoSituacaoCadastral;
-      // CNPJNormal.dataSituacaoCadastral = cnpjbrasil.dataSituacaoCadastral;
-      // CNPJNormal.motivoSituacaoCadastral = cnpjbrasil.motivoSituacaoCadastral;
-      // CNPJNormal.nomeCidadeExterior = cnpjbrasil.nomeCidadeExterior;
-      // CNPJNormal.dataInicioAtividade = cnpjbrasil.dataInicioAtividade;
-      // CNPJNormal.cnaeFiscal = cnpjbrasil.cnaeFiscal;
-      // CNPJNormal.cnaeFiscalDescricao = cnpjbrasil.cnaeFiscalDescricao;
-      // CNPJNormal.descricaoTipoLogradouro = cnpjbrasil.descricaoTipoLogradouro;
-      // CNPJNormal.dddTelefone1 = cnpjbrasil.dddTelefone1;
-      // CNPJNormal.dddTelefone2 = cnpjbrasil.dddTelefone2;
-      // CNPJNormal.dddFax = cnpjbrasil.dddFax;
-      // CNPJNormal.qualificacaoDoResponsavel = cnpjbrasil.qualificacaoDoResponsavel;
-      // CNPJNormal.descricaoPorte = cnpjbrasil.descricaoPorte;
-      // CNPJNormal.opcaoPeloSimples = cnpjbrasil.opcaoPeloSimples;
-      // CNPJNormal.dataOpcaoPeloSimples = cnpjbrasil.dataOpcaoPeloSimples;
-      // CNPJNormal.dataExclusaoDoSimples = cnpjbrasil.dataExclusaoDoSimples;
-      // CNPJNormal.opcaoPeloMei = cnpjbrasil.opcaoPeloMei;
-      // CNPJNormal.cnaesSecundarios = cnpjbrasil.cnaesSecundarios;
+      // CNPJNormal.identificadorMatrizFilial = CNPJBrasilAPI.identificadorMatrizFilial;
+      // CNPJNormal.codigoMunicipio = CNPJBrasilAPI.codigoMunicipio;
+      // CNPJNormal.motivoSituacaoCadastral = CNPJBrasilAPI.motivoSituacaoCadastral;
+      // CNPJNormal.nomeCidadeExterior = CNPJBrasilAPI.nomeCidadeExterior;
+      // CNPJNormal.descricaoTipoLogradouro = CNPJBrasilAPI.descricaoTipoLogradouro;
+      // CNPJNormal.dddTelefone2 = CNPJBrasilAPI.dddTelefone2;
+      // CNPJNormal.dddFax = CNPJBrasilAPI.dddFax;
+      // CNPJNormal.descricaoPorte = CNPJBrasilAPI.descricaoPorte;
+      // CNPJNormal.opcaoPeloSimples = CNPJBrasilAPI.opcaoPeloSimples;
+      // CNPJNormal.dataOpcaoPeloSimples = CNPJBrasilAPI.dataOpcaoPeloSimples;
+      // CNPJNormal.dataExclusaoDoSimples = CNPJBrasilAPI.dataExclusaoDoSimples;
+      // CNPJNormal.opcaoPeloMei = CNPJBrasilAPI.opcaoPeloMei;
+      // CNPJNormal.cnaesSecundarios = CNPJBrasilAPI.cnaesSecundarios;
+
+      // CNPJNormal.cnaeFiscal = CNPJBrasilAPI.cnaeFiscal; ***
+      // CNPJNormal.cnaeFiscalDescricao = CNPJBrasilAPI.cnaeFiscalDescricao; ***
+
+      // CNPJNormal.qualificacaoDoResponsavel = CNPJBrasilAPI.qualificacaoDoResponsavel; ***
 
 
       } catch (e) {
