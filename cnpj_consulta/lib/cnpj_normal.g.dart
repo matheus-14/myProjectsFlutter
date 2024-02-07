@@ -23,7 +23,7 @@ CNPJNormal _$CNPJNormalFromJson(Map<String, dynamic> json) => CNPJNormal(
       situacaoEspecial: json['situacaoEspecial'] as String? ?? "",
       dataSituacaoEspecial: json['dataSituacaoEspecial'] as String? ?? "",
       tipoMatrizFilial: json['tipoMatrizFilial'] as String? ?? "",
-      naturezaJuridica: json['naturezaJuridica'] as String? ?? "",
+      naturezaJuridica: json['naturezaJuridica'] as int?,
       abertura: json['abertura'] as String? ?? "",
       telefone: json['telefone'] as String? ?? "",
       situacaoCadastral: json['situacaoCadastral'] as String? ?? "",

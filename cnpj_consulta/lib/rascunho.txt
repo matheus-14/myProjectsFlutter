@@ -3,21 +3,16 @@
 **FALTAM:
 {
 identificadorMatrizFilial,
-  "identificadorMatrizFilial";
-  "codigoMunicipio";
-
-  "situacaoCadastral",
-  "descricaoSituacaoCadastral",
-  "dataSituacaoCadastral",
+  "identificadorMatrizFilial"; //
+  "codigoMunicipio"; //
+ 
   "motivoSituacaoCadastral",
   "nomeCidadeExterior",
-  "dataInicioAtividade",
   "cnaeFiscal",
   "cnaeFiscalDescricao",
   "descricaoTipoLogradouro",
-  "dddTelefone1",         ***********
-  "dddTelefone2",         *********
-  "dddFax",                ********
+  "dddTelefone2",         
+  "dddFax",                
   "qualificacaoDoResponsavel",
   "descricaoPorte",
   "opcaoPeloSimples",
@@ -35,15 +30,10 @@ FALTAM:
   "status",
   "ultimaAtualizacao",
 
-  "abertura",
   "atividadePrincipal",
   "atividadesSecundarias",
   "email",
-  "telefone",  ********
   "efr",
-  "situacao",
-  "dataSituacao",
-  "motivoSituacao",
   "billing"
 }
 
@@ -52,9 +42,9 @@ FALTAM:
 
 - CNPJNormal.tipoMatrizFilial > descricaoMatrizFilial (string) == tipo (string) 
 
-- CNPJNormal.naturezaJuridica (int )> codigoNaturezaJuridica (int) == naturezaJuridica (string)
+- CNPJNormal.naturezaJuridica (int) > codigoNaturezaJuridica (int) == naturezaJuridica (string)
 
-- CNPJNormal.dataSituacaoEspecial > dataSituacaoEspecial (datetime)  == dataSituacaoEspecial (string)
+- CNPJNormal.dataSituacaoEspecial (string) > dataSituacaoEspecial (datetime)  == dataSituacaoEspecial (string)
 
 - CNPJNormal.abertura > dataInicioAtividade (string) == abertura (string)
 
@@ -86,4 +76,9 @@ CNPJNormal.qualificacaoDoResponsavel > qualificacaoDoResponsavel (int) == qsa (q
 //---------------
 
 cnpjreceita.abertura duas vezes
+
+//---------------
+https://brasilapi.com.br/api/cnpj/v1/03637885000122
+
+https://receitaws.com.br/v1/cnpj/03637885000122
 

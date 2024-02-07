@@ -310,7 +310,7 @@ CNPJBrasilAPI({
       // CNPJNormal.capitalSocial = CNPJBrasilAPI.capitalSocial;
       // CNPJNormal.qsa = CNPJBrasilAPI.qsa;
       // CNPJNormal.situacaoEspecial = CNPJBrasilAPI.situacaoEspecial;
-      // CNPJNormal.dataSituacaoEspecial = CNPJBrasilAPI.dataSituacaoEspecial;
+      // CNPJNormal.dataSituacaoEspecial = CNPJBrasilAPI.dataSituacaoEspecial.toIso8601String(); //converte pra string
 //equivalentes 
       // CNPJNormal.nome = CNPJBrasilAPI.nomeFantasia;
       // CNPJNormal.tipoMatrizFilial = CNPJBrasilAPI.descricaoMatrizFilial;
