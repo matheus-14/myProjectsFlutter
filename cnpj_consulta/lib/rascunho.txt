@@ -47,7 +47,7 @@ FALTAM:
 - cnpjNormal.codigoNaturezaJuridica (int) > codigoNaturezaJuridica (int) == naturezaJuridica (string)
 
 
-- cnpjNormal.dataSituacaoEspecial (string) > dataSituacaoEspecial (datetime)  == dataSituacaoEspecial (string)
+- cnpjNormal.dataSituacaoEspecial (datetime) > dataSituacaoEspecial (string)  == dataSituacaoEspecial (string)
 
 - cnpjNormal.abertura > dataInicioAtividade (string) == abertura (string)
 
@@ -91,6 +91,5 @@ https://brasilapi.com.br/api/cnpj/v1/03637885000122
 
 https://receitaws.com.br/v1/cnpj/03637885000122
 
- .                 brasil x receitaWS
 
-cnaeFiscal (int) >  cnaeFiscal (int) == 
+***** dataSituacaoEspecial deve ser datetime na normal **

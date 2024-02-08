@@ -145,7 +145,7 @@ class CNPJBrasilAPI {
   DateTime? dataExclusaoDoSimples;
   bool? opcaoPeloMei;
   String? situacaoEspecial;
-  DateTime? dataSituacaoEspecial;
+  String? dataSituacaoEspecial;
   List<CnaesSecundarios>? cnaesSecundarios;  // codigo(int) - descricao(string)
   List<Qsa>? qsa;
 
@@ -187,7 +187,7 @@ CNPJBrasilAPI({
       this.dataExclusaoDoSimples,
       this.opcaoPeloMei,
       this.situacaoEspecial = "",
-      this.dataSituacaoEspecial,
+      this.dataSituacaoEspecial = "",
       this.cnaesSecundarios,
       this.qsa});
 
@@ -229,7 +229,7 @@ CNPJBrasilAPI({
     DateTime? dataExclusaoDoSimples,
     bool? opcaoPeloMei,
     String? situacaoEspecial,
-    DateTime? dataSituacaoEspecial,
+    String? dataSituacaoEspecial,
     List<CnaesSecundarios>? cnaesSecundarios,
     List<Qsa>? qsa,
   }) {
@@ -318,7 +318,11 @@ CNPJBrasilAPI({
        cnpjNormal.capitalSocial = cnpjbrasil.capitalSocial;
        //cnpjNormal.qsa = cnpjbrasil.qsa;
        cnpjNormal.situacaoEspecial = cnpjbrasil.situacaoEspecial;
-       cnpjNormal.dataSituacaoEspecial = cnpjbrasil.dataSituacaoEspecial!.toIso8601String(); //converte pra string
+
+       if(cnpjbrasil.dataSituacaoEspecial != ""){
+        cnpjNormal.dataSituacaoEspecial = DateTime.tryParse(cnpjbrasil.dataSituacaoEspecial ?? '');
+       }
+
 //equivalentes 
        cnpjNormal.nome = cnpjbrasil.nomeFantasia;
        cnpjNormal.tipoMatrizFilial = cnpjbrasil.descricaoMatrizFilial;
@@ -332,7 +336,7 @@ CNPJBrasilAPI({
        cnpjNormal.descricaoMotivoSituacaoCadastral = cnpjbrasil.descricaoMotivoSituacaoCadastral;
        cnpjNormal.dataSituacaoCadastral = cnpjbrasil.dataSituacaoCadastral;
 
-//particular --- podem ficar vazios no caso de ser a outra api?
+//particular
        cnpjNormal.identificadorMatrizFilial = cnpjbrasil.identificadorMatrizFilial;
        cnpjNormal.codigoMunicipio = cnpjbrasil.codigoMunicipio;
        cnpjNormal.motivoSituacaoCadastral = cnpjbrasil.motivoSituacaoCadastral;

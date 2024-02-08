@@ -325,16 +325,24 @@ class CNPJReceitaWS {
        cnpjNormal.cep = cnpjReceita.cep;
        cnpjNormal.uf = cnpjReceita.uf;
        cnpjNormal.municipio = cnpjReceita.municipio;
-       cnpjNormal.capitalSocial = int.parse(cnpjReceita.capitalSocial!);
+
+      if(cnpjReceita.capitalSocial != ""){
+       cnpjNormal.capitalSocial = int.parse(cnpjReceita.capitalSocial!);}
+
        //cnpjNormal.qsa = cnpjReceita.qsa as String?;
        cnpjNormal.situacaoEspecial = cnpjReceita.situacaoEspecial;
-       cnpjNormal.dataSituacaoEspecial = cnpjReceita.dataSituacaoEspecial;
+
+       if(cnpjReceita.dataSituacaoEspecial != ""){
+        cnpjNormal.dataSituacaoEspecial = DateTime.tryParse(cnpjReceita.dataSituacaoEspecial ?? '');
+       }
 //equivalentes
        cnpjNormal.nome = cnpjReceita.nome;
        cnpjNormal.tipoMatrizFilial = cnpjReceita.tipo;
 
+      if(cnpjReceita.naturezaJuridica != ""){
        cnpjNormal.naturezaJuridica = cnpjReceita.naturezaJuridica!.split('-')[2];         
        cnpjNormal.codigoNaturezaJuridica = int.parse(cnpjReceita.naturezaJuridica!.split(' ')[0].replaceAll('-', '').trim());
+      }
 
        cnpjNormal.abertura = cnpjReceita.abertura;
        cnpjNormal.telefone = cnpjReceita.telefone;
@@ -348,13 +356,23 @@ class CNPJReceitaWS {
        cnpjNormal.ultimaAtualizacao = cnpjReceita.ultimaAtualizacao;
        cnpjNormal.efr = cnpjReceita.efr;
        cnpjNormal.email = cnpjReceita.email;
+       
+       if(cnaeAtvPrincipal.text != ""){
+        cnpjNormal.cnaeFiscal = int.parse(cnaeAtvPrincipal.code!.replaceAll('.', '').replaceAll('-', '').trim());
+        cnpjNormal.cnaeFiscalDescricao = cnaeAtvPrincipal.text!;
+       }
 
-       cnpjNormal.cnaeFiscal = int.parse(cnaeAtvPrincipal.code!.replaceAll('.', '').replaceAll('-', '').trim());
-       cnpjNormal.cnaeFiscalDescricao = cnaeAtvPrincipal.text!;
-       cnpjNormal.cnaeAtvSecundaria = int.parse(cnaeAtvSecundaria.code!.replaceAll('.', '').replaceAll('-', '').trim());
-       cnpjNormal.cnaeAtvSecundariaDescricao = cnaeAtvSecundaria.text!;
+       if(cnaeAtvSecundaria.code != ""){
+        cnpjNormal.cnaeAtvSecundaria = int.parse(cnaeAtvSecundaria.code!.replaceAll('.', '').replaceAll('-', '').trim());
+       }
 
+      if(cnaeAtvSecundaria.code != ""){
+        cnpjNormal.cnaeAtvSecundariaDescricao = cnaeAtvSecundaria.text!;
+      }
+
+      if(qsa.qual != ""){
        cnpjNormal.qualificacaoDoResponsavel = qsa.qual!.split('-')[0];
+      }
 
        // cnpjNormal.billing = cnpjReceita.billing; 
  

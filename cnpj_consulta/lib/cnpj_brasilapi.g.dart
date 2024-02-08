@@ -89,9 +89,7 @@ CNPJBrasilAPI _$CNPJBrasilAPIFromJson(Map<String, dynamic> json) =>
           : DateTime.parse(json['dataExclusaoDoSimples'] as String),
       opcaoPeloMei: json['opcaoPeloMei'] as bool?,
       situacaoEspecial: json['situacaoEspecial'] as String? ?? "",
-      dataSituacaoEspecial: json['dataSituacaoEspecial'] == null
-          ? null
-          : DateTime.parse(json['dataSituacaoEspecial'] as String),
+      dataSituacaoEspecial: json['dataSituacaoEspecial'] as String? ?? "",
       cnaesSecundarios: (json['cnaesSecundarios'] as List<dynamic>?)
           ?.map((e) => CnaesSecundarios.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -141,7 +139,7 @@ Map<String, dynamic> _$CNPJBrasilAPIToJson(CNPJBrasilAPI instance) =>
           instance.dataExclusaoDoSimples?.toIso8601String(),
       'opcaoPeloMei': instance.opcaoPeloMei,
       'situacaoEspecial': instance.situacaoEspecial,
-      'dataSituacaoEspecial': instance.dataSituacaoEspecial?.toIso8601String(),
+      'dataSituacaoEspecial': instance.dataSituacaoEspecial,
       'cnaesSecundarios':
           instance.cnaesSecundarios?.map((e) => e.toJson()).toList(),
       'qsa': instance.qsa?.map((e) => e.toJson()).toList(),

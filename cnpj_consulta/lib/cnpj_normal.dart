@@ -21,7 +21,7 @@ class CNPJNormal {
   int? capitalSocial;
   String? qsa;
   String? situacaoEspecial;
-  String? dataSituacaoEspecial;
+  DateTime? dataSituacaoEspecial;
   String? tipoMatrizFilial;
   int? codigoNaturezaJuridica;
   String? naturezaJuridica;
@@ -76,7 +76,7 @@ class CNPJNormal {
     this.capitalSocial,
     this.qsa = "",
     this.situacaoEspecial = "",
-    this.dataSituacaoEspecial = "",
+    this.dataSituacaoEspecial,
     this.tipoMatrizFilial = "",
     this.codigoNaturezaJuridica,
     this.naturezaJuridica = "",
@@ -124,7 +124,7 @@ class CNPJNormal {
     int? capitalSocial,
     String? qsa,
     String? situacaoEspecial,
-    String? dataSituacaoEspecial,
+    DateTime? dataSituacaoEspecial,
     String? tipoMatrizFilial,
     int? codigoNaturezaJuridica,
     String? naturezaJuridica,
