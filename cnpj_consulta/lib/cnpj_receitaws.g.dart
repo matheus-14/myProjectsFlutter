@@ -95,9 +95,9 @@ CNPJReceitaWS _$CNPJReceitaWSFromJson(Map<String, dynamic> json) =>
       qsa: (json['qsa'] as List<dynamic>?)
           ?.map((e) => Qsa.fromJson(e as Map<String, dynamic>))
           .toList(),
-      billing: (json['billing'] as List<dynamic>?)
-          ?.map((e) => Billing.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      billing: json['billing'] == null
+          ? null
+          : Billing.fromJson(json['billing'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$CNPJReceitaWSToJson(CNPJReceitaWS instance) =>
@@ -132,5 +132,5 @@ Map<String, dynamic> _$CNPJReceitaWSToJson(CNPJReceitaWS instance) =>
       'dataSituacaoEspecial': instance.dataSituacaoEspecial,
       'capitalSocial': instance.capitalSocial,
       'qsa': instance.qsa?.map((e) => e.toJson()).toList(),
-      'billing': instance.billing?.map((e) => e.toJson()).toList(),
+      'billing': instance.billing?.toJson(),
     };

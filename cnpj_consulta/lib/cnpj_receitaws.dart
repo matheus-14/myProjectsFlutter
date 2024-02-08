@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:json_annotation/json_annotation.dart';
 import '../funcoes/fJson.dart';
@@ -10,8 +11,8 @@ part 'cnpj_receitaws.g.dart';
 //-----------------------------
 @JsonSerializable(explicitToJson: true)
 class AtividadePrincipal {
-  String? code;
-  String? text;
+  String? code = "";
+  String? text = "";
 
 	AtividadePrincipal({
 		  this.code = "",
@@ -44,8 +45,8 @@ class AtividadePrincipal {
 
 @JsonSerializable(explicitToJson: true)
 class AtividadesSecundarias {
-  String? code;
-  String? text;
+  String? code = "";
+  String? text = "";
 
 	AtividadesSecundarias({
 		  this.code = "",
@@ -78,11 +79,11 @@ class AtividadesSecundarias {
 
 @JsonSerializable(explicitToJson: true)
 class Qsa {
-  String? nome;
-  String? qual;
-  String? paisOrigem;
-  String? nomeRepLegal;
-  String? qualRepLegal;
+  String? nome = "";
+  String? qual = "";
+  String? paisOrigem = "";
+  String? nomeRepLegal = "";
+  String? qualRepLegal = "";
 
   Qsa({
     this.nome = "",
@@ -120,10 +121,11 @@ class Qsa {
   static String lQsaToJson(List<Qsa> data) => jsonEncode(List<dynamic>.from(data.map((x) => x.toJson())), toEncodable: FJson.dataHoraSeralizer);
 }
 
+
 @JsonSerializable(explicitToJson: true)
 class Billing {
-  bool? free;
-  bool? database;
+  bool? free = true;
+  bool? database = true;
 
   Billing({
     this.free = true,
@@ -157,35 +159,35 @@ class Billing {
 
 @JsonSerializable(explicitToJson: true)
 class CNPJReceitaWS {
-  String? status;
-  String? ultimaAtualizacao;
-  String? cnpj;
-  String? tipo;
-  String? porte;
-  String? nome;
-  String? fantasia;
-  String? abertura;
-  List<AtividadePrincipal>? atividadePrincipal;
-  List<AtividadesSecundarias>? atividadesSecundarias;
-  String? naturezaJuridica;
-  String? logradouro;
-  String? numero;
-  String? complemento;
-  String? cep;
-  String? bairro;
-  String? municipio;
-  String? uf;
-  String? email;
-  String? telefone;
-  String? efr;
-  String? situacao;
-  String? dataSituacao;
-  String? motivoSituacao;
-  String? situacaoEspecial;
-  String? dataSituacaoEspecial;
-  String? capitalSocial;
-  List<Qsa>? qsa;
-  List<Billing>? billing;
+  String? status = "";
+  String? ultimaAtualizacao = "";
+  String? cnpj = "";
+  String? tipo = "";
+  String? porte = "";
+  String? nome = "";
+  String? fantasia = "";
+  String? abertura = "";
+  List<AtividadePrincipal>? atividadePrincipal = <AtividadePrincipal>[];
+  List<AtividadesSecundarias>? atividadesSecundarias = <AtividadesSecundarias>[];
+  String? naturezaJuridica = "";
+  String? logradouro = "";
+  String? numero = "";
+  String? complemento = "";
+  String? cep = "";
+  String? bairro = "";
+  String? municipio = "";
+  String? uf = "";
+  String? email = "";
+  String? telefone = "";
+  String? efr = "";
+  String? situacao = "";
+  String? dataSituacao = "";
+  String? motivoSituacao = "";
+  String? situacaoEspecial = "";
+  String? dataSituacaoEspecial = "";
+  String? capitalSocial = "";
+  List<Qsa>? qsa = <Qsa>[];
+  Billing? billing = Billing();
 
   CNPJReceitaWS({
       this.status = "",
@@ -248,7 +250,7 @@ class CNPJReceitaWS {
     String? dataSituacaoEspecial,
     String? capitalSocial,
     List<Qsa>? qsa,
-    List<Billing>? billing,
+    Billing? billing,
   }) {
     return CNPJReceitaWS(
       status: status ?? this.status,
@@ -304,6 +306,7 @@ class CNPJReceitaWS {
     if (response.statusCode == 200) {
       CNPJReceitaWS cnpjReceita = CNPJReceitaWS();
       try {
+        await Clipboard.setData(ClipboardData(text: response.body));
       cnpjReceita = CNPJReceitaWS.fromJsonString(response.body);        
 
       // CNPJNormal cnpjNormal = CNPJNormal();

@@ -51,7 +51,7 @@ class Qsa {
   String? dataEntradaSociedade;
   String? cpfRepresentanteLegal;
   String? nomeRepresentanteLegal;
-  int? codigoQualificacaoRepresentanteLegal;  //Pergunta: String mesmo ou 
+  int? codigoQualificacaoRepresentanteLegal;  
 
   Qsa(
       {this.identificadorDeSocio,
