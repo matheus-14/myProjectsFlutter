@@ -160,14 +160,14 @@ class Billing {
 @JsonSerializable(explicitToJson: true)
 class CNPJReceitaWS {
   String? status = "";
-  String? ultimaAtualizacao = "";
+  DateTime? ultimaAtualizacao;
   String? cnpj = "";
   String? tipo = "";
   String? porte = "";
   String? nome = "";
   String? fantasia = "";
   String? abertura = "";
-  List<AtividadePrincipal>? atividadePrincipal = <AtividadePrincipal>[];
+  List<AtividadePrincipal>? cnaeAtvPrincipal = <AtividadePrincipal>[];
   List<AtividadesSecundarias>? atividadesSecundarias = <AtividadesSecundarias>[];
   String? naturezaJuridica = "";
   String? logradouro = "";
@@ -191,14 +191,14 @@ class CNPJReceitaWS {
 
   CNPJReceitaWS({
       this.status = "",
-      this.ultimaAtualizacao = "",
+      this.ultimaAtualizacao,
       this.cnpj = "",  
       this.tipo = "", 
       this.porte = "",
       this.nome = "", 
       this.fantasia = "", 
       this.abertura = "",
-      this.atividadePrincipal,
+      this.cnaeAtvPrincipal,
       this.atividadesSecundarias,
       this.naturezaJuridica = "",
       this.logradouro = "",
@@ -223,14 +223,14 @@ class CNPJReceitaWS {
 
   CNPJReceitaWS copyWith({
     String? status,
-    String? ultimaAtualizacao,
+    DateTime? ultimaAtualizacao,
     String? cnpj,
     String? tipo,
     String? porte,
     String? nome,
     String? fantasia,
     String? abertura,
-    List<AtividadePrincipal>? atividadePrincipal,
+    List<AtividadePrincipal>? cnaeAtvPrincipal,
     List<AtividadesSecundarias>? atividadesSecundarias,
     String? naturezaJuridica,
     String? logradouro,
@@ -261,7 +261,7 @@ class CNPJReceitaWS {
       nome: nome ?? this.nome,
       fantasia: fantasia ?? this.fantasia,
       abertura: abertura ?? this.abertura,
-      atividadePrincipal: atividadePrincipal ?? this.atividadePrincipal,
+      cnaeAtvPrincipal: cnaeAtvPrincipal ?? this.cnaeAtvPrincipal,
       atividadesSecundarias: atividadesSecundarias ?? this.atividadesSecundarias,
       naturezaJuridica: naturezaJuridica ?? this.naturezaJuridica,
       logradouro: logradouro ?? this.logradouro,
@@ -280,6 +280,8 @@ class CNPJReceitaWS {
       situacaoEspecial: situacaoEspecial ?? this.situacaoEspecial,
       dataSituacaoEspecial: dataSituacaoEspecial ?? this.dataSituacaoEspecial,
       capitalSocial: capitalSocial ?? this.capitalSocial,
+
+
       qsa: qsa ?? this.qsa,
       billing: billing ?? this.billing,
     );
@@ -309,44 +311,54 @@ class CNPJReceitaWS {
         await Clipboard.setData(ClipboardData(text: response.body));
       cnpjReceita = CNPJReceitaWS.fromJsonString(response.body);        
 
-      // CNPJNormal cnpjNormal = CNPJNormal();
+       CNPJNormal cnpjNormal = CNPJNormal();
+       Qsa qsa = Qsa();
+       AtividadePrincipal cnaeAtvPrincipal = AtividadePrincipal();
+       AtividadesSecundarias cnaeAtvSecundaria = AtividadesSecundarias();
 //iguais
-      // CNPJNormal.cnpj = CNPJReceitaWS.cnpj;
-      // CNPJNormal.porte = CNPJReceitaWS.porte;
-      // CNPJNormal.razao = CNPJReceitaWS.razaoSocial;
-      // CNPJNormal.logradouro = CNPJReceitaWS.logradouro;
-      // CNPJNormal.numero = CNPJReceitaWS.numero;
-      // CNPJNormal.complemento = CNPJReceitaWS.complemento;
-      // CNPJNormal.bairro = CNPJReceitaWS.bairro;
-      // CNPJNormal.cep = CNPJReceitaWS.cep;
-      // CNPJNormal.uf = CNPJReceitaWS.uf;
-      // CNPJNormal.municipio = CNPJReceitaWS.municipio;
-      // CNPJNormal.capitalSocial = CNPJReceitaWS.capitalSocial;
-      // CNPJNormal.qsa = CNPJReceitaWS.qsa;
-      // CNPJNormal.situacaoEspecial = CNPJReceitaWS.situacaoEspecial;
-      // CNPJNormal.dataSituacaoEspecial = CNPJReceitaWS.dataSituacaoEspecial;
+       cnpjNormal.cnpj = cnpjReceita.cnpj;
+       cnpjNormal.porte = cnpjReceita.porte;
+       cnpjNormal.logradouro = cnpjReceita.logradouro;
+       cnpjNormal.numero = cnpjReceita.numero;
+       cnpjNormal.complemento = cnpjReceita.complemento;
+       cnpjNormal.bairro = cnpjReceita.bairro;
+       cnpjNormal.cep = cnpjReceita.cep;
+       cnpjNormal.uf = cnpjReceita.uf;
+       cnpjNormal.municipio = cnpjReceita.municipio;
+       cnpjNormal.capitalSocial = int.parse(cnpjReceita.capitalSocial!);
+       //cnpjNormal.qsa = cnpjReceita.qsa as String?;
+       cnpjNormal.situacaoEspecial = cnpjReceita.situacaoEspecial;
+       cnpjNormal.dataSituacaoEspecial = cnpjReceita.dataSituacaoEspecial;
 //equivalentes
-      // CNPJNormal.nome = CNPJReceitaWS.nome;
-      // CNPJNormal.tipoMatrizFilial = CNPJReceitaWS.tipo;
-      // CNPJNormal.naturezaJuridica = int.parse(CNPJReceitaWS.codigoNaturezaJuridica.split(' ')[0].replaceAll('_', '').trim());
-      // CNPJNormal.abertura = CNPJReceitaWS.abertura;
-      // CNPJNormal.telefone = CNPJReceitaWS.telefone;
-      // CNPJNormal.situacaoCadastral = CNPJReceitaWS.situacao;
-      // CNPJNormal.dataSituacaoCadastral = CNPJReceitaWS.dataSituacao;
-      // CNPJNormal.descricaoMotivoSituacaoCadastral = CNPJReceitaWS.motivoSituacao;
-      // CNPJNormal.dataSituacaoCadastral = CNPJReceitaWS.abertura;
+       cnpjNormal.nome = cnpjReceita.nome;
+       cnpjNormal.tipoMatrizFilial = cnpjReceita.tipo;
+
+       cnpjNormal.naturezaJuridica = cnpjReceita.naturezaJuridica!.split('-')[2];         
+       cnpjNormal.codigoNaturezaJuridica = int.parse(cnpjReceita.naturezaJuridica!.split(' ')[0].replaceAll('-', '').trim());
+
+       cnpjNormal.abertura = cnpjReceita.abertura;
+       cnpjNormal.telefone = cnpjReceita.telefone;
+       cnpjNormal.situacaoCadastral = cnpjReceita.situacao;
+       cnpjNormal.dataSituacaoCadastral = cnpjReceita.dataSituacao;
+       cnpjNormal.descricaoMotivoSituacaoCadastral = cnpjReceita.motivoSituacao;
+       cnpjNormal.dataSituacaoCadastral = cnpjReceita.abertura;
 
 //particular  
-      // CNPJNormal.status = CNPJReceitaWS.status;
-      // CNPJNormal.ultimaAtualizacao = CNPJReceitaWS.ultimaAtualizacao;
-      // CNPJNormal.efr = CNPJReceitaWS.efr;
-      // CNPJNormal.email = CNPJReceitaWS.email;
-      // CNPJNormal.billing = CNPJReceitaWS.billing; 
+       cnpjNormal.status = cnpjReceita.status;
+       cnpjNormal.ultimaAtualizacao = cnpjReceita.ultimaAtualizacao;
+       cnpjNormal.efr = cnpjReceita.efr;
+       cnpjNormal.email = cnpjReceita.email;
 
-      // CNPJNormal.atividadePrincipal = CNPJReceitaWS.atividadePrincipal; ***
-      // CNPJNormal.atividadesSecundarias = CNPJReceitaWS.atividadesSecundarias; ***
-      
-      // CNPJNormal.qualificacaoDoResponsavel = CNPJReceitaWS.qsa; //* */
+       cnpjNormal.cnaeFiscal = int.parse(cnaeAtvPrincipal.code!.replaceAll('.', '').replaceAll('-', '').trim());
+       cnpjNormal.cnaeFiscalDescricao = cnaeAtvPrincipal.text!;
+       cnpjNormal.cnaeAtvSecundaria = int.parse(cnaeAtvSecundaria.code!.replaceAll('.', '').replaceAll('-', '').trim());
+       cnpjNormal.cnaeAtvSecundariaDescricao = cnaeAtvSecundaria.text!;
+
+       cnpjNormal.qualificacaoDoResponsavel = qsa.qual!.split('-')[0];
+
+       // cnpjNormal.billing = cnpjReceita.billing; 
+ 
+
 
      
 

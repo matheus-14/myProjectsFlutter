@@ -40,35 +40,44 @@ FALTAM:
 //-----------------------
 *                                                   brasilAPI x receitaWS
 
-- CNPJNormal.tipoMatrizFilial > descricaoMatrizFilial (string) == tipo (string) 
+- cnpjNormal.tipoMatrizFilial > descricaoMatrizFilial (string) == tipo (string) 
 
-- CNPJNormal.naturezaJuridica (int) > codigoNaturezaJuridica (int) == naturezaJuridica (string)
+- cnpjNormal.naturezaJuridica (String) > naturezaJuridica (int) == naturezaJuridica (string)
 
-- CNPJNormal.dataSituacaoEspecial (string) > dataSituacaoEspecial (datetime)  == dataSituacaoEspecial (string)
+- cnpjNormal.codigoNaturezaJuridica (int) > codigoNaturezaJuridica (int) == naturezaJuridica (string)
 
-- CNPJNormal.abertura > dataInicioAtividade (string) == abertura (string)
 
-- CNPJNormal.telefone > dddTelefone1 (string) == telefone (string)
+- cnpjNormal.dataSituacaoEspecial (string) > dataSituacaoEspecial (datetime)  == dataSituacaoEspecial (string)
 
-- CNPJNormal.situacaoCadastral > descricaoSituacaoCadastral (string) == situacao (string)
+- cnpjNormal.abertura > dataInicioAtividade (string) == abertura (string)
 
-- CNPJNormal.dataSituacaoCadastral > dataSituacaoCadastral (string) == dataSituacao (string)
+- cnpjNormal.telefone > dddTelefone1 (string) == telefone (string)
 
-- CNPJNormal.descricaoMotivoSituacaoCadastral > descricaoMotivoSituacaoCadastral (string) == motivoSituacao (string)
+- cnpjNormal.situacaoCadastral > descricaoSituacaoCadastral (string) == situacao (string)
 
-- CNPJNormal.dataSituacaoCadastral > dataSituacaoCadastral (string) == abertura (string)
+- cnpjNormal.dataSituacaoCadastral > dataSituacaoCadastral (string) == dataSituacao (string)
+
+- cnpjNormal.descricaoMotivoSituacaoCadastral > descricaoMotivoSituacaoCadastral (string) == motivoSituacao (string)
+
+- cnpjNormal.dataSituacaoCadastral > dataSituacaoCadastral (string) == abertura (string)
+
+- cnpjNormal.capitalSocial (int) > capitalSocial (int) == capitalSocial (String) 
+
+- cnpjNormal.qualificacaoDoResponsavel (string) > qualificacaoDoResponsavel (int) == qsa (qual) (string)
+
 
 //----------
 .			                          brasilApi x receitaWs
 
 /-
-CNPJNormal.cnaeAtvPrincipal > cnae_fiscal (int) == atividadePrincipal (code) (string)
+cnpjNormal.cnaeFiscal (int) > cnae_fiscal (int) == atividadePrincipal (code) (string)
 
-CNPJNormal.cnaeAtvPrincipalDescricao > cnaeFiscalDescricao == atividadePrincipal (text) (string)
-/-
+cnpjNormal.cnaeAtvPrincipalDescricao (String) > cnaeFiscalDescricao == cnaeAtvPrincipal (text) (string)
+/-------
 
+cnpjNormal.cnaeAtvSecundaria (int) > cnae_secundarios (codigo) (int) == cnaeAtvSecundaria (code) (string)
 
-CNPJNormal.qualificacaoDoResponsavel > qualificacaoDoResponsavel (int) == qsa (qual) (string)
+cnpjNormal.cnaeAtvSecundariaDescricao (string) > cnae_secundarios (descricao) (string) == cnaeAtvSecundaria (text) (string)
 
 //----------
 03637885000122  - cnpj versa
@@ -82,3 +91,6 @@ https://brasilapi.com.br/api/cnpj/v1/03637885000122
 
 https://receitaws.com.br/v1/cnpj/03637885000122
 
+ .                 brasil x receitaWS
+
+cnaeFiscal (int) >  cnaeFiscal (int) == 

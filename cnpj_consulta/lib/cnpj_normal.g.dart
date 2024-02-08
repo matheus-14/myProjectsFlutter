@@ -18,12 +18,13 @@ CNPJNormal _$CNPJNormalFromJson(Map<String, dynamic> json) => CNPJNormal(
       cep: json['cep'] as String? ?? "",
       uf: json['uf'] as String? ?? "",
       municipio: json['municipio'] as String? ?? "",
-      capitalSocial: json['capitalSocial'] as String? ?? "",
+      capitalSocial: json['capitalSocial'] as int?,
       qsa: json['qsa'] as String? ?? "",
       situacaoEspecial: json['situacaoEspecial'] as String? ?? "",
       dataSituacaoEspecial: json['dataSituacaoEspecial'] as String? ?? "",
       tipoMatrizFilial: json['tipoMatrizFilial'] as String? ?? "",
-      naturezaJuridica: json['naturezaJuridica'] as int?,
+      codigoNaturezaJuridica: json['codigoNaturezaJuridica'] as int?,
+      naturezaJuridica: json['naturezaJuridica'] as String? ?? "",
       abertura: json['abertura'] as String? ?? "",
       telefone: json['telefone'] as String? ?? "",
       situacaoCadastral: json['situacaoCadastral'] as String? ?? "",
@@ -47,11 +48,19 @@ CNPJNormal _$CNPJNormalFromJson(Map<String, dynamic> json) => CNPJNormal(
       dataExclusaoDoSimples: json['dataExclusaoDoSimples'] == null
           ? null
           : DateTime.parse(json['dataExclusaoDoSimples'] as String),
-      opcaoPeloMei: json['opcaoPeloMei'] as String? ?? "",
+      opcaoPeloMei: json['opcaoPeloMei'] as bool?,
       cnaesSecundarios: json['cnaesSecundarios'] as String? ?? "",
-      cnaeFiscal: json['cnaeFiscal'] as String? ?? "",
+      cnaeFiscal: json['cnaeFiscal'] as int?,
       cnaeFiscalDescricao: json['cnaeFiscalDescricao'] as String? ?? "",
-    );
+      status: json['status'] as String? ?? "",
+      efr: json['efr'] as String? ?? "",
+      email: json['email'] as String? ?? "",
+      ultimaAtualizacao: json['ultimaAtualizacao'] == null
+          ? null
+          : DateTime.parse(json['ultimaAtualizacao'] as String),
+      cnaeAtvSecundaria: json['cnaeAtvSecundaria'] as int?,
+      cnaeAtvSecundariaDescricao: json['cnaeAtvSecundariaDescricao'] as String?,
+    )..pcaoPeloSimples = json['pcaoPeloSimples'] as bool?;
 
 Map<String, dynamic> _$CNPJNormalToJson(CNPJNormal instance) =>
     <String, dynamic>{
@@ -71,6 +80,7 @@ Map<String, dynamic> _$CNPJNormalToJson(CNPJNormal instance) =>
       'situacaoEspecial': instance.situacaoEspecial,
       'dataSituacaoEspecial': instance.dataSituacaoEspecial,
       'tipoMatrizFilial': instance.tipoMatrizFilial,
+      'codigoNaturezaJuridica': instance.codigoNaturezaJuridica,
       'naturezaJuridica': instance.naturezaJuridica,
       'abertura': instance.abertura,
       'telefone': instance.telefone,
@@ -78,6 +88,17 @@ Map<String, dynamic> _$CNPJNormalToJson(CNPJNormal instance) =>
       'dataSituacaoCadastral': instance.dataSituacaoCadastral,
       'descricaoMotivoSituacaoCadastral':
           instance.descricaoMotivoSituacaoCadastral,
+      'qualificacaoDoResponsavel': instance.qualificacaoDoResponsavel,
+      'opcaoPeloSimples': instance.opcaoPeloSimples,
+      'cnaesSecundarios': instance.cnaesSecundarios,
+      'cnaeFiscal': instance.cnaeFiscal,
+      'cnaeFiscalDescricao': instance.cnaeFiscalDescricao,
+      'cnaeAtvSecundaria': instance.cnaeAtvSecundaria,
+      'cnaeAtvSecundariaDescricao': instance.cnaeAtvSecundariaDescricao,
+      'status': instance.status,
+      'efr': instance.efr,
+      'email': instance.email,
+      'ultimaAtualizacao': instance.ultimaAtualizacao?.toIso8601String(),
       'identificadorMatrizFilial': instance.identificadorMatrizFilial,
       'codigoMunicipio': instance.codigoMunicipio,
       'motivoSituacaoCadastral': instance.motivoSituacaoCadastral,
@@ -85,14 +106,10 @@ Map<String, dynamic> _$CNPJNormalToJson(CNPJNormal instance) =>
       'descricaoTipoLogradouro': instance.descricaoTipoLogradouro,
       'dddTelefone2': instance.dddTelefone2,
       'dddFax': instance.dddFax,
-      'qualificacaoDoResponsavel': instance.qualificacaoDoResponsavel,
       'descricaoPorte': instance.descricaoPorte,
-      'opcaoPeloSimples': instance.opcaoPeloSimples,
+      'pcaoPeloSimples': instance.pcaoPeloSimples,
       'dataOpcaoPeloSimples': instance.dataOpcaoPeloSimples?.toIso8601String(),
       'dataExclusaoDoSimples':
           instance.dataExclusaoDoSimples?.toIso8601String(),
       'opcaoPeloMei': instance.opcaoPeloMei,
-      'cnaesSecundarios': instance.cnaesSecundarios,
-      'cnaeFiscal': instance.cnaeFiscal,
-      'cnaeFiscalDescricao': instance.cnaeFiscalDescricao,
     };

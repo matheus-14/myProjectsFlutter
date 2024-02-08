@@ -61,14 +61,16 @@ Map<String, dynamic> _$BillingToJson(Billing instance) => <String, dynamic>{
 CNPJReceitaWS _$CNPJReceitaWSFromJson(Map<String, dynamic> json) =>
     CNPJReceitaWS(
       status: json['status'] as String? ?? "",
-      ultimaAtualizacao: json['ultimaAtualizacao'] as String? ?? "",
+      ultimaAtualizacao: json['ultimaAtualizacao'] == null
+          ? null
+          : DateTime.parse(json['ultimaAtualizacao'] as String),
       cnpj: json['cnpj'] as String? ?? "",
       tipo: json['tipo'] as String? ?? "",
       porte: json['porte'] as String? ?? "",
       nome: json['nome'] as String? ?? "",
       fantasia: json['fantasia'] as String? ?? "",
       abertura: json['abertura'] as String? ?? "",
-      atividadePrincipal: (json['atividadePrincipal'] as List<dynamic>?)
+      cnaeAtvPrincipal: (json['cnaeAtvPrincipal'] as List<dynamic>?)
           ?.map((e) => AtividadePrincipal.fromJson(e as Map<String, dynamic>))
           .toList(),
       atividadesSecundarias: (json['atividadesSecundarias'] as List<dynamic>?)
@@ -103,15 +105,15 @@ CNPJReceitaWS _$CNPJReceitaWSFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$CNPJReceitaWSToJson(CNPJReceitaWS instance) =>
     <String, dynamic>{
       'status': instance.status,
-      'ultimaAtualizacao': instance.ultimaAtualizacao,
+      'ultimaAtualizacao': instance.ultimaAtualizacao?.toIso8601String(),
       'cnpj': instance.cnpj,
       'tipo': instance.tipo,
       'porte': instance.porte,
       'nome': instance.nome,
       'fantasia': instance.fantasia,
       'abertura': instance.abertura,
-      'atividadePrincipal':
-          instance.atividadePrincipal?.map((e) => e.toJson()).toList(),
+      'cnaeAtvPrincipal':
+          instance.cnaeAtvPrincipal?.map((e) => e.toJson()).toList(),
       'atividadesSecundarias':
           instance.atividadesSecundarias?.map((e) => e.toJson()).toList(),
       'naturezaJuridica': instance.naturezaJuridica,

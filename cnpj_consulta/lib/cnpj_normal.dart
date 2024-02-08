@@ -18,17 +18,34 @@ class CNPJNormal {
   String? cep;
   String? uf;
   String? municipio;
-  String? capitalSocial;
+  int? capitalSocial;
   String? qsa;
   String? situacaoEspecial;
   String? dataSituacaoEspecial;
   String? tipoMatrizFilial;
-  int? naturezaJuridica;
+  int? codigoNaturezaJuridica;
+  String? naturezaJuridica;
   String? abertura;
   String? telefone;
   String? situacaoCadastral;
   String? dataSituacaoCadastral;
   String? descricaoMotivoSituacaoCadastral;
+  String? qualificacaoDoResponsavel;
+  bool? opcaoPeloSimples;
+  String? cnaesSecundarios;
+
+  int? cnaeFiscal;    
+  String? cnaeFiscalDescricao;
+  int? cnaeAtvSecundaria;
+  String? cnaeAtvSecundariaDescricao;
+
+  //receitaWs:
+  String? status;
+  String? efr;
+  String? email;
+  DateTime? ultimaAtualizacao;
+
+  //brasilApi:
   int? identificadorMatrizFilial;
   int? codigoMunicipio;
   int? motivoSituacaoCadastral;
@@ -36,16 +53,13 @@ class CNPJNormal {
   String? descricaoTipoLogradouro;
   String? dddTelefone2;
   String? dddFax;
-  String? qualificacaoDoResponsavel;
   String? descricaoPorte;
-  bool? opcaoPeloSimples;
+  bool? pcaoPeloSimples;
   DateTime? dataOpcaoPeloSimples;
   DateTime? dataExclusaoDoSimples;
-  String? opcaoPeloMei;
-  String? cnaesSecundarios;
+  bool? opcaoPeloMei;
+  //String? cnaesSecundarios;
 
-  String? cnaeFiscal;
-  String? cnaeFiscalDescricao;
 
   CNPJNormal({
     this.cnpj = "",
@@ -59,12 +73,13 @@ class CNPJNormal {
     this.cep = "",
     this.uf = "",
     this.municipio = "",
-    this.capitalSocial = "",
+    this.capitalSocial,
     this.qsa = "",
     this.situacaoEspecial = "",
     this.dataSituacaoEspecial = "",
     this.tipoMatrizFilial = "",
-    this.naturezaJuridica,
+    this.codigoNaturezaJuridica,
+    this.naturezaJuridica = "",
     this.abertura = "",
     this.telefone = "",
     this.situacaoCadastral = "",
@@ -82,10 +97,16 @@ class CNPJNormal {
     this.opcaoPeloSimples,
     this.dataOpcaoPeloSimples,
     this.dataExclusaoDoSimples,
-    this.opcaoPeloMei = "",
+    this.opcaoPeloMei,
     this.cnaesSecundarios = "",
-    this.cnaeFiscal = "",
+    this.cnaeFiscal,
     this.cnaeFiscalDescricao = "",
+    this.status = "",
+    this.efr = "",
+    this.email = "",
+    this.ultimaAtualizacao,
+    this.cnaeAtvSecundaria,
+    this.cnaeAtvSecundariaDescricao,
   });
 
   CNPJNormal copyWit({
@@ -100,12 +121,13 @@ class CNPJNormal {
     String? cep,
     String? uf,
     String? municipio,
-    String? capitalSocial,
+    int? capitalSocial,
     String? qsa,
     String? situacaoEspecial,
     String? dataSituacaoEspecial,
     String? tipoMatrizFilial,
-    int? naturezaJuridica,
+    int? codigoNaturezaJuridica,
+    String? naturezaJuridica,
     String? abertura,
     String? telefone,
     String? situacaoCadastral,
@@ -123,11 +145,16 @@ class CNPJNormal {
     bool? opcaoPeloSimples,
     DateTime? dataOpcaoPeloSimples,
     DateTime? dataExclusaoDoSimples,
-    String? opcaoPeloMei,
+    bool? opcaoPeloMei,
     String? cnaesSecundarios,
-    String? cnaeFiscal,
-    String? cnaeFiscalDescricao
-
+    int? cnaeFiscal,
+    String? cnaeFiscalDescricao,
+    String? status,
+    String? efr,
+    String? email,
+    DateTime? ultimaAtualizacao,
+    int? cnaeAtvSecundaria,
+    String? cnaeAtvSecundariaDescricao,
   }) {
     return CNPJNormal(
       cnpj: cnpj ?? this.cnpj,
@@ -146,6 +173,7 @@ class CNPJNormal {
       situacaoEspecial: situacaoEspecial ?? this.situacaoEspecial,
       dataSituacaoEspecial: dataSituacaoEspecial ?? this.dataSituacaoEspecial,
       tipoMatrizFilial: tipoMatrizFilial ?? this.tipoMatrizFilial,
+      codigoNaturezaJuridica: codigoNaturezaJuridica ?? this.codigoNaturezaJuridica,
       naturezaJuridica: naturezaJuridica ?? this.naturezaJuridica,
       abertura: abertura ?? this.abertura,
       telefone: telefone ?? this.telefone,
@@ -168,6 +196,11 @@ class CNPJNormal {
       cnaesSecundarios: cnaesSecundarios ?? this.cnaesSecundarios,
       cnaeFiscal: cnaeFiscal ?? this.cnaeFiscal,
       cnaeFiscalDescricao: cnaeFiscalDescricao ?? this.cnaeFiscalDescricao,
+      efr: efr ?? this.efr,
+      email: email ?? this.email,
+      ultimaAtualizacao: ultimaAtualizacao ?? this.ultimaAtualizacao,
+      cnaeAtvSecundaria: cnaeAtvSecundaria ?? this.cnaeAtvSecundaria,
+      cnaeAtvSecundariaDescricao: cnaeAtvSecundariaDescricao ?? this.cnaeAtvSecundariaDescricao,
     );
   }
 

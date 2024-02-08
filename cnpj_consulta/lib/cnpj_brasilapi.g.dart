@@ -59,6 +59,7 @@ CNPJBrasilAPI _$CNPJBrasilAPIFromJson(Map<String, dynamic> json) =>
       descricaoMotivoSituacaoCadastral:
           json['descricaoMotivoSituacaoCadastral'] as String? ?? "",
       nomeCidadeExterior: json['nomeCidadeExterior'] as String? ?? "",
+      naturezaJuridica: json['naturezaJuridica'] as String?,
       codigoNaturezaJuridica: json['codigoNaturezaJuridica'] as int?,
       dataInicioAtividade: json['dataInicioAtividade'] as String? ?? "",
       cnaeFiscal: json['cnaeFiscal'] as int?,
@@ -113,6 +114,7 @@ Map<String, dynamic> _$CNPJBrasilAPIToJson(CNPJBrasilAPI instance) =>
       'descricaoMotivoSituacaoCadastral':
           instance.descricaoMotivoSituacaoCadastral,
       'nomeCidadeExterior': instance.nomeCidadeExterior,
+      'naturezaJuridica': instance.naturezaJuridica,
       'codigoNaturezaJuridica': instance.codigoNaturezaJuridica,
       'dataInicioAtividade': instance.dataInicioAtividade,
       'cnaeFiscal': instance.cnaeFiscal,
