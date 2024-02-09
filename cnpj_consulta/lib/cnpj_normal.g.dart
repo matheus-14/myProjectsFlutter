@@ -27,10 +27,14 @@ CNPJNormal _$CNPJNormalFromJson(Map<String, dynamic> json) => CNPJNormal(
       tipoMatrizFilial: json['tipoMatrizFilial'] as String? ?? "",
       codigoNaturezaJuridica: json['codigoNaturezaJuridica'] as int?,
       naturezaJuridica: json['naturezaJuridica'] as String? ?? "",
-      abertura: json['abertura'] as String? ?? "",
+      abertura: json['abertura'] == null
+          ? null
+          : DateTime.parse(json['abertura'] as String),
       telefone: json['telefone'] as String? ?? "",
       situacaoCadastral: json['situacaoCadastral'] as String? ?? "",
-      dataSituacaoCadastral: json['dataSituacaoCadastral'] as String? ?? "",
+      dataSituacaoCadastral: json['dataSituacaoCadastral'] == null
+          ? null
+          : DateTime.parse(json['dataSituacaoCadastral'] as String),
       descricaoMotivoSituacaoCadastral:
           json['descricaoMotivoSituacaoCadastral'] as String? ?? "",
       identificadorMatrizFilial: json['identificadorMatrizFilial'] as int?,
@@ -40,7 +44,10 @@ CNPJNormal _$CNPJNormalFromJson(Map<String, dynamic> json) => CNPJNormal(
       descricaoTipoLogradouro: json['descricaoTipoLogradouro'] as String? ?? "",
       dddTelefone2: json['dddTelefone2'] as String? ?? "",
       dddFax: json['dddFax'] as String? ?? "",
-      qualificacaoDoResponsavel: json['qualificacaoDoResponsavel'] as int?,
+      qualificacaoDoResponsavel:
+          json['qualificacaoDoResponsavel'] as String? ?? "",
+      codigoQualificacaoDoResponsavel:
+          json['codigoQualificacaoDoResponsavel'] as int?,
       descricaoPorte: json['descricaoPorte'] as String? ?? "",
       opcaoPeloSimples: json['opcaoPeloSimples'] as bool?,
       dataOpcaoPeloSimples: json['dataOpcaoPeloSimples'] == null
@@ -63,6 +70,24 @@ CNPJNormal _$CNPJNormalFromJson(Map<String, dynamic> json) => CNPJNormal(
       cnaeAtvSecundariaDescricao: json['cnaeAtvSecundariaDescricao'] as String?,
       billingFree: json['billingFree'] as bool?,
       billingDatabase: json['billingDatabase'] as bool?,
+      pais: json['pais'] as String? ?? "",
+      nomeSocio: json['nomeSocio'] as String? ?? "",
+      codigoPais: json['codigoPais'] as int?,
+      faixaEtaria: json['faixaEtaria'] as String? ?? "",
+      cnpjCpfDoSocio: json['cnpjCpfDoSocio'] as String? ?? "",
+      qualificacaoSocio: json['qualificacaoSocio'] as String? ?? "",
+      codigoFaixaEtaria: json['codigoFaixaEtaria'] as int?,
+      dataEntradaSociedade: json['dataEntradaSociedade'] == null
+          ? null
+          : DateTime.parse(json['dataEntradaSociedade'] as String),
+      identificadorDeSocio: json['identificadorDeSocio'] as int?,
+      cpfRepresentanteLegal: json['cpfRepresentanteLegal'] as String? ?? "",
+      nomeRepresentanteLegal: json['nomeRepresentanteLegal'] as String? ?? "",
+      codigoQualificacaoSocio: json['codigoQualificacaoSocio'] as int?,
+      qualificacaoRepresentanteLegal:
+          json['qualificacaoRepresentanteLegal'] as String? ?? "",
+      codigoQualificacaoRepresentanteLegal:
+          json['codigoQualificacaoRepresentanteLegal'] as int?,
     )..pcaoPeloSimples = json['pcaoPeloSimples'] as bool?;
 
 Map<String, dynamic> _$CNPJNormalToJson(CNPJNormal instance) =>
@@ -85,13 +110,16 @@ Map<String, dynamic> _$CNPJNormalToJson(CNPJNormal instance) =>
       'tipoMatrizFilial': instance.tipoMatrizFilial,
       'codigoNaturezaJuridica': instance.codigoNaturezaJuridica,
       'naturezaJuridica': instance.naturezaJuridica,
-      'abertura': instance.abertura,
+      'abertura': instance.abertura?.toIso8601String(),
       'telefone': instance.telefone,
       'situacaoCadastral': instance.situacaoCadastral,
-      'dataSituacaoCadastral': instance.dataSituacaoCadastral,
+      'dataSituacaoCadastral':
+          instance.dataSituacaoCadastral?.toIso8601String(),
       'descricaoMotivoSituacaoCadastral':
           instance.descricaoMotivoSituacaoCadastral,
       'qualificacaoDoResponsavel': instance.qualificacaoDoResponsavel,
+      'codigoQualificacaoDoResponsavel':
+          instance.codigoQualificacaoDoResponsavel,
       'opcaoPeloSimples': instance.opcaoPeloSimples,
       'cnaesSecundarios': instance.cnaesSecundarios,
       'cnaeFiscal': instance.cnaeFiscal,
@@ -117,4 +145,19 @@ Map<String, dynamic> _$CNPJNormalToJson(CNPJNormal instance) =>
       'dataExclusaoDoSimples':
           instance.dataExclusaoDoSimples?.toIso8601String(),
       'opcaoPeloMei': instance.opcaoPeloMei,
+      'pais': instance.pais,
+      'nomeSocio': instance.nomeSocio,
+      'codigoPais': instance.codigoPais,
+      'faixaEtaria': instance.faixaEtaria,
+      'cnpjCpfDoSocio': instance.cnpjCpfDoSocio,
+      'qualificacaoSocio': instance.qualificacaoSocio,
+      'codigoFaixaEtaria': instance.codigoFaixaEtaria,
+      'dataEntradaSociedade': instance.dataEntradaSociedade?.toIso8601String(),
+      'identificadorDeSocio': instance.identificadorDeSocio,
+      'cpfRepresentanteLegal': instance.cpfRepresentanteLegal,
+      'nomeRepresentanteLegal': instance.nomeRepresentanteLegal,
+      'codigoQualificacaoSocio': instance.codigoQualificacaoSocio,
+      'qualificacaoRepresentanteLegal': instance.qualificacaoRepresentanteLegal,
+      'codigoQualificacaoRepresentanteLegal':
+          instance.codigoQualificacaoRepresentanteLegal,
     };

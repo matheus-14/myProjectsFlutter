@@ -1,7 +1,7 @@
 // ignore_for_file: non_constant_identifier_names, unnecessary_this
 
 import 'dart:convert';
-import 'dart:developer';
+//import 'dart:developer';
 import 'package:http/http.dart' as http;
 import 'package:json_annotation/json_annotation.dart';
 import '../funcoes/fJson.dart';
@@ -45,49 +45,69 @@ class CnaesSecundarios {
 
 @JsonSerializable(explicitToJson: true)
 class Qsa {
-  int? identificadorDeSocio;
-  String? nomeSocio;
-  String? cnpjCpfDoSocio;
-  int? codigoQualificacaoSocio;
-  int? percentualCapitalSocial;
-  String? dataEntradaSociedade;
-  String? cpfRepresentanteLegal;
-  String? nomeRepresentanteLegal;
-  int? codigoQualificacaoRepresentanteLegal;  
+  String? pais;
+  String? nome_socio;
+  int? codigo_pais; 
+  String? faixa_etaria; 
+  String? cnpj_cpf_do_socio;
+  String? qualificacao_socio;
+  int? codigo_faixa_etaria; 
+  String? data_entrada_sociedade;
+  int? identificador_de_socio;
+  String? cpf_representante_legal;
+  String? nome_representante_legal;
+  int? codigo_qualificacao_socio;
+  String? qualificacao_representante_legal; 
+  int? codigo_qualificacao_representante_legal;  
 
-  Qsa(
-      {this.identificadorDeSocio,
-      this.nomeSocio = "",
-      this.cnpjCpfDoSocio = "",
-      this.codigoQualificacaoSocio,
-      this.percentualCapitalSocial,
-      this.dataEntradaSociedade = "",
-      this.cpfRepresentanteLegal = "",
-      this.nomeRepresentanteLegal = "",
-      this.codigoQualificacaoRepresentanteLegal,
-      });
+  Qsa({
+    this.pais = "",
+    this.nome_socio = "",
+    this.codigo_pais,
+    this.faixa_etaria = "",
+    this.cnpj_cpf_do_socio = "",
+    this.qualificacao_socio = "",
+    this.codigo_faixa_etaria,
+    this.data_entrada_sociedade = "",
+    this.identificador_de_socio,
+    this.cpf_representante_legal = "",
+    this.nome_representante_legal = "",
+    this.codigo_qualificacao_socio,
+    this.qualificacao_representante_legal = "",
+    this.codigo_qualificacao_representante_legal,
+    });
 
   Qsa copyWith({
-    int? identificadorDeSocio,
-    String? nomeSocio,
-    String? cnpjCpfDoSocio,
-    int? codigoQualificacaoSocio,
-    int? percentualCapitalSocial,
-    String? dataEntradaSociedade,
-    String? cpfRepresentanteLegal,
-    String? nomeRepresentanteLegal,
-    int? codigoQualificacaoRepresentanteLegal,
+    String? pais,
+    String? nome_socio,
+    int? codigo_pais,
+    String? faixa_etaria,
+    String? cnpj_cpf_do_socio,
+    String? qualificacao_socio,
+    int? codigo_faixa_etaria,
+    String? data_entrada_sociedade,
+    int? identificador_de_socio,
+    String? cpf_representante_legal,
+    String? nome_representante_legal,
+    int? codigo_qualificacao_socio,
+    String? qualificacao_representante_legal,
+    int? codigo_qualificacao_representante_legal,
 	}) {
 	  return Qsa(
-      identificadorDeSocio: identificadorDeSocio ?? this.identificadorDeSocio,
-      nomeSocio: nomeSocio ?? this.nomeSocio,
-      cnpjCpfDoSocio: cnpjCpfDoSocio ?? this.cnpjCpfDoSocio,
-      codigoQualificacaoSocio: codigoQualificacaoSocio ?? this.codigoQualificacaoSocio,
-      percentualCapitalSocial: percentualCapitalSocial ?? this.percentualCapitalSocial,
-      dataEntradaSociedade: dataEntradaSociedade ?? this.dataEntradaSociedade,
-      cpfRepresentanteLegal: cpfRepresentanteLegal ?? this.cpfRepresentanteLegal,
-      nomeRepresentanteLegal: nomeRepresentanteLegal ?? this.nomeRepresentanteLegal,
-      codigoQualificacaoRepresentanteLegal: codigoQualificacaoRepresentanteLegal ?? this.codigoQualificacaoRepresentanteLegal,
+    pais: pais ?? this.pais,
+    nome_socio: nome_socio ?? this.nome_socio,
+    codigo_pais: codigo_pais ?? this.codigo_pais,
+    faixa_etaria: faixa_etaria ?? this.faixa_etaria,
+    cnpj_cpf_do_socio: cnpj_cpf_do_socio ?? this.cnpj_cpf_do_socio,
+    qualificacao_socio: qualificacao_socio ?? this.qualificacao_socio,
+    codigo_faixa_etaria: codigo_faixa_etaria ?? this.codigo_faixa_etaria,
+    data_entrada_sociedade: data_entrada_sociedade ?? this.data_entrada_sociedade,
+    identificador_de_socio: identificador_de_socio ?? this.identificador_de_socio,
+    cpf_representante_legal: cpf_representante_legal ?? this.cpf_representante_legal,
+    nome_representante_legal: nome_representante_legal ?? this.nome_representante_legal,
+    codigo_qualificacao_socio: codigo_qualificacao_socio ?? this.codigo_qualificacao_socio,
+    qualificacao_representante_legal: qualificacao_representante_legal ?? this.qualificacao_representante_legal,
+    codigo_qualificacao_representante_legal: codigo_qualificacao_representante_legal ?? this.codigo_qualificacao_representante_legal,
 	);
 	}
 
@@ -306,6 +326,7 @@ CNPJBrasilAPI({
 
        CNPJNormal cnpjNormal = CNPJNormal();
        CnaesSecundarios cnaeAtvSecundaria = CnaesSecundarios();
+       Qsa qsa = Qsa();
 
 //iguais
        cnpjNormal.cnpj = cnpjbrasil.cnpj;
@@ -327,15 +348,23 @@ CNPJBrasilAPI({
        }
 
 //equivalentes 
-       cnpjNormal.nome = cnpjbrasil.nome_fantasia; //
-       cnpjNormal.tipoMatrizFilial = cnpjbrasil.descricao_matriz_filial; //
+       cnpjNormal.nome = cnpjbrasil.nome_fantasia;
+       cnpjNormal.tipoMatrizFilial = cnpjbrasil.descricao_matriz_filial;
       
-       cnpjNormal.naturezaJuridica = cnpjbrasil.natureza_juridica; //
-       cnpjNormal.codigoNaturezaJuridica = cnpjbrasil.codigo_natureza_juridica; //
-       cnpjNormal.abertura = cnpjbrasil.data_inicio_atividade; //
-       cnpjNormal.telefone = cnpjbrasil.ddd_telefone1; //
-       cnpjNormal.situacaoCadastral = cnpjbrasil.descricao_situacao_cadastral;//
-       cnpjNormal.dataSituacaoCadastral = cnpjbrasil.data_situacao_cadastral;
+       cnpjNormal.naturezaJuridica = cnpjbrasil.natureza_juridica;
+       cnpjNormal.codigoNaturezaJuridica = cnpjbrasil.codigo_natureza_juridica;
+
+      if(cnpjbrasil.data_inicio_atividade != ""){
+       cnpjNormal.abertura = DateTime.tryParse(cnpjbrasil.data_inicio_atividade ?? '');
+      }
+
+       cnpjNormal.telefone = cnpjbrasil.ddd_telefone1;
+       cnpjNormal.situacaoCadastral = cnpjbrasil.descricao_situacao_cadastral;
+
+      if(cnpjbrasil.data_situacao_cadastral != ""){
+       cnpjNormal.dataSituacaoCadastral = DateTime.tryParse(cnpjbrasil.data_situacao_cadastral ?? '');
+      }
+
        cnpjNormal.descricaoMotivoSituacaoCadastral = cnpjbrasil.descricao_motivo_situacao_cadastral;
 
 //particular
@@ -351,14 +380,32 @@ CNPJBrasilAPI({
        cnpjNormal.dataOpcaoPeloSimples = cnpjbrasil.data_opcao_pelo_simples;
        cnpjNormal.dataExclusaoDoSimples = cnpjbrasil.data_exclusao_do_simples;
        cnpjNormal.opcaoPeloMei = cnpjbrasil.opcao_pelo_mei;
-
        cnpjNormal.cnaeFiscal = cnpjbrasil.cnae_fiscal; 
        cnpjNormal.cnaeFiscalDescricao = cnpjbrasil.cnae_fiscal_descricao;
        cnpjNormal.cnaeAtvSecundaria = cnaeAtvSecundaria.codigo; 
        cnpjNormal.cnaeAtvSecundariaDescricao = cnaeAtvSecundaria.descricao;
 
-       cnpjNormal.qualificacaoDoResponsavel = cnpjbrasil.qualificacao_do_responsavel;
-      
+       cnpjNormal.pais = qsa.pais;
+       cnpjNormal.nomeSocio = qsa.nome_socio;
+       cnpjNormal.codigoPais = qsa.codigo_pais;
+       cnpjNormal.faixaEtaria = qsa.faixa_etaria;
+       cnpjNormal.cnpjCpfDoSocio = qsa.cnpj_cpf_do_socio;
+       cnpjNormal.qualificacaoSocio = qsa.qualificacao_socio;
+       cnpjNormal.codigoFaixaEtaria = qsa.codigo_faixa_etaria;
+
+      if(qsa.data_entrada_sociedade != ""){
+        cnpjNormal.dataEntradaSociedade = DateTime.tryParse(qsa.data_entrada_sociedade ?? '');
+       }
+
+       cnpjNormal.identificadorDeSocio = qsa.identificador_de_socio;
+       cnpjNormal.cpfRepresentanteLegal = qsa.cpf_representante_legal;
+       cnpjNormal.nomeRepresentanteLegal = qsa.nome_representante_legal;
+       cnpjNormal.codigoQualificacaoSocio = qsa.codigo_qualificacao_socio;
+       cnpjNormal.qualificacaoRepresentanteLegal = qsa.qualificacao_representante_legal;
+       cnpjNormal.codigoQualificacaoRepresentanteLegal = qsa.codigo_qualificacao_representante_legal;
+       cnpjNormal.codigoQualificacaoDoResponsavel = qsa.codigo_qualificacao_socio;
+       cnpjNormal.qualificacaoDoResponsavel = qsa.qualificacao_socio;
+
 
       /*} catch (e) {
         debugger();

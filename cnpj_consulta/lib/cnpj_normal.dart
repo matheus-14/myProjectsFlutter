@@ -25,20 +25,19 @@ class CNPJNormal {
   String? tipoMatrizFilial;
   int? codigoNaturezaJuridica;
   String? naturezaJuridica;
-  String? abertura;
+  DateTime? abertura;
   String? telefone;
   String? situacaoCadastral;
-  String? dataSituacaoCadastral;
+  DateTime? dataSituacaoCadastral;
   String? descricaoMotivoSituacaoCadastral;
-  int? qualificacaoDoResponsavel;
+  String? qualificacaoDoResponsavel;
+  int? codigoQualificacaoDoResponsavel;
   bool? opcaoPeloSimples;
   String? cnaesSecundarios;
-
   int? cnaeFiscal;    
   String? cnaeFiscalDescricao;
   int? cnaeAtvSecundaria;
   String? cnaeAtvSecundariaDescricao;
-
   //receitaWs:
   String? status;
   String? efr;
@@ -46,7 +45,6 @@ class CNPJNormal {
   DateTime? ultimaAtualizacao;
   bool? billingFree;
   bool? billingDatabase;
-
   //brasilApi:
   int? identificadorMatrizFilial;
   int? codigoMunicipio;
@@ -60,6 +58,21 @@ class CNPJNormal {
   DateTime? dataOpcaoPeloSimples;
   DateTime? dataExclusaoDoSimples;
   bool? opcaoPeloMei;
+
+  String? pais;
+  String? nomeSocio;
+  int? codigoPais; 
+  String? faixaEtaria; 
+  String? cnpjCpfDoSocio;
+  String? qualificacaoSocio;
+  int? codigoFaixaEtaria; 
+  DateTime? dataEntradaSociedade;
+  int? identificadorDeSocio;
+  String? cpfRepresentanteLegal;
+  String? nomeRepresentanteLegal;
+  int? codigoQualificacaoSocio;
+  String? qualificacaoRepresentanteLegal; 
+  int? codigoQualificacaoRepresentanteLegal; 
 
 
   CNPJNormal({
@@ -81,10 +94,10 @@ class CNPJNormal {
     this.tipoMatrizFilial = "",
     this.codigoNaturezaJuridica,
     this.naturezaJuridica = "",
-    this.abertura = "",
+    this.abertura,
     this.telefone = "",
     this.situacaoCadastral = "",
-    this.dataSituacaoCadastral = "",
+    this.dataSituacaoCadastral,
     this.descricaoMotivoSituacaoCadastral = "",
     this.identificadorMatrizFilial,
     this.codigoMunicipio,
@@ -93,7 +106,8 @@ class CNPJNormal {
     this.descricaoTipoLogradouro = "",
     this.dddTelefone2 = "",
     this.dddFax = "",
-    this.qualificacaoDoResponsavel,
+    this.qualificacaoDoResponsavel = "",
+    this.codigoQualificacaoDoResponsavel,
     this.descricaoPorte = "",
     this.opcaoPeloSimples,
     this.dataOpcaoPeloSimples,
@@ -110,6 +124,21 @@ class CNPJNormal {
     this.cnaeAtvSecundariaDescricao,
     this.billingFree,
     this.billingDatabase,
+    
+    this.pais = "",
+    this.nomeSocio = "",
+    this.codigoPais,
+    this.faixaEtaria = "",
+    this.cnpjCpfDoSocio = "",
+    this.qualificacaoSocio = "",
+    this.codigoFaixaEtaria,
+    this.dataEntradaSociedade,
+    this.identificadorDeSocio,
+    this.cpfRepresentanteLegal = "",
+    this.nomeRepresentanteLegal = "",
+    this.codigoQualificacaoSocio,
+    this.qualificacaoRepresentanteLegal = "",
+    this.codigoQualificacaoRepresentanteLegal,
   });
 
   CNPJNormal copyWit({
@@ -131,10 +160,10 @@ class CNPJNormal {
     String? tipoMatrizFilial,
     int? codigoNaturezaJuridica,
     String? naturezaJuridica,
-    String? abertura,
+    DateTime? abertura,
     String? telefone,
     String? situacaoCadastral,
-    String? dataSituacaoCadastral,
+    DateTime? dataSituacaoCadastral,
     String? descricaoMotivoSituacaoCadastral,
     int? identificadorMatrizFilial,
     int? codigoMunicipio,
@@ -143,7 +172,8 @@ class CNPJNormal {
     String? descricaoTipoLogradouro,
     String? dddTelefone2,
     String? dddFax,
-    int? qualificacaoDoResponsavel,
+    String? qualificacaoDoResponsavel,
+    int? codigoQualificacaoDoResponsavel,
     String? descricaoPorte,
     bool? opcaoPeloSimples,
     DateTime? dataOpcaoPeloSimples,
@@ -160,6 +190,21 @@ class CNPJNormal {
     String? cnaeAtvSecundariaDescricao,
     bool? billingFree,
     bool? billingDatabase,
+
+    String? pais,
+    String? nomeSocio,
+    int? codigoPais,
+    String? faixaEtaria,
+    String? cnpjCpfDoSocio,
+    String? qualificacaoSocio,
+    int? codigoFaixaEtaria,
+    DateTime? dataEntradaSociedade,
+    int? identificadorDeSocio,
+    String? cpfRepresentanteLegal,
+    String? nomeRepresentanteLegal,
+    int? codigoQualificacaoSocio,
+    String? qualificacaoRepresentanteLegal,
+    int? codigoQualificacaoRepresentanteLegal,
   }) {
     return CNPJNormal(
       cnpj: cnpj ?? this.cnpj,
@@ -193,6 +238,7 @@ class CNPJNormal {
       dddTelefone2: dddTelefone2 ?? this.dddTelefone2,
       dddFax: dddFax ?? this.dddFax,
       qualificacaoDoResponsavel: qualificacaoDoResponsavel ?? this.qualificacaoDoResponsavel,
+      codigoQualificacaoDoResponsavel: codigoQualificacaoDoResponsavel ?? this.codigoQualificacaoDoResponsavel,
       descricaoPorte: descricaoPorte ?? this.descricaoPorte,
       opcaoPeloSimples: opcaoPeloSimples ?? this.opcaoPeloSimples,
       dataOpcaoPeloSimples: dataOpcaoPeloSimples ?? this.dataOpcaoPeloSimples,
@@ -208,6 +254,21 @@ class CNPJNormal {
       cnaeAtvSecundariaDescricao: cnaeAtvSecundariaDescricao ?? this.cnaeAtvSecundariaDescricao,
       billingFree: billingFree ?? this.billingFree,
       billingDatabase: billingDatabase ?? this.billingDatabase,
+
+      pais: pais ?? this.pais,
+      nomeSocio: nomeSocio ?? this.nomeSocio,
+      codigoPais: codigoPais ?? this.codigoPais,
+      faixaEtaria: faixaEtaria ?? this.faixaEtaria,
+      cnpjCpfDoSocio: cnpjCpfDoSocio ?? this.cnpjCpfDoSocio,
+      qualificacaoSocio: qualificacaoSocio ?? this.qualificacaoSocio,
+      codigoFaixaEtaria: codigoFaixaEtaria ?? this.codigoFaixaEtaria,
+      dataEntradaSociedade: dataEntradaSociedade ?? this.dataEntradaSociedade,
+      identificadorDeSocio: identificadorDeSocio ?? this.identificadorDeSocio,
+      cpfRepresentanteLegal: cpfRepresentanteLegal ?? this.cpfRepresentanteLegal,
+      nomeRepresentanteLegal: nomeRepresentanteLegal ?? this.nomeRepresentanteLegal,
+      codigoQualificacaoSocio: codigoQualificacaoSocio ?? this.codigoQualificacaoSocio,
+      qualificacaoRepresentanteLegal: qualificacaoRepresentanteLegal ?? this.qualificacaoRepresentanteLegal,
+      codigoQualificacaoRepresentanteLegal: codigoQualificacaoRepresentanteLegal ?? this.codigoQualificacaoRepresentanteLegal,
     );
   }
 

@@ -1,7 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'dart:convert';
-import 'dart:developer';
+//import 'dart:developer';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:json_annotation/json_annotation.dart';
@@ -322,7 +322,7 @@ class CNPJReceitaWS {
        cnpjNormal.porte = cnpjReceita.porte;
        cnpjNormal.logradouro = cnpjReceita.logradouro;
        cnpjNormal.numero = cnpjReceita.numero;
-       cnpjNormal.complemento = cnpjReceita.complemento; //
+       cnpjNormal.complemento = cnpjReceita.complemento;
        cnpjNormal.bairro = cnpjReceita.bairro;
        cnpjNormal.cep = cnpjReceita.cep;
        cnpjNormal.uf = cnpjReceita.uf;
@@ -347,12 +347,20 @@ class CNPJReceitaWS {
        cnpjNormal.codigoNaturezaJuridica = int.parse(cnpjReceita.natureza_juridica!.split(' ')[0].replaceAll('-', '').trim());
       }
 
-       cnpjNormal.abertura = cnpjReceita.abertura;
+//------------conv?
+      if(cnpjReceita.abertura != ""){
+       cnpjNormal.abertura = DateTime.tryParse(cnpjReceita.abertura ?? '');
+
+      }
+
        cnpjNormal.telefone = cnpjReceita.telefone;
        cnpjNormal.situacaoCadastral = cnpjReceita.situacao;
-       cnpjNormal.dataSituacaoCadastral = cnpjReceita.data_situacao;//- mesma, conferir
+//conv
+      if(cnpjReceita.data_situacao != ""){
+       cnpjNormal.dataSituacaoCadastral = DateTime.tryParse(cnpjReceita.data_situacao ?? '');
+      }
+
        cnpjNormal.descricaoMotivoSituacaoCadastral = cnpjReceita.motivo_situacao;
-       cnpjNormal.dataSituacaoCadastral = cnpjReceita.abertura;//- conferir
 
 //particular  
        cnpjNormal.status = cnpjReceita.status;
@@ -374,13 +382,19 @@ class CNPJReceitaWS {
 
 
       if(qsa.qual != ""){
-       cnpjNormal.qualificacaoDoResponsavel = int.parse(qsa.qual!.split('-')[0]);
+       cnpjNormal.codigoQualificacaoDoResponsavel = int.parse(qsa.qual!.split('-')[0]);
+       cnpjNormal.qualificacaoDoResponsavel = qsa.qual!.split('-').sublist(1).toString();
+
       }
      
+      if(qsa.nome != ""){
+       cnpjNormal.nomeSocio = qsa.nome;
+      }
 
-     /* } catch (e) {
+      /*} catch (e) {
         debugger();
       }*/
+
       return cnpjNormal;
     } else {
       throw Exception('Aconteceu uma falha ao consultar o Cnpj na ReceitaWS.');

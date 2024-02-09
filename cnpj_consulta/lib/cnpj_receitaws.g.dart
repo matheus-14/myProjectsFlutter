@@ -61,23 +61,23 @@ Map<String, dynamic> _$BillingToJson(Billing instance) => <String, dynamic>{
 CNPJReceitaWS _$CNPJReceitaWSFromJson(Map<String, dynamic> json) =>
     CNPJReceitaWS(
       status: json['status'] as String? ?? "",
-      ultimaAtualizacao: json['ultimaAtualizacao'] == null
+      ultima_atualizacao: json['ultima_atualizacao'] == null
           ? null
-          : DateTime.parse(json['ultimaAtualizacao'] as String),
+          : DateTime.parse(json['ultima_atualizacao'] as String),
       cnpj: json['cnpj'] as String? ?? "",
       tipo: json['tipo'] as String? ?? "",
       porte: json['porte'] as String? ?? "",
       nome: json['nome'] as String? ?? "",
       fantasia: json['fantasia'] as String? ?? "",
       abertura: json['abertura'] as String? ?? "",
-      cnaeAtvPrincipal: (json['cnaeAtvPrincipal'] as List<dynamic>?)
+      atividade_principal: (json['atividade_principal'] as List<dynamic>?)
           ?.map((e) => AtividadePrincipal.fromJson(e as Map<String, dynamic>))
           .toList(),
-      atividadesSecundarias: (json['atividadesSecundarias'] as List<dynamic>?)
+      atividades_secundarias: (json['atividades_secundarias'] as List<dynamic>?)
           ?.map(
               (e) => AtividadesSecundarias.fromJson(e as Map<String, dynamic>))
           .toList(),
-      naturezaJuridica: json['naturezaJuridica'] as String? ?? "",
+      natureza_juridica: json['natureza_juridica'] as String? ?? "",
       logradouro: json['logradouro'] as String? ?? "",
       numero: json['numero'] as String? ?? "",
       complemento: json['complemento'] as String? ?? "",
@@ -89,11 +89,11 @@ CNPJReceitaWS _$CNPJReceitaWSFromJson(Map<String, dynamic> json) =>
       telefone: json['telefone'] as String? ?? "",
       efr: json['efr'] as String? ?? "",
       situacao: json['situacao'] as String? ?? "",
-      dataSituacao: json['dataSituacao'] as String? ?? "",
-      motivoSituacao: json['motivoSituacao'] as String? ?? "",
-      situacaoEspecial: json['situacaoEspecial'] as String? ?? "",
-      dataSituacaoEspecial: json['dataSituacaoEspecial'] as String? ?? "",
-      capitalSocial: json['capitalSocial'] as String? ?? "",
+      data_situacao: json['data_situacao'] as String? ?? "",
+      motivo_situacao: json['motivo_situacao'] as String? ?? "",
+      situacao_especial: json['situacao_especial'] as String? ?? "",
+      data_situacao_especial: json['data_situacao_especial'] as String? ?? "",
+      capital_social: json['capital_social'] as String? ?? "",
       qsa: (json['qsa'] as List<dynamic>?)
           ?.map((e) => Qsa.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -105,18 +105,18 @@ CNPJReceitaWS _$CNPJReceitaWSFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$CNPJReceitaWSToJson(CNPJReceitaWS instance) =>
     <String, dynamic>{
       'status': instance.status,
-      'ultimaAtualizacao': instance.ultimaAtualizacao?.toIso8601String(),
+      'ultima_atualizacao': instance.ultima_atualizacao?.toIso8601String(),
       'cnpj': instance.cnpj,
       'tipo': instance.tipo,
       'porte': instance.porte,
       'nome': instance.nome,
       'fantasia': instance.fantasia,
       'abertura': instance.abertura,
-      'cnaeAtvPrincipal':
-          instance.cnaeAtvPrincipal?.map((e) => e.toJson()).toList(),
-      'atividadesSecundarias':
-          instance.atividadesSecundarias?.map((e) => e.toJson()).toList(),
-      'naturezaJuridica': instance.naturezaJuridica,
+      'atividade_principal':
+          instance.atividade_principal?.map((e) => e.toJson()).toList(),
+      'atividades_secundarias':
+          instance.atividades_secundarias?.map((e) => e.toJson()).toList(),
+      'natureza_juridica': instance.natureza_juridica,
       'logradouro': instance.logradouro,
       'numero': instance.numero,
       'complemento': instance.complemento,
@@ -128,11 +128,11 @@ Map<String, dynamic> _$CNPJReceitaWSToJson(CNPJReceitaWS instance) =>
       'telefone': instance.telefone,
       'efr': instance.efr,
       'situacao': instance.situacao,
-      'dataSituacao': instance.dataSituacao,
-      'motivoSituacao': instance.motivoSituacao,
-      'situacaoEspecial': instance.situacaoEspecial,
-      'dataSituacaoEspecial': instance.dataSituacaoEspecial,
-      'capitalSocial': instance.capitalSocial,
+      'data_situacao': instance.data_situacao,
+      'motivo_situacao': instance.motivo_situacao,
+      'situacao_especial': instance.situacao_especial,
+      'data_situacao_especial': instance.data_situacao_especial,
+      'capital_social': instance.capital_social,
       'qsa': instance.qsa?.map((e) => e.toJson()).toList(),
       'billing': instance.billing?.toJson(),
     };
