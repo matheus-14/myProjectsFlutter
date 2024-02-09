@@ -1,8 +1,8 @@
-// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names, avoid_print
+//import 'dart:developer';
+//import 'package:flutter/services.dart';
 
 import 'dart:convert';
-//import 'dart:developer';
-import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:json_annotation/json_annotation.dart';
 import '../funcoes/fJson.dart';
@@ -10,20 +10,19 @@ import 'cnpj_normal.dart';
 
 part 'cnpj_receitaws.g.dart';
 
-//-----------------------------
 @JsonSerializable(explicitToJson: true)
 class AtividadePrincipal {
   String? code = "";
   String? text = "";
 
 	AtividadePrincipal({
-		  this.code = "",
-		  this.text = "",
+		this.code = "",
+		this.text = "",
   });
 
   AtividadePrincipal copyWith({
-	    String? code,
-		  String? text,
+	  String? code,
+		String? text,
 	}) {
 	  return AtividadePrincipal(
 		  code: code ?? this.code,
@@ -41,9 +40,7 @@ class AtividadePrincipal {
   static List<AtividadePrincipal> lAtividadePrincipalFromMap(List<Map<String, Object?>> lMap) => lMap.map((x) => AtividadePrincipal.fromJson(x)).toList();
 
   static String lAtividadePrincipalToJson(List<AtividadePrincipal> data) => jsonEncode(List<dynamic>.from(data.map((x) => x.toJson())), toEncodable: FJson.dataHoraSeralizer);
-
 }
-
 
 @JsonSerializable(explicitToJson: true)
 class AtividadesSecundarias {
@@ -51,19 +48,19 @@ class AtividadesSecundarias {
   String? text = "";
 
 	AtividadesSecundarias({
-		  this.code = "",
-		  this.text = "",
-    });
+		this.code = "",
+		this.text = "",
+  });
 
   AtividadesSecundarias copyWith({
-	    String? code,
-		  String? text,
+	  String? code,
+		String? text,
 	}) {
 	  return AtividadesSecundarias(
 		  code: code ?? this.code,
 		  text: text ?? this.text,
 	);
-	}
+  }
 
   factory AtividadesSecundarias.fromJson(Map<String, dynamic> json) => _$AtividadesSecundariasFromJson(json);
   Map<String, dynamic> toJson() => _$AtividadesSecundariasToJson(this);
@@ -75,9 +72,7 @@ class AtividadesSecundarias {
   static List<AtividadesSecundarias> lAtividadesSecundariasFromMap(List<Map<String, Object?>> lMap) => lMap.map((x) => AtividadesSecundarias.fromJson(x)).toList();
 
   static String lAtividadesSecundariasToJson(List<AtividadesSecundarias> data) => jsonEncode(List<dynamic>.from(data.map((x) => x.toJson())), toEncodable: FJson.dataHoraSeralizer);
-
 }
-
 
 @JsonSerializable(explicitToJson: true)
 class Qsa {
@@ -123,7 +118,6 @@ class Qsa {
   static String lQsaToJson(List<Qsa> data) => jsonEncode(List<dynamic>.from(data.map((x) => x.toJson())), toEncodable: FJson.dataHoraSeralizer);
 }
 
-
 @JsonSerializable(explicitToJson: true)
 class Billing {
   bool? free = true;
@@ -154,10 +148,7 @@ class Billing {
   static List<Billing> lBillingFromMap(List<Map<String, Object?>> lMap) => lMap.map((x) => Billing.fromJson(x)).toList();
 
   static String lBillingToJson(List<Billing> data) => jsonEncode(List<dynamic>.from(data.map((x) => x.toJson())), toEncodable: FJson.dataHoraSeralizer);
-
 }
-//-----------------------------
-
 
 @JsonSerializable(explicitToJson: true)
 class CNPJReceitaWS {
@@ -308,7 +299,7 @@ class CNPJReceitaWS {
     if (response.statusCode == 200) {
       CNPJReceitaWS cnpjReceita = CNPJReceitaWS();
       //try {
-        await Clipboard.setData(ClipboardData(text: response.body));
+      // await Clipboard.setData(ClipboardData(text: response.body));
       cnpjReceita = CNPJReceitaWS.fromJsonString(response.body);        
 
        CNPJNormal cnpjNormal = CNPJNormal();
@@ -329,10 +320,9 @@ class CNPJReceitaWS {
        cnpjNormal.municipio = cnpjReceita.municipio;
 
       if(cnpjReceita.capital_social != ""){
-       cnpjNormal.capitalSocial = int.parse(cnpjReceita.capital_social!);
+        cnpjNormal.capitalSocial = int.parse(double.parse(cnpjReceita.capital_social!).toStringAsFixed(0));
        }
 
-       //cnpjNormal.qsa = cnpjReceita.qsa as String?;
        cnpjNormal.situacaoEspecial = cnpjReceita.situacao_especial;
 
        if(cnpjReceita.data_situacao_especial != ""){
@@ -355,7 +345,7 @@ class CNPJReceitaWS {
 
        cnpjNormal.telefone = cnpjReceita.telefone;
        cnpjNormal.situacaoCadastral = cnpjReceita.situacao;
-//conv
+//conv?
       if(cnpjReceita.data_situacao != ""){
        cnpjNormal.dataSituacaoCadastral = DateTime.tryParse(cnpjReceita.data_situacao ?? '');
       }
@@ -380,7 +370,6 @@ class CNPJReceitaWS {
         cnpjNormal.cnaeAtvSecundariaDescricao = cnaeAtvSecundaria.text!;     
        }
 
-
       if(qsa.qual != ""){
        cnpjNormal.codigoQualificacaoDoResponsavel = int.parse(qsa.qual!.split('-')[0]);
        cnpjNormal.qualificacaoDoResponsavel = qsa.qual!.split('-').sublist(1).toString();
@@ -394,12 +383,22 @@ class CNPJReceitaWS {
       /*} catch (e) {
         debugger();
       }*/
+      
+      print('Dados consultados com sucesso.');
 
       return cnpjNormal;
+
+    } else if (response.statusCode == 429) {
+      print('Too many requests. (429)');
+      throw Exception('Too many requests. (429)');
+
+    } else if (response.statusCode == 504) {
+      print('Timeout. (504)');
+      throw Exception('Timeout. (504)');
+
     } else {
       throw Exception('Aconteceu uma falha ao consultar o Cnpj na ReceitaWS.');
     }
   }
- 
 
 }

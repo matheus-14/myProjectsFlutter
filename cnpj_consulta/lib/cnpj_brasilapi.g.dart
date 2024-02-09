@@ -67,14 +67,18 @@ CNPJBrasilAPI _$CNPJBrasilAPIFromJson(Map<String, dynamic> json) =>
       situacao_cadastral: json['situacao_cadastral'] as int?,
       descricao_situacao_cadastral:
           json['descricao_situacao_cadastral'] as String? ?? "",
-      data_situacao_cadastral: json['data_situacao_cadastral'] as String? ?? "",
+      data_situacao_cadastral: json['data_situacao_cadastral'] == null
+          ? null
+          : DateTime.parse(json['data_situacao_cadastral'] as String),
       motivo_situacao_cadastral: json['motivo_situacao_cadastral'] as int?,
       descricao_motivo_situacao_cadastral:
           json['descricao_motivo_situacao_cadastral'] as String? ?? "",
       nome_cidade_exterior: json['nome_cidade_exterior'] as String? ?? "",
       natureza_juridica: json['natureza_juridica'] as String?,
       codigo_natureza_juridica: json['codigo_natureza_juridica'] as int?,
-      data_inicio_atividade: json['data_inicio_atividade'] as String? ?? "",
+      data_inicio_atividade: json['data_inicio_atividade'] == null
+          ? null
+          : DateTime.parse(json['data_inicio_atividade'] as String),
       cnae_fiscal: json['cnae_fiscal'] as int?,
       cnae_fiscal_descricao: json['cnae_fiscal_descricao'] as String? ?? "",
       descricao_tipo_logradouro:
@@ -95,12 +99,9 @@ CNPJBrasilAPI _$CNPJBrasilAPIFromJson(Map<String, dynamic> json) =>
       porte: json['porte'] as String? ?? "",
       descricao_porte: json['descricao_porte'] as String? ?? "",
       opcao_pelo_simples: json['opcao_pelo_simples'] as bool?,
-      data_opcao_pelo_simples: json['data_opcao_pelo_simples'] == null
-          ? null
-          : DateTime.parse(json['data_opcao_pelo_simples'] as String),
-      data_exclusao_do_simples: json['data_exclusao_do_simples'] == null
-          ? null
-          : DateTime.parse(json['data_exclusao_do_simples'] as String),
+      data_opcao_pelo_simples: json['data_opcao_pelo_simples'] as String? ?? "",
+      data_exclusao_do_simples:
+          json['data_exclusao_do_simples'] as String? ?? "",
       opcao_pelo_mei: json['opcao_pelo_mei'] as bool?,
       situacao_especial: json['situacao_especial'] as String? ?? "",
       data_situacao_especial: json['data_situacao_especial'] as String? ?? "",
@@ -121,14 +122,16 @@ Map<String, dynamic> _$CNPJBrasilAPIToJson(CNPJBrasilAPI instance) =>
       'nome_fantasia': instance.nome_fantasia,
       'situacao_cadastral': instance.situacao_cadastral,
       'descricao_situacao_cadastral': instance.descricao_situacao_cadastral,
-      'data_situacao_cadastral': instance.data_situacao_cadastral,
+      'data_situacao_cadastral':
+          instance.data_situacao_cadastral?.toIso8601String(),
       'motivo_situacao_cadastral': instance.motivo_situacao_cadastral,
       'descricao_motivo_situacao_cadastral':
           instance.descricao_motivo_situacao_cadastral,
       'nome_cidade_exterior': instance.nome_cidade_exterior,
       'natureza_juridica': instance.natureza_juridica,
       'codigo_natureza_juridica': instance.codigo_natureza_juridica,
-      'data_inicio_atividade': instance.data_inicio_atividade,
+      'data_inicio_atividade':
+          instance.data_inicio_atividade?.toIso8601String(),
       'cnae_fiscal': instance.cnae_fiscal,
       'cnae_fiscal_descricao': instance.cnae_fiscal_descricao,
       'descricao_tipo_logradouro': instance.descricao_tipo_logradouro,
@@ -148,10 +151,8 @@ Map<String, dynamic> _$CNPJBrasilAPIToJson(CNPJBrasilAPI instance) =>
       'porte': instance.porte,
       'descricao_porte': instance.descricao_porte,
       'opcao_pelo_simples': instance.opcao_pelo_simples,
-      'data_opcao_pelo_simples':
-          instance.data_opcao_pelo_simples?.toIso8601String(),
-      'data_exclusao_do_simples':
-          instance.data_exclusao_do_simples?.toIso8601String(),
+      'data_opcao_pelo_simples': instance.data_opcao_pelo_simples,
+      'data_exclusao_do_simples': instance.data_exclusao_do_simples,
       'opcao_pelo_mei': instance.opcao_pelo_mei,
       'situacao_especial': instance.situacao_especial,
       'data_situacao_especial': instance.data_situacao_especial,

@@ -58,7 +58,6 @@ class CNPJNormal {
   DateTime? dataOpcaoPeloSimples;
   DateTime? dataExclusaoDoSimples;
   bool? opcaoPeloMei;
-
   String? pais;
   String? nomeSocio;
   int? codigoPais; 
@@ -73,7 +72,6 @@ class CNPJNormal {
   int? codigoQualificacaoSocio;
   String? qualificacaoRepresentanteLegal; 
   int? codigoQualificacaoRepresentanteLegal; 
-
 
   CNPJNormal({
     this.cnpj = "",

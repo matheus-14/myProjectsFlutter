@@ -1,7 +1,7 @@
-// ignore_for_file: non_constant_identifier_names, unnecessary_this
+// ignore_for_file: non_constant_identifier_names, unnecessary_this, avoid_print
+//import 'dart:developer';
 
 import 'dart:convert';
-//import 'dart:developer';
 import 'package:http/http.dart' as http;
 import 'package:json_annotation/json_annotation.dart';
 import '../funcoes/fJson.dart';
@@ -9,7 +9,6 @@ import 'cnpj_normal.dart';
 
 part 'cnpj_brasilapi.g.dart';
 
-//-------------------------
 @JsonSerializable(explicitToJson: true)
 class CnaesSecundarios {
   int? codigo;
@@ -21,14 +20,14 @@ class CnaesSecundarios {
   });
 
   CnaesSecundarios copyWith({
-        int? codigo,
-        String? descricao,
-    }) {
-      return CnaesSecundarios(
-        codigo: codigo ?? this.codigo,
-        descricao: descricao ?? this.descricao,
+    int? codigo,
+    String? descricao,
+  }) {
+    return CnaesSecundarios(
+      codigo: codigo ?? this.codigo,
+      descricao: descricao ?? this.descricao,
     );
-    }
+  }
 
   factory CnaesSecundarios.fromJson(Map<String, dynamic> json) => _$CnaesSecundariosFromJson(json);
   Map<String, dynamic> toJson() => _$CnaesSecundariosToJson(this);
@@ -40,7 +39,6 @@ class CnaesSecundarios {
   static List<CnaesSecundarios> lCnaesSecundariosFromMap(List<Map<String, Object?>> lMap) => lMap.map((x) => CnaesSecundarios.fromJson(x)).toList();
 
   static String lCnaesSecundariosToJson(List<CnaesSecundarios> data) => jsonEncode(List<dynamic>.from(data.map((x) => x.toJson())), toEncodable: FJson.dataHoraSeralizer);
-
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -108,8 +106,8 @@ class Qsa {
     codigo_qualificacao_socio: codigo_qualificacao_socio ?? this.codigo_qualificacao_socio,
     qualificacao_representante_legal: qualificacao_representante_legal ?? this.qualificacao_representante_legal,
     codigo_qualificacao_representante_legal: codigo_qualificacao_representante_legal ?? this.codigo_qualificacao_representante_legal,
-	);
-	}
+	  );
+  }
 
   factory Qsa.fromJson(Map<String, dynamic> json) => _$QsaFromJson(json);
   Map<String, dynamic> toJson() => _$QsaToJson(this);
@@ -122,8 +120,6 @@ class Qsa {
 
   static String lQsaToJson(List<Qsa> data) => jsonEncode(List<dynamic>.from(data.map((x) => x.toJson())), toEncodable: FJson.dataHoraSeralizer);
 }
-//-------------------------
-
 
 @JsonSerializable(explicitToJson: true)
 class CNPJBrasilAPI {
@@ -135,15 +131,13 @@ class CNPJBrasilAPI {
   String? nome_fantasia;
   int? situacao_cadastral;
   String? descricao_situacao_cadastral;
-  String? data_situacao_cadastral;
+  DateTime? data_situacao_cadastral;
   int? motivo_situacao_cadastral;
   String? descricao_motivo_situacao_cadastral;
   String? nome_cidade_exterior;
-
   String? natureza_juridica;
   int? codigo_natureza_juridica;
-
-  String? data_inicio_atividade;
+  DateTime? data_inicio_atividade;
   int? cnae_fiscal;
   String? cnae_fiscal_descricao;
   String? descricao_tipo_logradouro;
@@ -163,8 +157,8 @@ class CNPJBrasilAPI {
   String? porte;
   String? descricao_porte;
   bool? opcao_pelo_simples;
-  DateTime? data_opcao_pelo_simples;
-  DateTime? data_exclusao_do_simples;
+  String? data_opcao_pelo_simples;
+  String? data_exclusao_do_simples;
   bool? opcao_pelo_mei;
   String? situacao_especial;
   String? data_situacao_especial;
@@ -172,47 +166,47 @@ class CNPJBrasilAPI {
   List<Qsa>? qsa;
 
 CNPJBrasilAPI({
-      this.cnpj = "",
-      this.identificador_matriz_filial,
-      this.descricao_matriz_filial = "",
-      this.razao_social = "",
-      this.nome_fantasia = "",
-      this.situacao_cadastral,
-      this.descricao_situacao_cadastral = "",
-      this.data_situacao_cadastral = "",
-      this.motivo_situacao_cadastral,
-      this.descricao_motivo_situacao_cadastral = "", // ******
-      this.nome_cidade_exterior = "",
-      this.natureza_juridica,
-      this.codigo_natureza_juridica,
-      this.data_inicio_atividade = "",
-      this.cnae_fiscal,
-      this.cnae_fiscal_descricao = "",
-      this.descricao_tipo_logradouro = "",
-      this.logradouro = "",
-      this.numero = "",
-      this.complemento = "",
-      this.bairro = "",
-      this.cep = "",
-      this.uf = "",
-      this.codigo_municipio,
-      this.municipio = "",
-      this.ddd_telefone1 = "",
-      this.ddd_telefone2 = "",
-      this.ddd_fax = "",
-      this.qualificacao_do_responsavel,
-      this.capital_social,
-      this.porte = "",
-      this.descricao_porte = "",
-      this.opcao_pelo_simples,
-      this.data_opcao_pelo_simples,
-      this.data_exclusao_do_simples,
-      this.opcao_pelo_mei,
-      this.situacao_especial = "",
-      this.data_situacao_especial = "",
-      this.cnaes_secundarios,
-      this.qsa,
-      });
+  this.cnpj = "",
+  this.identificador_matriz_filial,
+  this.descricao_matriz_filial = "",
+  this.razao_social = "",
+  this.nome_fantasia = "",
+  this.situacao_cadastral,
+  this.descricao_situacao_cadastral = "",
+  this.data_situacao_cadastral,
+  this.motivo_situacao_cadastral,
+  this.descricao_motivo_situacao_cadastral = "",
+  this.nome_cidade_exterior = "",
+  this.natureza_juridica,
+  this.codigo_natureza_juridica,
+  this.data_inicio_atividade,
+  this.cnae_fiscal,
+  this.cnae_fiscal_descricao = "",
+  this.descricao_tipo_logradouro = "",
+  this.logradouro = "",
+  this.numero = "",
+  this.complemento = "",
+  this.bairro = "",
+  this.cep = "",
+  this.uf = "",
+  this.codigo_municipio,
+  this.municipio = "",
+  this.ddd_telefone1 = "",
+  this.ddd_telefone2 = "",
+  this.ddd_fax = "",
+  this.qualificacao_do_responsavel,
+  this.capital_social,
+  this.porte = "",
+  this.descricao_porte = "",
+  this.opcao_pelo_simples,
+  this.data_opcao_pelo_simples = "",
+  this.data_exclusao_do_simples = "",
+  this.opcao_pelo_mei,
+  this.situacao_especial = "",
+  this.data_situacao_especial = "",
+  this.cnaes_secundarios,
+  this.qsa,
+  });
 
   CNPJBrasilAPI copyWith({
     String? cnpj,  //
@@ -222,13 +216,13 @@ CNPJBrasilAPI({
     String? nome_fantasia,
     int? situacao_cadastral,
     String? descricao_situacao_cadastral,
-    String? data_situacao_cadastral,
+    DateTime? data_situacao_cadastral,
     int? motivo_situacao_cadastral,
     String? descricao_motivo_situacao_cadastral,
     String? nome_cidade_exterior,
     String? natureza_juridica,
     int? codigo_natureza_juridica,
-    String? data_inicio_atividade,
+    DateTime? data_inicio_atividade,
     int? cnae_fiscal,
     String? cnae_fiscal_descricao,
     String? descricao_tipo_logradouro,
@@ -248,8 +242,8 @@ CNPJBrasilAPI({
     String? porte,
     String? descricao_porte,
     bool? opcao_pelo_simples,
-    DateTime? data_opcao_pelo_simples,
-    DateTime? data_exclusao_do_simples,
+    String? data_opcao_pelo_simples,
+    String? data_exclusao_do_simples,
     bool? opcao_pelo_mei,
     String? situacao_especial,
     String? data_situacao_especial,
@@ -313,7 +307,6 @@ CNPJBrasilAPI({
 
   static Future<CNPJNormal> consultarCNPJ(String cnpj) async {
 
-
     final url = Uri.parse("https://brasilapi.com.br/api/cnpj/v1/${cnpj.trim().replaceAll('.', '').replaceAll('-', '').replaceAll('/', '')}");
 
     final response = await http.get(url);
@@ -321,17 +314,16 @@ CNPJBrasilAPI({
     if (response.statusCode == 200) {
       CNPJBrasilAPI cnpjbrasil = CNPJBrasilAPI();
       //try {
-        
       cnpjbrasil = CNPJBrasilAPI.fromJsonString(response.body);
 
        CNPJNormal cnpjNormal = CNPJNormal();
        CnaesSecundarios cnaeAtvSecundaria = CnaesSecundarios();
        Qsa qsa = Qsa();
-
+    
 //iguais
        cnpjNormal.cnpj = cnpjbrasil.cnpj;
        cnpjNormal.porte = cnpjbrasil.porte;
-       cnpjNormal.razao = cnpjbrasil.razao_social; //
+       cnpjNormal.razao = cnpjbrasil.razao_social; 
        cnpjNormal.logradouro = cnpjbrasil.logradouro;
        cnpjNormal.numero = cnpjbrasil.numero;
        cnpjNormal.complemento = cnpjbrasil.complemento;
@@ -339,8 +331,7 @@ CNPJBrasilAPI({
        cnpjNormal.cep = cnpjbrasil.cep;
        cnpjNormal.uf = cnpjbrasil.uf;
        cnpjNormal.municipio = cnpjbrasil.municipio;
-       cnpjNormal.capitalSocial = cnpjbrasil.capital_social;//
-       //cnpjNormal.qsa = cnpjbrasil.qsa;
+       cnpjNormal.capitalSocial = cnpjbrasil.capital_social;
        cnpjNormal.situacaoEspecial = cnpjbrasil.situacao_especial;
 
        if(cnpjbrasil.data_situacao_especial != ""){
@@ -350,21 +341,12 @@ CNPJBrasilAPI({
 //equivalentes 
        cnpjNormal.nome = cnpjbrasil.nome_fantasia;
        cnpjNormal.tipoMatrizFilial = cnpjbrasil.descricao_matriz_filial;
-      
        cnpjNormal.naturezaJuridica = cnpjbrasil.natureza_juridica;
        cnpjNormal.codigoNaturezaJuridica = cnpjbrasil.codigo_natureza_juridica;
-
-      if(cnpjbrasil.data_inicio_atividade != ""){
-       cnpjNormal.abertura = DateTime.tryParse(cnpjbrasil.data_inicio_atividade ?? '');
-      }
-
+       cnpjNormal.abertura = cnpjbrasil.data_inicio_atividade;
        cnpjNormal.telefone = cnpjbrasil.ddd_telefone1;
        cnpjNormal.situacaoCadastral = cnpjbrasil.descricao_situacao_cadastral;
-
-      if(cnpjbrasil.data_situacao_cadastral != ""){
-       cnpjNormal.dataSituacaoCadastral = DateTime.tryParse(cnpjbrasil.data_situacao_cadastral ?? '');
-      }
-
+       cnpjNormal.dataSituacaoCadastral = cnpjbrasil.data_situacao_cadastral;
        cnpjNormal.descricaoMotivoSituacaoCadastral = cnpjbrasil.descricao_motivo_situacao_cadastral;
 
 //particular
@@ -377,14 +359,21 @@ CNPJBrasilAPI({
        cnpjNormal.dddFax = cnpjbrasil.ddd_fax;
        cnpjNormal.descricaoPorte = cnpjbrasil.descricao_porte;
        cnpjNormal.opcaoPeloSimples = cnpjbrasil.opcao_pelo_simples;
-       cnpjNormal.dataOpcaoPeloSimples = cnpjbrasil.data_opcao_pelo_simples;
-       cnpjNormal.dataExclusaoDoSimples = cnpjbrasil.data_exclusao_do_simples;
+
+
+      if(cnpjbrasil.data_opcao_pelo_simples != ""){
+       cnpjNormal.dataOpcaoPeloSimples = DateTime.tryParse(cnpjbrasil.data_opcao_pelo_simples ?? '');
+      }
+
+      if(cnpjbrasil.data_exclusao_do_simples != ""){
+       cnpjNormal.dataExclusaoDoSimples = DateTime.tryParse(cnpjbrasil.data_exclusao_do_simples ?? '');
+      }
+
        cnpjNormal.opcaoPeloMei = cnpjbrasil.opcao_pelo_mei;
        cnpjNormal.cnaeFiscal = cnpjbrasil.cnae_fiscal; 
        cnpjNormal.cnaeFiscalDescricao = cnpjbrasil.cnae_fiscal_descricao;
        cnpjNormal.cnaeAtvSecundaria = cnaeAtvSecundaria.codigo; 
        cnpjNormal.cnaeAtvSecundariaDescricao = cnaeAtvSecundaria.descricao;
-
        cnpjNormal.pais = qsa.pais;
        cnpjNormal.nomeSocio = qsa.nome_socio;
        cnpjNormal.codigoPais = qsa.codigo_pais;
@@ -406,17 +395,24 @@ CNPJBrasilAPI({
        cnpjNormal.codigoQualificacaoDoResponsavel = qsa.codigo_qualificacao_socio;
        cnpjNormal.qualificacaoDoResponsavel = qsa.qualificacao_socio;
 
-
       /*} catch (e) {
         debugger();
-      }
-      */
+      }*/
+
+      print('Dados consultados com sucesso.');
 
       return cnpjNormal;
-    } else {
+
+    }
+    
+    if (response.statusCode == 404){
+      print('CNPJ não encontrado na API Minha Receita. (404)');
+      throw Exception('CNPJ não encontrado na API Minha Receita. (Brasil API)');
+    }
+     else {
+      print('Aconteceu uma falha ao consultar o Cnpj na BrasilAPI.');
       throw Exception('Aconteceu uma falha ao consultar o Cnpj na BrasilAPI.');
     }
   }
-
 
 }
