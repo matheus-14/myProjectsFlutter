@@ -40,8 +40,7 @@ CNPJNormal _$CNPJNormalFromJson(Map<String, dynamic> json) => CNPJNormal(
       descricaoTipoLogradouro: json['descricaoTipoLogradouro'] as String? ?? "",
       dddTelefone2: json['dddTelefone2'] as String? ?? "",
       dddFax: json['dddFax'] as String? ?? "",
-      qualificacaoDoResponsavel:
-          json['qualificacaoDoResponsavel'] as String? ?? "",
+      qualificacaoDoResponsavel: json['qualificacaoDoResponsavel'] as int?,
       descricaoPorte: json['descricaoPorte'] as String? ?? "",
       opcaoPeloSimples: json['opcaoPeloSimples'] as bool?,
       dataOpcaoPeloSimples: json['dataOpcaoPeloSimples'] == null
@@ -62,6 +61,8 @@ CNPJNormal _$CNPJNormalFromJson(Map<String, dynamic> json) => CNPJNormal(
           : DateTime.parse(json['ultimaAtualizacao'] as String),
       cnaeAtvSecundaria: json['cnaeAtvSecundaria'] as int?,
       cnaeAtvSecundariaDescricao: json['cnaeAtvSecundariaDescricao'] as String?,
+      billingFree: json['billingFree'] as bool?,
+      billingDatabase: json['billingDatabase'] as bool?,
     )..pcaoPeloSimples = json['pcaoPeloSimples'] as bool?;
 
 Map<String, dynamic> _$CNPJNormalToJson(CNPJNormal instance) =>
@@ -101,6 +102,8 @@ Map<String, dynamic> _$CNPJNormalToJson(CNPJNormal instance) =>
       'efr': instance.efr,
       'email': instance.email,
       'ultimaAtualizacao': instance.ultimaAtualizacao?.toIso8601String(),
+      'billingFree': instance.billingFree,
+      'billingDatabase': instance.billingDatabase,
       'identificadorMatrizFilial': instance.identificadorMatrizFilial,
       'codigoMunicipio': instance.codigoMunicipio,
       'motivoSituacaoCadastral': instance.motivoSituacaoCadastral,

@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/services.dart';
@@ -160,16 +162,16 @@ class Billing {
 @JsonSerializable(explicitToJson: true)
 class CNPJReceitaWS {
   String? status = "";
-  DateTime? ultimaAtualizacao;
+  DateTime? ultima_atualizacao;
   String? cnpj = "";
   String? tipo = "";
   String? porte = "";
   String? nome = "";
   String? fantasia = "";
   String? abertura = "";
-  List<AtividadePrincipal>? cnaeAtvPrincipal = <AtividadePrincipal>[];
-  List<AtividadesSecundarias>? atividadesSecundarias = <AtividadesSecundarias>[];
-  String? naturezaJuridica = "";
+  List<AtividadePrincipal>? atividade_principal = <AtividadePrincipal>[];
+  List<AtividadesSecundarias>? atividades_secundarias = <AtividadesSecundarias>[];
+  String? natureza_juridica = "";
   String? logradouro = "";
   String? numero = "";
   String? complemento = "";
@@ -181,26 +183,26 @@ class CNPJReceitaWS {
   String? telefone = "";
   String? efr = "";
   String? situacao = "";
-  String? dataSituacao = "";
-  String? motivoSituacao = "";
-  String? situacaoEspecial = "";
-  String? dataSituacaoEspecial = "";
-  String? capitalSocial = "";
+  String? data_situacao = "";
+  String? motivo_situacao = "";
+  String? situacao_especial = "";
+  String? data_situacao_especial = "";
+  String? capital_social = "";
   List<Qsa>? qsa = <Qsa>[];
   Billing? billing = Billing();
 
   CNPJReceitaWS({
       this.status = "",
-      this.ultimaAtualizacao,
+      this.ultima_atualizacao,
       this.cnpj = "",  
       this.tipo = "", 
       this.porte = "",
       this.nome = "", 
       this.fantasia = "", 
       this.abertura = "",
-      this.cnaeAtvPrincipal,
-      this.atividadesSecundarias,
-      this.naturezaJuridica = "",
+      this.atividade_principal,
+      this.atividades_secundarias,
+      this.natureza_juridica = "",
       this.logradouro = "",
       this.numero = "",
       this.complemento = "",
@@ -212,27 +214,27 @@ class CNPJReceitaWS {
       this.telefone = "",
       this.efr = "",
       this.situacao = "",
-      this.dataSituacao = "",
-      this.motivoSituacao = "",
-      this.situacaoEspecial = "",
-      this.dataSituacaoEspecial = "",
-      this.capitalSocial = "",
+      this.data_situacao = "",
+      this.motivo_situacao = "",
+      this.situacao_especial = "",
+      this.data_situacao_especial = "",
+      this.capital_social = "",
       this.qsa,
       this.billing,
       });
 
   CNPJReceitaWS copyWith({
     String? status,
-    DateTime? ultimaAtualizacao,
+    DateTime? ultima_atualizacao,
     String? cnpj,
     String? tipo,
     String? porte,
     String? nome,
     String? fantasia,
     String? abertura,
-    List<AtividadePrincipal>? cnaeAtvPrincipal,
-    List<AtividadesSecundarias>? atividadesSecundarias,
-    String? naturezaJuridica,
+    List<AtividadePrincipal>? atividade_principal,
+    List<AtividadesSecundarias>? atividades_secundarias,
+    String? natureza_juridica,
     String? logradouro,
     String? numero,
     String? complemento,
@@ -244,26 +246,26 @@ class CNPJReceitaWS {
     String? telefone,
     String? efr,
     String? situacao,
-    String? dataSituacao,
-    String? motivoSituacao,
-    String? situacaoEspecial,
-    String? dataSituacaoEspecial,
-    String? capitalSocial,
+    String? data_situacao,
+    String? motivo_situacao,
+    String? situacao_especial,
+    String? data_situacao_especial,
+    String? capital_social,
     List<Qsa>? qsa,
     Billing? billing,
   }) {
     return CNPJReceitaWS(
       status: status ?? this.status,
-      ultimaAtualizacao: ultimaAtualizacao ?? this.ultimaAtualizacao,
+      ultima_atualizacao: ultima_atualizacao ?? this.ultima_atualizacao,
       cnpj: cnpj ?? this.cnpj,
       tipo: tipo ?? this.tipo,
       porte: porte ?? this.porte,
       nome: nome ?? this.nome,
       fantasia: fantasia ?? this.fantasia,
       abertura: abertura ?? this.abertura,
-      cnaeAtvPrincipal: cnaeAtvPrincipal ?? this.cnaeAtvPrincipal,
-      atividadesSecundarias: atividadesSecundarias ?? this.atividadesSecundarias,
-      naturezaJuridica: naturezaJuridica ?? this.naturezaJuridica,
+      atividade_principal: atividade_principal ?? this.atividade_principal,
+      atividades_secundarias: atividades_secundarias ?? this.atividades_secundarias,
+      natureza_juridica: natureza_juridica ?? this.natureza_juridica,
       logradouro: logradouro ?? this.logradouro,
       numero: numero ?? this.numero,
       complemento: complemento ?? this.complemento,
@@ -275,13 +277,11 @@ class CNPJReceitaWS {
       telefone: telefone ?? this.telefone,
       efr: efr ?? this.efr,
       situacao: situacao ?? this.situacao,
-      dataSituacao: dataSituacao ?? this.dataSituacao,
-      motivoSituacao: motivoSituacao ?? this.motivoSituacao,
-      situacaoEspecial: situacaoEspecial ?? this.situacaoEspecial,
-      dataSituacaoEspecial: dataSituacaoEspecial ?? this.dataSituacaoEspecial,
-      capitalSocial: capitalSocial ?? this.capitalSocial,
-
-
+      data_situacao: data_situacao ?? this.data_situacao,
+      motivo_situacao: motivo_situacao ?? this.motivo_situacao,
+      situacao_especial: situacao_especial ?? this.situacao_especial,
+      data_situacao_especial: data_situacao_especial ?? this.data_situacao_especial,
+      capital_social: capital_social ?? this.capital_social,
       qsa: qsa ?? this.qsa,
       billing: billing ?? this.billing,
     );
@@ -299,7 +299,7 @@ class CNPJReceitaWS {
   static String lCNPJReceitaWSToJson(List<CNPJReceitaWS> data) => jsonEncode(List<dynamic>.from(data.map((x) => x.toJson())), toEncodable: FJson.dataHoraSeralizer);
 
  
-  static Future<CNPJReceitaWS> consultarCNPJ(String cnpj) async {
+  static Future<CNPJNormal> consultarCNPJ(String cnpj) async {
 
     final url = Uri.parse("https://receitaws.com.br/v1/cnpj/${cnpj.trim().replaceAll('.', '').replaceAll('-', '').replaceAll('/', '')}");
 
@@ -307,7 +307,7 @@ class CNPJReceitaWS {
 
     if (response.statusCode == 200) {
       CNPJReceitaWS cnpjReceita = CNPJReceitaWS();
-      try {
+      //try {
         await Clipboard.setData(ClipboardData(text: response.body));
       cnpjReceita = CNPJReceitaWS.fromJsonString(response.body);        
 
@@ -315,47 +315,52 @@ class CNPJReceitaWS {
        Qsa qsa = Qsa();
        AtividadePrincipal cnaeAtvPrincipal = AtividadePrincipal();
        AtividadesSecundarias cnaeAtvSecundaria = AtividadesSecundarias();
+       Billing billing = Billing();
+
 //iguais
        cnpjNormal.cnpj = cnpjReceita.cnpj;
        cnpjNormal.porte = cnpjReceita.porte;
        cnpjNormal.logradouro = cnpjReceita.logradouro;
        cnpjNormal.numero = cnpjReceita.numero;
-       cnpjNormal.complemento = cnpjReceita.complemento;
+       cnpjNormal.complemento = cnpjReceita.complemento; //
        cnpjNormal.bairro = cnpjReceita.bairro;
        cnpjNormal.cep = cnpjReceita.cep;
        cnpjNormal.uf = cnpjReceita.uf;
        cnpjNormal.municipio = cnpjReceita.municipio;
 
-      if(cnpjReceita.capitalSocial != ""){
-       cnpjNormal.capitalSocial = int.parse(cnpjReceita.capitalSocial!);}
+      if(cnpjReceita.capital_social != ""){
+       cnpjNormal.capitalSocial = int.parse(cnpjReceita.capital_social!);
+       }
 
        //cnpjNormal.qsa = cnpjReceita.qsa as String?;
-       cnpjNormal.situacaoEspecial = cnpjReceita.situacaoEspecial;
+       cnpjNormal.situacaoEspecial = cnpjReceita.situacao_especial;
 
-       if(cnpjReceita.dataSituacaoEspecial != ""){
-        cnpjNormal.dataSituacaoEspecial = DateTime.tryParse(cnpjReceita.dataSituacaoEspecial ?? '');
+       if(cnpjReceita.data_situacao_especial != ""){
+        cnpjNormal.dataSituacaoEspecial = DateTime.tryParse(cnpjReceita.data_situacao_especial ?? '');
        }
 //equivalentes
        cnpjNormal.nome = cnpjReceita.nome;
        cnpjNormal.tipoMatrizFilial = cnpjReceita.tipo;
 
-      if(cnpjReceita.naturezaJuridica != ""){
-       cnpjNormal.naturezaJuridica = cnpjReceita.naturezaJuridica!.split('-')[2];         
-       cnpjNormal.codigoNaturezaJuridica = int.parse(cnpjReceita.naturezaJuridica!.split(' ')[0].replaceAll('-', '').trim());
+      if(cnpjReceita.natureza_juridica != ""){
+       cnpjNormal.naturezaJuridica = cnpjReceita.natureza_juridica!.split('-')[2];         
+       cnpjNormal.codigoNaturezaJuridica = int.parse(cnpjReceita.natureza_juridica!.split(' ')[0].replaceAll('-', '').trim());
       }
 
        cnpjNormal.abertura = cnpjReceita.abertura;
        cnpjNormal.telefone = cnpjReceita.telefone;
        cnpjNormal.situacaoCadastral = cnpjReceita.situacao;
-       cnpjNormal.dataSituacaoCadastral = cnpjReceita.dataSituacao;
-       cnpjNormal.descricaoMotivoSituacaoCadastral = cnpjReceita.motivoSituacao;
-       cnpjNormal.dataSituacaoCadastral = cnpjReceita.abertura;
+       cnpjNormal.dataSituacaoCadastral = cnpjReceita.data_situacao;//- mesma, conferir
+       cnpjNormal.descricaoMotivoSituacaoCadastral = cnpjReceita.motivo_situacao;
+       cnpjNormal.dataSituacaoCadastral = cnpjReceita.abertura;//- conferir
 
 //particular  
        cnpjNormal.status = cnpjReceita.status;
-       cnpjNormal.ultimaAtualizacao = cnpjReceita.ultimaAtualizacao;
+       cnpjNormal.ultimaAtualizacao = cnpjReceita.ultima_atualizacao;
        cnpjNormal.efr = cnpjReceita.efr;
        cnpjNormal.email = cnpjReceita.email;
+       cnpjNormal.billingFree = billing.free;
+       cnpjNormal.billingDatabase = billing.database;
        
        if(cnaeAtvPrincipal.text != ""){
         cnpjNormal.cnaeFiscal = int.parse(cnaeAtvPrincipal.code!.replaceAll('.', '').replaceAll('-', '').trim());
@@ -364,26 +369,19 @@ class CNPJReceitaWS {
 
        if(cnaeAtvSecundaria.code != ""){
         cnpjNormal.cnaeAtvSecundaria = int.parse(cnaeAtvSecundaria.code!.replaceAll('.', '').replaceAll('-', '').trim());
+        cnpjNormal.cnaeAtvSecundariaDescricao = cnaeAtvSecundaria.text!;     
        }
 
-      if(cnaeAtvSecundaria.code != ""){
-        cnpjNormal.cnaeAtvSecundariaDescricao = cnaeAtvSecundaria.text!;
-      }
 
       if(qsa.qual != ""){
-       cnpjNormal.qualificacaoDoResponsavel = qsa.qual!.split('-')[0];
+       cnpjNormal.qualificacaoDoResponsavel = int.parse(qsa.qual!.split('-')[0]);
       }
-
-       // cnpjNormal.billing = cnpjReceita.billing; 
- 
-
-
      
 
-      } catch (e) {
+     /* } catch (e) {
         debugger();
-      }
-      return cnpjReceita;
+      }*/
+      return cnpjNormal;
     } else {
       throw Exception('Aconteceu uma falha ao consultar o Cnpj na ReceitaWS.');
     }

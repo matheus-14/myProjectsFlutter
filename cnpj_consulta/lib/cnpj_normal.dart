@@ -30,7 +30,7 @@ class CNPJNormal {
   String? situacaoCadastral;
   String? dataSituacaoCadastral;
   String? descricaoMotivoSituacaoCadastral;
-  String? qualificacaoDoResponsavel;
+  int? qualificacaoDoResponsavel;
   bool? opcaoPeloSimples;
   String? cnaesSecundarios;
 
@@ -44,6 +44,8 @@ class CNPJNormal {
   String? efr;
   String? email;
   DateTime? ultimaAtualizacao;
+  bool? billingFree;
+  bool? billingDatabase;
 
   //brasilApi:
   int? identificadorMatrizFilial;
@@ -58,7 +60,6 @@ class CNPJNormal {
   DateTime? dataOpcaoPeloSimples;
   DateTime? dataExclusaoDoSimples;
   bool? opcaoPeloMei;
-  //String? cnaesSecundarios;
 
 
   CNPJNormal({
@@ -92,7 +93,7 @@ class CNPJNormal {
     this.descricaoTipoLogradouro = "",
     this.dddTelefone2 = "",
     this.dddFax = "",
-    this.qualificacaoDoResponsavel = "",
+    this.qualificacaoDoResponsavel,
     this.descricaoPorte = "",
     this.opcaoPeloSimples,
     this.dataOpcaoPeloSimples,
@@ -107,6 +108,8 @@ class CNPJNormal {
     this.ultimaAtualizacao,
     this.cnaeAtvSecundaria,
     this.cnaeAtvSecundariaDescricao,
+    this.billingFree,
+    this.billingDatabase,
   });
 
   CNPJNormal copyWit({
@@ -140,7 +143,7 @@ class CNPJNormal {
     String? descricaoTipoLogradouro,
     String? dddTelefone2,
     String? dddFax,
-    String? qualificacaoDoResponsavel,
+    int? qualificacaoDoResponsavel,
     String? descricaoPorte,
     bool? opcaoPeloSimples,
     DateTime? dataOpcaoPeloSimples,
@@ -155,6 +158,8 @@ class CNPJNormal {
     DateTime? ultimaAtualizacao,
     int? cnaeAtvSecundaria,
     String? cnaeAtvSecundariaDescricao,
+    bool? billingFree,
+    bool? billingDatabase,
   }) {
     return CNPJNormal(
       cnpj: cnpj ?? this.cnpj,
@@ -201,6 +206,8 @@ class CNPJNormal {
       ultimaAtualizacao: ultimaAtualizacao ?? this.ultimaAtualizacao,
       cnaeAtvSecundaria: cnaeAtvSecundaria ?? this.cnaeAtvSecundaria,
       cnaeAtvSecundariaDescricao: cnaeAtvSecundariaDescricao ?? this.cnaeAtvSecundariaDescricao,
+      billingFree: billingFree ?? this.billingFree,
+      billingDatabase: billingDatabase ?? this.billingDatabase,
     );
   }
 
