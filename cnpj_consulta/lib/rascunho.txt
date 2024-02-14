@@ -92,4 +92,3 @@ https://brasilapi.com.br/api/cnpj/v1/03637885000122
 https://receitaws.com.br/v1/cnpj/03637885000122
 
 
-***** dataSituacaoEspecial deve ser datetime na normal **

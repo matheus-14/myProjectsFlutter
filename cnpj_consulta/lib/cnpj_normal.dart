@@ -282,4 +282,12 @@ class CNPJNormal {
   static String lCNPJNormalToJson(List<CNPJNormal> data) => jsonEncode(List<dynamic>.from(data.map((x) => x.toJson())), toEncodable: FJson.dataHoraSeralizer);
 
 
+
+//Future<CNPJNormal> consultarCnpj() async {
+
+
+
+//}
+  
+
 }

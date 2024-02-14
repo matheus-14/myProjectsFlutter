@@ -59,6 +59,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 hintText: 'Digite o Cnpj',
                 border: OutlineInputBorder(),
               ),
+              maxLines: 1, 
+              maxLength: 18, 
             ),
             const SizedBox(height: 10),
             DropdownButton<String>(
@@ -94,6 +96,9 @@ class _MyHomePageState extends State<MyHomePage> {
  Future<void> _consultarCNPJ() async {
     try {
       debugger();
+
+      //await 
+
       if (selecionadaAPI == 'BrasilAPI') {
         final cnpjbrasil = await CNPJBrasilAPI.consultarCNPJ(cnpjEntrada);
         setState(() {

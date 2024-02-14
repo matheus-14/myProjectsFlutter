@@ -405,8 +405,8 @@ CNPJBrasilAPI({
     }
     
     if (response.statusCode == 404){
-      print('CNPJ não encontrado na API Minha Receita. (404)');
-      throw Exception('CNPJ não encontrado na API Minha Receita. (Brasil API)');
+      print('Cnpj não encontrado na API Minha Receita. (404)');
+      throw Exception('Cnpj não encontrado na API Minha Receita. (Brasil API)');
     }
      else {
       print('Aconteceu uma falha ao consultar o Cnpj na BrasilAPI.');

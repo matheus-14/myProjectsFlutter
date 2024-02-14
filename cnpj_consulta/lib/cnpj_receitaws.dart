@@ -337,15 +337,12 @@ class CNPJReceitaWS {
        cnpjNormal.codigoNaturezaJuridica = int.parse(cnpjReceita.natureza_juridica!.split(' ')[0].replaceAll('-', '').trim());
       }
 
-//------------conv?
       if(cnpjReceita.abertura != ""){
 
         var auxAno = int.parse(cnpjReceita.abertura!.split('/')[2]);
         var auxMes = int.parse(cnpjReceita.abertura!.split('/')[1]);
         var auxDia = int.parse(cnpjReceita.abertura!.split('/')[0]);
-
-       cnpjNormal.abertura = DateTime(auxAno, auxMes, auxDia);
-
+        cnpjNormal.abertura = DateTime(auxAno, auxMes, auxDia);
       }
 
        cnpjNormal.telefone = cnpjReceita.telefone;
@@ -355,7 +352,6 @@ class CNPJReceitaWS {
        var auxAno = int.parse(cnpjReceita.data_situacao!.split('/')[2]);
        var auxMes = int.parse(cnpjReceita.data_situacao!.split('/')[1]);
        var auxDia = int.parse(cnpjReceita.data_situacao!.split('/')[0]);
-
        cnpjNormal.dataSituacaoCadastral = DateTime(auxAno, auxMes, auxDia);
       }
 
