@@ -123,7 +123,6 @@ class Qsa {
 
 @JsonSerializable(explicitToJson: true)
 class CNPJBrasilAPI {
-
   String? cnpj;
   int? identificador_matriz_filial;
   String? descricao_matriz_filial;
