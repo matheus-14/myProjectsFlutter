@@ -1,5 +1,6 @@
 // ignore_for_file: non_constant_identifier_names, unnecessary_this, avoid_print, unused_local_variable
 //import 'dart:developer';
+import 'package:flutter/services.dart';
 
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -148,8 +149,8 @@ class CNPJBrasilAPI {
   String? uf;
   int? codigo_municipio;
   String? municipio;
-  String? ddd_telefone1;
-  String? ddd_telefone2;
+  String? ddd_telefone_1;
+  String? ddd_telefone_2;
   String? ddd_fax;
   int? qualificacao_do_responsavel;
   int? capital_social;
@@ -190,8 +191,8 @@ CNPJBrasilAPI({
   this.uf = "",
   this.codigo_municipio,
   this.municipio = "",
-  this.ddd_telefone1 = "",
-  this.ddd_telefone2 = "",
+  this.ddd_telefone_1 = "",
+  this.ddd_telefone_2 = "",
   this.ddd_fax = "",
   this.qualificacao_do_responsavel,
   this.capital_social,
@@ -233,8 +234,8 @@ CNPJBrasilAPI({
     String? uf,
     int? codigo_municipio,
     String? municipio,
-    String? ddd_telefone1,
-    String? ddd_telefone2,
+    String? ddd_telefone_1,
+    String? ddd_telefone_2,
     String? ddd_fax,
     int? qualificacao_do_responsavel,
     int? capital_social,
@@ -275,8 +276,8 @@ CNPJBrasilAPI({
       uf: uf ?? this.uf,
       codigo_municipio: codigo_municipio ?? this.codigo_municipio,
       municipio: municipio ?? this.municipio,
-      ddd_telefone1: ddd_telefone1 ?? this.ddd_telefone1,
-      ddd_telefone2: ddd_telefone2 ?? this.ddd_telefone2,
+      ddd_telefone_1: ddd_telefone_1 ?? this.ddd_telefone_1,
+      ddd_telefone_2: ddd_telefone_2 ?? this.ddd_telefone_2,
       ddd_fax: ddd_fax ?? this.ddd_fax,
       qualificacao_do_responsavel: qualificacao_do_responsavel ?? this.qualificacao_do_responsavel,
       capital_social: capital_social ?? this.capital_social,
@@ -316,6 +317,7 @@ CNPJBrasilAPI({
     CNPJBrasilAPI cnpjbrasil = CNPJBrasilAPI();
     
     //try {
+      await Clipboard.setData(ClipboardData(text: response.body));
     cnpjbrasil = CNPJBrasilAPI.fromJsonString(response.body);
     CnaesSecundarios cnaeAtvSecundaria = CnaesSecundarios();
     Qsa qsa = Qsa();
@@ -344,7 +346,7 @@ CNPJBrasilAPI({
        cnpjNormal.naturezaJuridica = cnpjbrasil.natureza_juridica;
        cnpjNormal.codigoNaturezaJuridica = cnpjbrasil.codigo_natureza_juridica;
        cnpjNormal.abertura = cnpjbrasil.data_inicio_atividade;
-       cnpjNormal.telefone = cnpjbrasil.ddd_telefone1;
+       cnpjNormal.telefone = cnpjbrasil.ddd_telefone_1;
        cnpjNormal.situacaoCadastral = cnpjbrasil.descricao_situacao_cadastral;
        cnpjNormal.dataSituacaoCadastral = cnpjbrasil.data_situacao_cadastral;
        cnpjNormal.descricaoMotivoSituacaoCadastral = cnpjbrasil.descricao_motivo_situacao_cadastral;
@@ -355,7 +357,7 @@ CNPJBrasilAPI({
        cnpjNormal.motivoSituacaoCadastral = cnpjbrasil.motivo_situacao_cadastral;
        cnpjNormal.nomeCidadeExterior = cnpjbrasil.nome_cidade_exterior;
        cnpjNormal.descricaoTipoLogradouro = cnpjbrasil.descricao_tipo_logradouro;
-       cnpjNormal.dddTelefone2 = cnpjbrasil.ddd_telefone2;
+       cnpjNormal.dddTelefone2 = cnpjbrasil.ddd_telefone_2;
        cnpjNormal.dddFax = cnpjbrasil.ddd_fax;
        cnpjNormal.descricaoPorte = cnpjbrasil.descricao_porte;
        cnpjNormal.opcaoPeloSimples = cnpjbrasil.opcao_pelo_simples;

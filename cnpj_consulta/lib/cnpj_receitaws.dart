@@ -1,6 +1,6 @@
 // ignore_for_file: non_constant_identifier_names, avoid_print, unused_local_variable
 //import 'dart:developer';
-//import 'package:flutter/services.dart';
+import 'package:flutter/services.dart';
 
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -301,7 +301,7 @@ class CNPJReceitaWS {
 
     CNPJReceitaWS cnpjReceita = CNPJReceitaWS();
     //try {
-    // await Clipboard.setData(ClipboardData(text: response.body));
+     await Clipboard.setData(ClipboardData(text: response.body));
     cnpjReceita = CNPJReceitaWS.fromJsonString(response.body);        
     Qsa qsa = Qsa();
     AtividadePrincipal cnaeAtvPrincipal = AtividadePrincipal();
