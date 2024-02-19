@@ -2,6 +2,8 @@ import 'dart:convert';
 //import 'dart:developer';
 import 'package:json_annotation/json_annotation.dart';
 import '../funcoes/fJson.dart';
+import 'cnpj_brasilapi.dart';
+import 'cnpj_receitaws.dart';
 
 part 'cnpj_normal.g.dart';
 
@@ -281,13 +283,16 @@ class CNPJNormal {
 
   static String lCNPJNormalToJson(List<CNPJNormal> data) => jsonEncode(List<dynamic>.from(data.map((x) => x.toJson())), toEncodable: FJson.dataHoraSeralizer);
 
-
-
-//Future<CNPJNormal> consultarCnpj() async {
-
-
-
-//}
   
+  static Future<CNPJNormal> consultarCNPJ(String selecionadaAPI, String cnpjEntrada) async {
+
+    if (selecionadaAPI == 'BrasilAPI') {
+      return CNPJBrasilAPI.consultarCNPJ(cnpjEntrada);
+    }
+     else {
+      return CNPJReceitaWS.consultarCNPJ(cnpjEntrada);
+    }
+
+  }
 
 }

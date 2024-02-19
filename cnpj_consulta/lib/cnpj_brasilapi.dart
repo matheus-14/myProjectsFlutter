@@ -1,4 +1,4 @@
-// ignore_for_file: non_constant_identifier_names, unnecessary_this, avoid_print
+// ignore_for_file: non_constant_identifier_names, unnecessary_this, avoid_print, unused_local_variable
 //import 'dart:developer';
 
 import 'dart:convert';
@@ -310,14 +310,15 @@ CNPJBrasilAPI({
 
     final response = await http.get(url);
 
-    if (response.statusCode == 200) {
-      CNPJBrasilAPI cnpjbrasil = CNPJBrasilAPI();
-      //try {
-      cnpjbrasil = CNPJBrasilAPI.fromJsonString(response.body);
+    CNPJNormal cnpjNormal = CNPJNormal();
+    String sMensagem = "";
 
-       CNPJNormal cnpjNormal = CNPJNormal();
-       CnaesSecundarios cnaeAtvSecundaria = CnaesSecundarios();
-       Qsa qsa = Qsa();
+    CNPJBrasilAPI cnpjbrasil = CNPJBrasilAPI();
+    
+    //try {
+    cnpjbrasil = CNPJBrasilAPI.fromJsonString(response.body);
+    CnaesSecundarios cnaeAtvSecundaria = CnaesSecundarios();
+    Qsa qsa = Qsa();
     
 //iguais
        cnpjNormal.cnpj = cnpjbrasil.cnpj;
@@ -398,20 +399,12 @@ CNPJBrasilAPI({
         debugger();
       }*/
 
-      print('Dados consultados com sucesso.');
+    if(response.statusCode != 200){
+      sMensagem = "Aconteceu uma falha ao consultar o Cnpj na ReceitaWS.";
+    }
 
-      return cnpjNormal;
+    return cnpjNormal;
 
-    }
-    
-    if (response.statusCode == 404){
-      print('Cnpj não encontrado na API Minha Receita. (404)');
-      throw Exception('Cnpj não encontrado na API Minha Receita. (Brasil API)');
-    }
-     else {
-      print('Aconteceu uma falha ao consultar o Cnpj na BrasilAPI.');
-      throw Exception('Aconteceu uma falha ao consultar o Cnpj na BrasilAPI.');
-    }
   }
 
 }

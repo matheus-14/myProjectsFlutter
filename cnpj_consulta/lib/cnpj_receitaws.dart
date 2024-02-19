@@ -1,4 +1,4 @@
-// ignore_for_file: non_constant_identifier_names, avoid_print
+// ignore_for_file: non_constant_identifier_names, avoid_print, unused_local_variable
 //import 'dart:developer';
 //import 'package:flutter/services.dart';
 
@@ -296,114 +296,104 @@ class CNPJReceitaWS {
 
     final response = await http.get(url);
 
-    if (response.statusCode == 200) {
-      CNPJReceitaWS cnpjReceita = CNPJReceitaWS();
-      //try {
-      // await Clipboard.setData(ClipboardData(text: response.body));
-      cnpjReceita = CNPJReceitaWS.fromJsonString(response.body);        
+    CNPJNormal cnpjNormal = CNPJNormal();
+    String sMensagem = "";
 
-       CNPJNormal cnpjNormal = CNPJNormal();
-       Qsa qsa = Qsa();
-       AtividadePrincipal cnaeAtvPrincipal = AtividadePrincipal();
-       AtividadesSecundarias cnaeAtvSecundaria = AtividadesSecundarias();
-       Billing billing = Billing();
+    CNPJReceitaWS cnpjReceita = CNPJReceitaWS();
+    //try {
+    // await Clipboard.setData(ClipboardData(text: response.body));
+    cnpjReceita = CNPJReceitaWS.fromJsonString(response.body);        
+    Qsa qsa = Qsa();
+    AtividadePrincipal cnaeAtvPrincipal = AtividadePrincipal();
+    AtividadesSecundarias cnaeAtvSecundaria = AtividadesSecundarias();
+    Billing billing = Billing();
 
 //iguais
-       cnpjNormal.cnpj = cnpjReceita.cnpj;
-       cnpjNormal.porte = cnpjReceita.porte;
-       cnpjNormal.logradouro = cnpjReceita.logradouro;
-       cnpjNormal.numero = cnpjReceita.numero;
-       cnpjNormal.complemento = cnpjReceita.complemento;
-       cnpjNormal.bairro = cnpjReceita.bairro;
-       cnpjNormal.cep = cnpjReceita.cep;
-       cnpjNormal.uf = cnpjReceita.uf;
-       cnpjNormal.municipio = cnpjReceita.municipio;
+    cnpjNormal.cnpj = cnpjReceita.cnpj;
+    cnpjNormal.porte = cnpjReceita.porte;
+    cnpjNormal.logradouro = cnpjReceita.logradouro;
+    cnpjNormal.numero = cnpjReceita.numero;
+    cnpjNormal.complemento = cnpjReceita.complemento;
+    cnpjNormal.bairro = cnpjReceita.bairro;
+    cnpjNormal.cep = cnpjReceita.cep;
+    cnpjNormal.uf = cnpjReceita.uf;
+    cnpjNormal.municipio = cnpjReceita.municipio;
 
-      if(cnpjReceita.capital_social != ""){
-        cnpjNormal.capitalSocial = int.parse(double.parse(cnpjReceita.capital_social!).toStringAsFixed(0));
-       }
+    if(cnpjReceita.capital_social != ""){
+      cnpjNormal.capitalSocial = int.parse(double.parse(cnpjReceita.capital_social!).toStringAsFixed(0));
+    }
 
-       cnpjNormal.situacaoEspecial = cnpjReceita.situacao_especial;
+    cnpjNormal.situacaoEspecial = cnpjReceita.situacao_especial;
 
-       if(cnpjReceita.data_situacao_especial != ""){
-        cnpjNormal.dataSituacaoEspecial = DateTime.tryParse(cnpjReceita.data_situacao_especial ?? '');
-       }
+    if(cnpjReceita.data_situacao_especial != ""){
+      cnpjNormal.dataSituacaoEspecial = DateTime.tryParse(cnpjReceita.data_situacao_especial ?? '');
+    }
 //equivalentes
-       cnpjNormal.nome = cnpjReceita.nome;
-       cnpjNormal.tipoMatrizFilial = cnpjReceita.tipo;
+    cnpjNormal.nome = cnpjReceita.nome;
+    cnpjNormal.tipoMatrizFilial = cnpjReceita.tipo;
 
-      if(cnpjReceita.natureza_juridica != ""){
-       cnpjNormal.naturezaJuridica = cnpjReceita.natureza_juridica!.split('-')[2];         
-       cnpjNormal.codigoNaturezaJuridica = int.parse(cnpjReceita.natureza_juridica!.split(' ')[0].replaceAll('-', '').trim());
-      }
+    if(cnpjReceita.natureza_juridica != ""){
+      cnpjNormal.naturezaJuridica = cnpjReceita.natureza_juridica!.split('-')[2];         
+      cnpjNormal.codigoNaturezaJuridica = int.parse(cnpjReceita.natureza_juridica!.split(' ')[0].replaceAll('-', '').trim());
+    }
 
-      if(cnpjReceita.abertura != ""){
+    if(cnpjReceita.abertura != ""){
 
-        var auxAno = int.parse(cnpjReceita.abertura!.split('/')[2]);
-        var auxMes = int.parse(cnpjReceita.abertura!.split('/')[1]);
-        var auxDia = int.parse(cnpjReceita.abertura!.split('/')[0]);
-        cnpjNormal.abertura = DateTime(auxAno, auxMes, auxDia);
-      }
+      var auxAno = int.parse(cnpjReceita.abertura!.split('/')[2]);
+      var auxMes = int.parse(cnpjReceita.abertura!.split('/')[1]);
+      var auxDia = int.parse(cnpjReceita.abertura!.split('/')[0]);
+      cnpjNormal.abertura = DateTime(auxAno, auxMes, auxDia);
+    }
 
-       cnpjNormal.telefone = cnpjReceita.telefone;
-       cnpjNormal.situacaoCadastral = cnpjReceita.situacao;
+     cnpjNormal.telefone = cnpjReceita.telefone;
+     cnpjNormal.situacaoCadastral = cnpjReceita.situacao;
 
-      if(cnpjReceita.data_situacao != ""){
-       var auxAno = int.parse(cnpjReceita.data_situacao!.split('/')[2]);
-       var auxMes = int.parse(cnpjReceita.data_situacao!.split('/')[1]);
-       var auxDia = int.parse(cnpjReceita.data_situacao!.split('/')[0]);
-       cnpjNormal.dataSituacaoCadastral = DateTime(auxAno, auxMes, auxDia);
-      }
+    if(cnpjReceita.data_situacao != ""){
+      var auxAno = int.parse(cnpjReceita.data_situacao!.split('/')[2]);
+      var auxMes = int.parse(cnpjReceita.data_situacao!.split('/')[1]);
+      var auxDia = int.parse(cnpjReceita.data_situacao!.split('/')[0]);
+      cnpjNormal.dataSituacaoCadastral = DateTime(auxAno, auxMes, auxDia);
+    }
 
-       cnpjNormal.descricaoMotivoSituacaoCadastral = cnpjReceita.motivo_situacao;
+    cnpjNormal.descricaoMotivoSituacaoCadastral = cnpjReceita.motivo_situacao;
 
 //particular  
-       cnpjNormal.status = cnpjReceita.status;
-       cnpjNormal.ultimaAtualizacao = cnpjReceita.ultima_atualizacao;
-       cnpjNormal.efr = cnpjReceita.efr;
-       cnpjNormal.email = cnpjReceita.email;
-       cnpjNormal.billingFree = billing.free;
-       cnpjNormal.billingDatabase = billing.database;
-       
-       if(cnaeAtvPrincipal.text != ""){
-        cnpjNormal.cnaeFiscal = int.parse(cnaeAtvPrincipal.code!.replaceAll('.', '').replaceAll('-', '').trim());
-        cnpjNormal.cnaeFiscalDescricao = cnaeAtvPrincipal.text!;
-       }
+    cnpjNormal.status = cnpjReceita.status;
+    cnpjNormal.ultimaAtualizacao = cnpjReceita.ultima_atualizacao;
+    cnpjNormal.efr = cnpjReceita.efr;
+    cnpjNormal.email = cnpjReceita.email;
+    cnpjNormal.billingFree = billing.free;
+    cnpjNormal.billingDatabase = billing.database;
+    
+    if(cnaeAtvPrincipal.text != ""){
+      cnpjNormal.cnaeFiscal = int.parse(cnaeAtvPrincipal.code!.replaceAll('.', '').replaceAll('-', '').trim());
+      cnpjNormal.cnaeFiscalDescricao = cnaeAtvPrincipal.text!;
+    }
 
-       if(cnaeAtvSecundaria.code != ""){
-        cnpjNormal.cnaeAtvSecundaria = int.parse(cnaeAtvSecundaria.code!.replaceAll('.', '').replaceAll('-', '').trim());
-        cnpjNormal.cnaeAtvSecundariaDescricao = cnaeAtvSecundaria.text!;     
-       }
+    if(cnaeAtvSecundaria.code != ""){
+      cnpjNormal.cnaeAtvSecundaria = int.parse(cnaeAtvSecundaria.code!.replaceAll('.', '').replaceAll('-', '').trim());
+      cnpjNormal.cnaeAtvSecundariaDescricao = cnaeAtvSecundaria.text!;     
+    }
 
-      if(qsa.qual != ""){
-       cnpjNormal.codigoQualificacaoDoResponsavel = int.parse(qsa.qual!.split('-')[0]);
-       cnpjNormal.qualificacaoDoResponsavel = qsa.qual!.split('-').sublist(1).toString();
-
-      }
-     
-      if(qsa.nome != ""){
-       cnpjNormal.nomeSocio = qsa.nome;
-      }
+    if(qsa.qual != ""){
+      cnpjNormal.codigoQualificacaoDoResponsavel = int.parse(qsa.qual!.split('-')[0]);
+      cnpjNormal.qualificacaoDoResponsavel = qsa.qual!.split('-').sublist(1).toString();
+    }
+    
+    if(qsa.nome != ""){
+     cnpjNormal.nomeSocio = qsa.nome;
+    }
 
       /*} catch (e) {
         debugger();
       }*/
-      
-      print('Dados consultados com sucesso.');
+
+    if(response.statusCode != 200){
+      sMensagem = "Aconteceu uma falha ao consultar o Cnpj na ReceitaWS.";
+    }
 
       return cnpjNormal;
 
-    } else if (response.statusCode == 429) {
-      print('Too many requests. (429)');
-      throw Exception('Too many requests. (429)');
-
-    } else if (response.statusCode == 504) {
-      print('Timeout. (504)');
-      throw Exception('Timeout. (504)');
-
-    } else {
-      throw Exception('Aconteceu uma falha ao consultar o Cnpj na ReceitaWS.');
-    }
   }
 
 }

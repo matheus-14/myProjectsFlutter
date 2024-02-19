@@ -1,8 +1,9 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'cnpj_brasilapi.dart';
-import 'cnpj_receitaws.dart';
+//import 'cnpj_brasilapi.dart';
+//import 'cnpj_receitaws.dart';
+import 'cnpj_normal.dart';
 
 //import 'package:fluttertoast/fluttertoast.dart';
 
@@ -97,25 +98,16 @@ class _MyHomePageState extends State<MyHomePage> {
     try {
       debugger();
 
-      //await 
+    final cnpjData = await CNPJNormal.consultarCNPJ(selecionadaAPI, cnpjEntrada);
 
-      if (selecionadaAPI == 'BrasilAPI') {
-        final cnpjbrasil = await CNPJBrasilAPI.consultarCNPJ(cnpjEntrada);
-        setState(() {
-          cnpjData = cnpjbrasil;
-        });
-      } else if (selecionadaAPI == 'ReceitaWS') {
-        final cnpjReceita = await CNPJReceitaWS.consultarCNPJ(cnpjEntrada);
-        setState(() {
-          cnpjData = cnpjReceita;
-        });
-      }
+    setState(() {
+      this.cnpjData = cnpjData;
+    });
+
     } catch (e) {
       setState(() {
         cnpjData = null;
       });
-
-        // Tratar 
     }
   }
 }
