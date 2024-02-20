@@ -1,6 +1,6 @@
 // ignore_for_file: non_constant_identifier_names, avoid_print, unused_local_variable
 //import 'dart:developer';
-import 'package:flutter/services.dart';
+//import 'package:flutter/services.dart';
 
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -78,31 +78,31 @@ class AtividadesSecundarias {
 class Qsa {
   String? nome = "";
   String? qual = "";
-  String? paisOrigem = "";
-  String? nomeRepLegal = "";
-  String? qualRepLegal = "";
+  String? pais_origem = "";
+  String? nome_rep_legal = "";
+  String? qual_rep_legal = "";
 
   Qsa({
     this.nome = "",
     this.qual = "",
-    this.paisOrigem = "",
-    this.nomeRepLegal = "",
-    this.qualRepLegal = "",
+    this.pais_origem = "",
+    this.nome_rep_legal = "",
+    this.qual_rep_legal = "",
 	});
 
   Qsa copyWith({
 	  String? nome,
     String? qual,
-    String? paisOrigem,
-    String? nomeRepLegal,
-    String? qualRepLegal,
+    String? pais_origem,
+    String? nome_rep_legal,
+    String? qual_rep_legal,
 	}) {
 	  return Qsa(
 		nome: nome ?? this.nome,
 		qual: qual ?? this.qual,
-		paisOrigem: paisOrigem ?? this.paisOrigem,
-		nomeRepLegal: nomeRepLegal ?? this.nomeRepLegal,
-		qualRepLegal: qualRepLegal ?? this.qualRepLegal,
+		pais_origem: pais_origem ?? this.pais_origem,
+		nome_rep_legal: nome_rep_legal ?? this.nome_rep_legal,
+		qual_rep_legal: qual_rep_legal ?? this.qual_rep_legal,
 	);
 	}
   
@@ -301,11 +301,13 @@ class CNPJReceitaWS {
 
     CNPJReceitaWS cnpjReceita = CNPJReceitaWS();
     //try {
-     await Clipboard.setData(ClipboardData(text: response.body));
-    cnpjReceita = CNPJReceitaWS.fromJsonString(response.body);        
-    Qsa qsa = Qsa();
-    AtividadePrincipal cnaeAtvPrincipal = AtividadePrincipal();
-    AtividadesSecundarias cnaeAtvSecundaria = AtividadesSecundarias();
+    //await Clipboard.setData(ClipboardData(text: response.body));
+    cnpjReceita = CNPJReceitaWS.fromJsonString(response.body);
+
+    //Qsa qsaReceita = Qsa();
+    //AtividadePrincipal cnaeAtvPrincipal = AtividadePrincipal();
+    //AtividadesSecundarias cnaeAtvSecundaria = AtividadesSecundarias();
+
     Billing billing = Billing();
 
 //iguais
@@ -333,7 +335,7 @@ class CNPJReceitaWS {
     cnpjNormal.tipoMatrizFilial = cnpjReceita.tipo;
 
     if(cnpjReceita.natureza_juridica != ""){
-      cnpjNormal.naturezaJuridica = cnpjReceita.natureza_juridica!.split('-')[2];         
+      cnpjNormal.naturezaJuridica = cnpjReceita.natureza_juridica!.split('-')[2].trim();         
       cnpjNormal.codigoNaturezaJuridica = int.parse(cnpjReceita.natureza_juridica!.split(' ')[0].replaceAll('-', '').trim());
     }
 
@@ -362,27 +364,19 @@ class CNPJReceitaWS {
     cnpjNormal.ultimaAtualizacao = cnpjReceita.ultima_atualizacao;
     cnpjNormal.efr = cnpjReceita.efr;
     cnpjNormal.email = cnpjReceita.email;
-    cnpjNormal.billingFree = billing.free;
-    cnpjNormal.billingDatabase = billing.database;
-    
-    if(cnaeAtvPrincipal.text != ""){
-      cnpjNormal.cnaeFiscal = int.parse(cnaeAtvPrincipal.code!.replaceAll('.', '').replaceAll('-', '').trim());
-      cnpjNormal.cnaeFiscalDescricao = cnaeAtvPrincipal.text!;
-    }
 
-    if(cnaeAtvSecundaria.code != ""){
-      cnpjNormal.cnaeAtvSecundaria = int.parse(cnaeAtvSecundaria.code!.replaceAll('.', '').replaceAll('-', '').trim());
-      cnpjNormal.cnaeAtvSecundariaDescricao = cnaeAtvSecundaria.text!;     
-    }
+    cnpjNormal.billingFree = cnpjReceita.billing!.free;
+    cnpjNormal.billingDatabase = cnpjReceita.billing!.database;
 
-    if(qsa.qual != ""){
-      cnpjNormal.codigoQualificacaoDoResponsavel = int.parse(qsa.qual!.split('-')[0]);
-      cnpjNormal.qualificacaoDoResponsavel = qsa.qual!.split('-').sublist(1).toString();
-    }
-    
-    if(qsa.nome != ""){
-     cnpjNormal.nomeSocio = qsa.nome;
-    }
+    cnpjNormal.cnaeFiscal = int.parse(cnpjReceita.atividade_principal![0].code!.replaceAll('.', '').replaceAll('-', '').trim());
+    cnpjNormal.cnaeFiscalDescricao = cnpjReceita.atividade_principal![0].text;
+
+    cnpjNormal.cnaeAtvSecundaria = int.parse(cnpjReceita.atividades_secundarias![0].code!.replaceAll('.', '').replaceAll('-', '').trim());
+    cnpjNormal.cnaeAtvSecundariaDescricao = cnpjReceita.atividades_secundarias![0].text;
+
+    cnpjNormal.codigoQualificacaoDoResponsavel = int.parse(cnpjReceita.qsa![0].qual!.split('-')[0]); 
+    cnpjNormal.qualificacaoDoResponsavel = cnpjReceita.qsa![0].qual!.split('-').sublist(1).join(' ').trim();
+    cnpjNormal.nomeSocio = cnpjReceita.qsa![0].nome;
 
       /*} catch (e) {
         debugger();
@@ -392,7 +386,7 @@ class CNPJReceitaWS {
       sMensagem = "Aconteceu uma falha ao consultar o Cnpj na ReceitaWS.";
     }
 
-      return cnpjNormal;
+    return cnpjNormal;
 
   }
 

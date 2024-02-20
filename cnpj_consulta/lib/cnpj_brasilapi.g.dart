@@ -61,7 +61,8 @@ CNPJBrasilAPI _$CNPJBrasilAPIFromJson(Map<String, dynamic> json) =>
     CNPJBrasilAPI(
       cnpj: json['cnpj'] as String? ?? "",
       identificador_matriz_filial: json['identificador_matriz_filial'] as int?,
-      descricao_matriz_filial: json['descricao_matriz_filial'] as String? ?? "",
+      descricao_identificador_matriz_filial:
+          json['descricao_identificador_matriz_filial'] as String? ?? "",
       razao_social: json['razao_social'] as String? ?? "",
       nome_fantasia: json['nome_fantasia'] as String? ?? "",
       situacao_cadastral: json['situacao_cadastral'] as int?,
@@ -81,8 +82,8 @@ CNPJBrasilAPI _$CNPJBrasilAPIFromJson(Map<String, dynamic> json) =>
           : DateTime.parse(json['data_inicio_atividade'] as String),
       cnae_fiscal: json['cnae_fiscal'] as int?,
       cnae_fiscal_descricao: json['cnae_fiscal_descricao'] as String? ?? "",
-      descricao_tipo_logradouro:
-          json['descricao_tipo_logradouro'] as String? ?? "",
+      descricao_tipo_de_logradouro:
+          json['descricao_tipo_de_logradouro'] as String? ?? "",
       logradouro: json['logradouro'] as String? ?? "",
       numero: json['numero'] as String? ?? "",
       complemento: json['complemento'] as String? ?? "",
@@ -117,7 +118,8 @@ Map<String, dynamic> _$CNPJBrasilAPIToJson(CNPJBrasilAPI instance) =>
     <String, dynamic>{
       'cnpj': instance.cnpj,
       'identificador_matriz_filial': instance.identificador_matriz_filial,
-      'descricao_matriz_filial': instance.descricao_matriz_filial,
+      'descricao_identificador_matriz_filial':
+          instance.descricao_identificador_matriz_filial,
       'razao_social': instance.razao_social,
       'nome_fantasia': instance.nome_fantasia,
       'situacao_cadastral': instance.situacao_cadastral,
@@ -134,7 +136,7 @@ Map<String, dynamic> _$CNPJBrasilAPIToJson(CNPJBrasilAPI instance) =>
           instance.data_inicio_atividade?.toIso8601String(),
       'cnae_fiscal': instance.cnae_fiscal,
       'cnae_fiscal_descricao': instance.cnae_fiscal_descricao,
-      'descricao_tipo_logradouro': instance.descricao_tipo_logradouro,
+      'descricao_tipo_de_logradouro': instance.descricao_tipo_de_logradouro,
       'logradouro': instance.logradouro,
       'numero': instance.numero,
       'complemento': instance.complemento,
