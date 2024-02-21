@@ -19,7 +19,9 @@ CNPJNormal _$CNPJNormalFromJson(Map<String, dynamic> json) => CNPJNormal(
       uf: json['uf'] as String? ?? "",
       municipio: json['municipio'] as String? ?? "",
       capitalSocial: json['capitalSocial'] as int?,
-      qsa: json['qsa'] as String? ?? "",
+      qsa: (json['qsa'] as List<dynamic>?)
+          ?.map((e) => Qsa.fromJson(e as Map<String, dynamic>))
+          .toList(),
       situacaoEspecial: json['situacaoEspecial'] as String? ?? "",
       dataSituacaoEspecial: json['dataSituacaoEspecial'] == null
           ? null
@@ -104,7 +106,7 @@ Map<String, dynamic> _$CNPJNormalToJson(CNPJNormal instance) =>
       'uf': instance.uf,
       'municipio': instance.municipio,
       'capitalSocial': instance.capitalSocial,
-      'qsa': instance.qsa,
+      'qsa': instance.qsa?.map((e) => e.toJson()).toList(),
       'situacaoEspecial': instance.situacaoEspecial,
       'dataSituacaoEspecial': instance.dataSituacaoEspecial?.toIso8601String(),
       'tipoMatrizFilial': instance.tipoMatrizFilial,

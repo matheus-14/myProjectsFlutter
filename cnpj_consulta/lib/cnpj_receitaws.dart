@@ -3,6 +3,7 @@
 //import 'package:flutter/services.dart';
 
 import 'dart:convert';
+import 'package:cnpj_consulta/qsa.dart';
 import 'package:http/http.dart' as http;
 import 'package:json_annotation/json_annotation.dart';
 import '../funcoes/fJson.dart';
@@ -75,50 +76,6 @@ class AtividadesSecundarias {
 }
 
 @JsonSerializable(explicitToJson: true)
-class Qsa {
-  String? nome = "";
-  String? qual = "";
-  String? pais_origem = "";
-  String? nome_rep_legal = "";
-  String? qual_rep_legal = "";
-
-  Qsa({
-    this.nome = "",
-    this.qual = "",
-    this.pais_origem = "",
-    this.nome_rep_legal = "",
-    this.qual_rep_legal = "",
-	});
-
-  Qsa copyWith({
-	  String? nome,
-    String? qual,
-    String? pais_origem,
-    String? nome_rep_legal,
-    String? qual_rep_legal,
-	}) {
-	  return Qsa(
-		nome: nome ?? this.nome,
-		qual: qual ?? this.qual,
-		pais_origem: pais_origem ?? this.pais_origem,
-		nome_rep_legal: nome_rep_legal ?? this.nome_rep_legal,
-		qual_rep_legal: qual_rep_legal ?? this.qual_rep_legal,
-	);
-	}
-  
-  factory Qsa.fromJson(Map<String, dynamic> json) => _$QsaFromJson(json);
-  Map<String, dynamic> toJson() => _$QsaToJson(this);
-
-  factory Qsa.fromJsonString(String jsonS) => Qsa.fromJson(jsonDecode(jsonS));
-  String toJsonString() => jsonEncode(_$QsaToJson(this));
-
-  static List<Qsa> lQsaFromJson(String str) => List<Qsa>.from(jsonDecode(str).map((x) => Qsa.fromJson(x)));
-  static List<Qsa> lQsaFromMap(List<Map<String, Object?>> lMap) => lMap.map((x) => Qsa.fromJson(x)).toList();
-
-  static String lQsaToJson(List<Qsa> data) => jsonEncode(List<dynamic>.from(data.map((x) => x.toJson())), toEncodable: FJson.dataHoraSeralizer);
-}
-
-@JsonSerializable(explicitToJson: true)
 class Billing {
   bool? free = true;
   bool? database = true;
@@ -179,7 +136,7 @@ class CNPJReceitaWS {
   String? situacao_especial = "";
   String? data_situacao_especial = "";
   String? capital_social = "";
-  List<Qsa>? qsa = <Qsa>[];
+  List<Qsa>? qsa;
   Billing? billing = Billing();
 
 CNPJReceitaWS({
@@ -298,19 +255,20 @@ CNPJReceitaWS copyWith({
 
     CNPJNormal cnpjNormal = CNPJNormal();
     String sMensagem = "";
-
     CNPJReceitaWS cnpjReceita = CNPJReceitaWS();
+
     //try {
     //await Clipboard.setData(ClipboardData(text: response.body));
     cnpjReceita = CNPJReceitaWS.fromJsonString(response.body);
+    //  cnpjNormal = CNPJNormal.fromJsonString(response.body);
+    
 
-    //Qsa qsaReceita = Qsa();
     //AtividadePrincipal cnaeAtvPrincipal = AtividadePrincipal();
     //AtividadesSecundarias cnaeAtvSecundaria = AtividadesSecundarias();
-
-    Billing billing = Billing();
+    //Billing billing = Billing();
 
 //iguais
+//cnpjReceita.qsa
     cnpjNormal.cnpj = cnpjReceita.cnpj;
     cnpjNormal.porte = cnpjReceita.porte;
     cnpjNormal.logradouro = cnpjReceita.logradouro;
@@ -375,9 +333,11 @@ CNPJReceitaWS copyWith({
     cnpjNormal.cnaeAtvSecundaria = int.parse(cnpjReceita.atividades_secundarias![0].code!.replaceAll('.', '').replaceAll('-', '').trim());
     cnpjNormal.cnaeAtvSecundariaDescricao = cnpjReceita.atividades_secundarias![0].text;
 
-    cnpjNormal.codigoQualificacaoDoResponsavel = int.parse(cnpjReceita.qsa![0].qual!.split('-')[0]); 
-    cnpjNormal.qualificacaoDoResponsavel = cnpjReceita.qsa![0].qual!.split('-').sublist(1).join(' ').trim();
-    cnpjNormal.nomeSocio = cnpjReceita.qsa![0].nome;
+    //cnpjReceita.qsa![0].nome_socio = ;   // CONTINUAAAAAR
+
+    // cnpjNormal.codigoQualificacaoDoResponsavel = int.parse(cnpjReceita.qsa![0].qual!.split('-')[0]); 
+    // cnpjNormal.qualificacaoDoResponsavel = cnpjReceita.qsa![0].qual!.split('-').sublist(1).join(' ').trim();
+    // cnpjNormal.nomeSocio = cnpjReceita.qsa![0].nome;
 
     /*} catch (e) {
       debugger();

@@ -1,11 +1,15 @@
+// ignore_for_file: non_constant_identifier_names, unnecessary_this, avoid_print, unused_local_variable, unused_import
+
 import 'dart:convert';
 //import 'dart:developer';
 import 'package:json_annotation/json_annotation.dart';
 import '../funcoes/fJson.dart';
 import 'cnpj_brasilapi.dart';
 import 'cnpj_receitaws.dart';
+import 'qsa.dart';
 
 part 'cnpj_normal.g.dart';
+
 
 @JsonSerializable(explicitToJson: true)
 class CNPJNormal {
@@ -21,7 +25,8 @@ class CNPJNormal {
   String? uf;
   String? municipio;
   int? capitalSocial;
-  String? qsa;
+  List<Qsa>? qsa;
+
   String? situacaoEspecial;
   DateTime? dataSituacaoEspecial;
   String? tipoMatrizFilial;
@@ -88,7 +93,7 @@ CNPJNormal({
   this.uf = "",
   this.municipio = "",
   this.capitalSocial,
-  this.qsa = "",
+  this.qsa,
   this.situacaoEspecial = "",
   this.dataSituacaoEspecial,
   this.tipoMatrizFilial = "",
@@ -153,7 +158,7 @@ CNPJNormal copyWit({
   String? uf,
   String? municipio,
   int? capitalSocial,
-  String? qsa,
+  List<Qsa>? qsa,
   String? situacaoEspecial,
   DateTime? dataSituacaoEspecial,
   String? tipoMatrizFilial,

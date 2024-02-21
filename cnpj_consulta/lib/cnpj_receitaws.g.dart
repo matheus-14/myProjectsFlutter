@@ -32,22 +32,6 @@ Map<String, dynamic> _$AtividadesSecundariasToJson(
       'text': instance.text,
     };
 
-Qsa _$QsaFromJson(Map<String, dynamic> json) => Qsa(
-      nome: json['nome'] as String? ?? "",
-      qual: json['qual'] as String? ?? "",
-      pais_origem: json['pais_origem'] as String? ?? "",
-      nome_rep_legal: json['nome_rep_legal'] as String? ?? "",
-      qual_rep_legal: json['qual_rep_legal'] as String? ?? "",
-    );
-
-Map<String, dynamic> _$QsaToJson(Qsa instance) => <String, dynamic>{
-      'nome': instance.nome,
-      'qual': instance.qual,
-      'pais_origem': instance.pais_origem,
-      'nome_rep_legal': instance.nome_rep_legal,
-      'qual_rep_legal': instance.qual_rep_legal,
-    };
-
 Billing _$BillingFromJson(Map<String, dynamic> json) => Billing(
       free: json['free'] as bool? ?? true,
       database: json['database'] as bool? ?? true,
