@@ -395,7 +395,8 @@ CNPJBrasilAPI copyWith({
     }*/
 
     if(response.statusCode != 200){
-      sMensagem = "Aconteceu uma falha ao consultar o Cnpj na ReceitaWS.";
+      sMensagem = "Aconteceu uma falha ao consultar o Cnpj na Brasil Api.";
+      sMensagem += "\n(${response.statusCode})";
     }
 
     return cnpjNormal;

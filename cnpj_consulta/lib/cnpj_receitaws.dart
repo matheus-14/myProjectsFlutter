@@ -331,7 +331,8 @@ CNPJReceitaWS copyWith({
       cnpjNormal.dataSituacaoEspecial = DateTime.tryParse(cnpjReceita.data_situacao_especial ?? '');
     }
 //equivalentes
-    cnpjNormal.nome = cnpjReceita.nome;
+    cnpjNormal.nome = cnpjReceita.fantasia;
+    cnpjNormal.razao = cnpjReceita.nome;
     cnpjNormal.tipoMatrizFilial = cnpjReceita.tipo;
 
     if(cnpjReceita.natureza_juridica != ""){
@@ -384,6 +385,7 @@ CNPJReceitaWS copyWith({
 
     if(response.statusCode != 200){
       sMensagem = "Aconteceu uma falha ao consultar o Cnpj na ReceitaWS.";
+      sMensagem += "\n(${response.statusCode})";
     }
 
     return cnpjNormal;
