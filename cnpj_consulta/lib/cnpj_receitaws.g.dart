@@ -6,32 +6,6 @@ part of 'cnpj_receitaws.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-AtividadePrincipal _$AtividadePrincipalFromJson(Map<String, dynamic> json) =>
-    AtividadePrincipal(
-      code: json['code'] as String? ?? "",
-      text: json['text'] as String? ?? "",
-    );
-
-Map<String, dynamic> _$AtividadePrincipalToJson(AtividadePrincipal instance) =>
-    <String, dynamic>{
-      'code': instance.code,
-      'text': instance.text,
-    };
-
-AtividadesSecundarias _$AtividadesSecundariasFromJson(
-        Map<String, dynamic> json) =>
-    AtividadesSecundarias(
-      code: json['code'] as String? ?? "",
-      text: json['text'] as String? ?? "",
-    );
-
-Map<String, dynamic> _$AtividadesSecundariasToJson(
-        AtividadesSecundarias instance) =>
-    <String, dynamic>{
-      'code': instance.code,
-      'text': instance.text,
-    };
-
 Billing _$BillingFromJson(Map<String, dynamic> json) => Billing(
       free: json['free'] as bool? ?? true,
       database: json['database'] as bool? ?? true,

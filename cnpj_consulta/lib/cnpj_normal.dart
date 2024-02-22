@@ -26,6 +26,8 @@ class CNPJNormal {
   String? municipio;
   int? capitalSocial;
   List<Qsa>? qsa;
+  List<AtividadePrincipal>? atividade_principal;
+  List<AtividadesSecundarias>? atividades_secundarias;
 
   String? situacaoEspecial;
   DateTime? dataSituacaoEspecial;
@@ -94,6 +96,8 @@ CNPJNormal({
   this.municipio = "",
   this.capitalSocial,
   this.qsa,
+  this.atividade_principal,
+  this.atividades_secundarias,
   this.situacaoEspecial = "",
   this.dataSituacaoEspecial,
   this.tipoMatrizFilial = "",
@@ -159,6 +163,9 @@ CNPJNormal copyWit({
   String? municipio,
   int? capitalSocial,
   List<Qsa>? qsa,
+  List<AtividadePrincipal>? atividade_principal,
+  List<AtividadesSecundarias>? atividades_secundarias,
+  
   String? situacaoEspecial,
   DateTime? dataSituacaoEspecial,
   String? tipoMatrizFilial,
@@ -223,6 +230,9 @@ CNPJNormal copyWit({
     municipio: municipio ?? this.municipio,
     capitalSocial: capitalSocial ?? this.capitalSocial,
     qsa: qsa ?? this.qsa,
+    atividade_principal: atividade_principal ?? this.atividade_principal,
+    atividades_secundarias: atividades_secundarias ?? this.atividades_secundarias,
+    
     situacaoEspecial: situacaoEspecial ?? this.situacaoEspecial,
     dataSituacaoEspecial: dataSituacaoEspecial ?? this.dataSituacaoEspecial,
     tipoMatrizFilial: tipoMatrizFilial ?? this.tipoMatrizFilial,

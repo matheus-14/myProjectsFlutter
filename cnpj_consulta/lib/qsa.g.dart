@@ -48,3 +48,33 @@ Map<String, dynamic> _$QsaToJson(Qsa instance) => <String, dynamic>{
       'nome': instance.nome,
       'qual': instance.qual,
     };
+
+AtividadePrincipal _$AtividadePrincipalFromJson(Map<String, dynamic> json) =>
+    AtividadePrincipal(
+      code: json['code'] as String? ?? "",
+      text: json['text'] as String? ?? "",
+    );
+
+Map<String, dynamic> _$AtividadePrincipalToJson(AtividadePrincipal instance) =>
+    <String, dynamic>{
+      'code': instance.code,
+      'text': instance.text,
+    };
+
+AtividadesSecundarias _$AtividadesSecundariasFromJson(
+        Map<String, dynamic> json) =>
+    AtividadesSecundarias(
+      code: json['code'] as String? ?? "",
+      text: json['text'] as String? ?? "",
+      codigo: json['codigo'] as int?,
+      descricao: json['descricao'] as String? ?? "",
+    );
+
+Map<String, dynamic> _$AtividadesSecundariasToJson(
+        AtividadesSecundarias instance) =>
+    <String, dynamic>{
+      'code': instance.code,
+      'text': instance.text,
+      'codigo': instance.codigo,
+      'descricao': instance.descricao,
+    };

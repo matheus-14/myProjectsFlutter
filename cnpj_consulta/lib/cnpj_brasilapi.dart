@@ -16,9 +16,9 @@ class CnaesSecundarios {
   int? codigo;
   String? descricao;
 
-	CnaesSecundarios({
-		  this.codigo,
-		  this.descricao = "",
+  CnaesSecundarios({
+      this.codigo,
+      this.descricao = "",
   });
 
   CnaesSecundarios copyWith({
@@ -31,17 +31,17 @@ class CnaesSecundarios {
     );
   }
 
-  factory CnaesSecundarios.fromJson(Map<String, dynamic> json) => _$CnaesSecundariosFromJson(json);
-  Map<String, dynamic> toJson() => _$CnaesSecundariosToJson(this);
+   factory CnaesSecundarios.fromJson(Map<String, dynamic> json) => _$CnaesSecundariosFromJson(json);
+   Map<String, dynamic> toJson() => _$CnaesSecundariosToJson(this);
 
-  factory CnaesSecundarios.fromJsonString(String jsonS) => CnaesSecundarios.fromJson(jsonDecode(jsonS));
-  String toJsonString() => jsonEncode(_$CnaesSecundariosToJson(this));
+   factory CnaesSecundarios.fromJsonString(String jsonS) => CnaesSecundarios.fromJson(jsonDecode(jsonS));
+   String toJsonString() => jsonEncode(_$CnaesSecundariosToJson(this));
 
-  static List<CnaesSecundarios> lCnaesSecundariosFromJson(String str) => List<CnaesSecundarios>.from(jsonDecode(str).map((x) => CnaesSecundarios.fromJson(x)));
-  static List<CnaesSecundarios> lCnaesSecundariosFromMap(List<Map<String, Object?>> lMap) => lMap.map((x) => CnaesSecundarios.fromJson(x)).toList();
+   static List<CnaesSecundarios> lCnaesSecundariosFromJson(String str) => List<CnaesSecundarios>.from(jsonDecode(str).map((x) => CnaesSecundarios.fromJson(x)));
+   static List<CnaesSecundarios> lCnaesSecundariosFromMap(List<Map<String, Object?>> lMap) => lMap.map((x) => CnaesSecundarios.fromJson(x)).toList();
 
-  static String lCnaesSecundariosToJson(List<CnaesSecundarios> data) => jsonEncode(List<dynamic>.from(data.map((x) => x.toJson())), toEncodable: FJson.dataHoraSeralizer);
-}
+   static String lCnaesSecundariosToJson(List<CnaesSecundarios> data) => jsonEncode(List<dynamic>.from(data.map((x) => x.toJson())), toEncodable: FJson.dataHoraSeralizer);
+ }
 
 @JsonSerializable(explicitToJson: true)
 class CNPJBrasilAPI {
@@ -85,6 +85,8 @@ class CNPJBrasilAPI {
   String? data_situacao_especial;
   List<CnaesSecundarios>? cnaes_secundarios;
   List<Qsa>? qsa;
+  List<AtividadePrincipal>? atividade_principal;
+  List<AtividadesSecundarias>? atividades_secundarias;
 
 CNPJBrasilAPI({
   this.cnpj = "",
@@ -127,6 +129,8 @@ CNPJBrasilAPI({
   this.data_situacao_especial = "",
   this.cnaes_secundarios,
   this.qsa,
+  this.atividade_principal,
+  this.atividades_secundarias,
   });
 
 CNPJBrasilAPI copyWith({
@@ -170,6 +174,8 @@ CNPJBrasilAPI copyWith({
   String? data_situacao_especial,
   List<CnaesSecundarios>? cnaes_secundarios,
   List<Qsa>? qsa,
+  List<AtividadePrincipal>? atividade_principal,
+  List<AtividadesSecundarias>? atividades_secundarias,
   }) {
   return CNPJBrasilAPI(
     cnpj: cnpj ?? this.cnpj,
@@ -212,6 +218,9 @@ CNPJBrasilAPI copyWith({
     data_situacao_especial: data_situacao_especial ?? this.data_situacao_especial,
     cnaes_secundarios: cnaes_secundarios ?? this.cnaes_secundarios,
     qsa: qsa ?? this.qsa,
+    atividade_principal: atividade_principal ?? this.atividade_principal,
+    atividades_secundarias: atividades_secundarias ?? this.atividades_secundarias,
+ 
    );
   }
 
@@ -241,6 +250,16 @@ CNPJBrasilAPI copyWith({
     cnpjbrasil = CNPJBrasilAPI.fromJsonString(response.body);
     cnpjNormal = CNPJNormal.fromJsonString(response.body);
     
+    // cnpjNormal.atividade_principal = [];
+    // for(var obj in cnpjbrasil.atividade_principal!){
+    //   cnpjNormal.atividade_principal!.add(obj);
+    // }
+
+    // cnpjNormal.atividades_secundarias = [];
+    // for(var obj in cnpjbrasil.atividades_secundarias!){
+    //   cnpjNormal.atividades_secundarias!.add(obj);
+    // }
+
 //iguais
     cnpjNormal.cnpj = cnpjbrasil.cnpj;
     cnpjNormal.porte = cnpjbrasil.porte;
@@ -291,6 +310,7 @@ CNPJBrasilAPI copyWith({
     cnpjNormal.opcaoPeloMei = cnpjbrasil.opcao_pelo_mei;
     cnpjNormal.cnaeFiscal = cnpjbrasil.cnae_fiscal; 
     cnpjNormal.cnaeFiscalDescricao = cnpjbrasil.cnae_fiscal_descricao;
+    
     cnpjNormal.cnaeAtvSecundaria = cnpjbrasil.cnaes_secundarios![0].codigo;
     cnpjNormal.cnaeAtvSecundariaDescricao = cnpjbrasil.cnaes_secundarios![0].descricao;
 

@@ -73,6 +73,13 @@ CNPJBrasilAPI _$CNPJBrasilAPIFromJson(Map<String, dynamic> json) =>
       qsa: (json['qsa'] as List<dynamic>?)
           ?.map((e) => Qsa.fromJson(e as Map<String, dynamic>))
           .toList(),
+      atividade_principal: (json['atividade_principal'] as List<dynamic>?)
+          ?.map((e) => AtividadePrincipal.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      atividades_secundarias: (json['atividades_secundarias'] as List<dynamic>?)
+          ?.map(
+              (e) => AtividadesSecundarias.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$CNPJBrasilAPIToJson(CNPJBrasilAPI instance) =>
@@ -122,4 +129,8 @@ Map<String, dynamic> _$CNPJBrasilAPIToJson(CNPJBrasilAPI instance) =>
       'cnaes_secundarios':
           instance.cnaes_secundarios?.map((e) => e.toJson()).toList(),
       'qsa': instance.qsa?.map((e) => e.toJson()).toList(),
+      'atividade_principal':
+          instance.atividade_principal?.map((e) => e.toJson()).toList(),
+      'atividades_secundarias':
+          instance.atividades_secundarias?.map((e) => e.toJson()).toList(),
     };
