@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'cnpj_normal.dart';
+part of 'MCnpj.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -19,6 +19,9 @@ CNPJNormal _$CNPJNormalFromJson(Map<String, dynamic> json) => CNPJNormal(
       uf: json['uf'] as String? ?? "",
       municipio: json['municipio'] as String? ?? "",
       capitalSocial: json['capitalSocial'] as int?,
+      cnaes_secundarios: (json['cnaes_secundarios'] as List<dynamic>?)
+          ?.map((e) => CnaesSecundarios.fromJson(e as Map<String, dynamic>))
+          .toList(),
       qsa: (json['qsa'] as List<dynamic>?)
           ?.map((e) => Qsa.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -46,8 +49,11 @@ CNPJNormal _$CNPJNormalFromJson(Map<String, dynamic> json) => CNPJNormal(
           : DateTime.parse(json['dataSituacaoCadastral'] as String),
       descricaoMotivoSituacaoCadastral:
           json['descricaoMotivoSituacaoCadastral'] as String? ?? "",
+      enteFederativoResponsavel:
+          json['enteFederativoResponsavel'] as String? ?? "",
       identificadorMatrizFilial: json['identificadorMatrizFilial'] as int?,
       codigoMunicipio: json['codigoMunicipio'] as int?,
+      codigo_municipio_ibge: json['codigo_municipio_ibge'] as int?,
       motivoSituacaoCadastral: json['motivoSituacaoCadastral'] as int?,
       nomeCidadeExterior: json['nomeCidadeExterior'] as String? ?? "",
       descricaoTipoLogradouro: json['descricaoTipoLogradouro'] as String? ?? "",
@@ -65,6 +71,12 @@ CNPJNormal _$CNPJNormalFromJson(Map<String, dynamic> json) => CNPJNormal(
       dataExclusaoDoSimples: json['dataExclusaoDoSimples'] == null
           ? null
           : DateTime.parse(json['dataExclusaoDoSimples'] as String),
+      dataOpcaoPeloMei: json['dataOpcaoPeloMei'] == null
+          ? null
+          : DateTime.parse(json['dataOpcaoPeloMei'] as String),
+      dataExclusaoDoMei: json['dataExclusaoDoMei'] == null
+          ? null
+          : DateTime.parse(json['dataExclusaoDoMei'] as String),
       opcaoPeloMei: json['opcaoPeloMei'] as bool?,
       cnaesSecundarios: json['cnaesSecundarios'] as String? ?? "",
       cnaeFiscal: json['cnaeFiscal'] as int?,
@@ -97,6 +109,7 @@ CNPJNormal _$CNPJNormalFromJson(Map<String, dynamic> json) => CNPJNormal(
           json['qualificacaoRepresentanteLegal'] as String? ?? "",
       codigoQualificacaoRepresentanteLegal:
           json['codigoQualificacaoRepresentanteLegal'] as int?,
+      codigoPorte: json['codigoPorte'] as int?,
     )..pcaoPeloSimples = json['pcaoPeloSimples'] as bool?;
 
 Map<String, dynamic> _$CNPJNormalToJson(CNPJNormal instance) =>
@@ -113,6 +126,8 @@ Map<String, dynamic> _$CNPJNormalToJson(CNPJNormal instance) =>
       'uf': instance.uf,
       'municipio': instance.municipio,
       'capitalSocial': instance.capitalSocial,
+      'cnaes_secundarios':
+          instance.cnaes_secundarios?.map((e) => e.toJson()).toList(),
       'qsa': instance.qsa?.map((e) => e.toJson()).toList(),
       'atividade_principal':
           instance.atividade_principal?.map((e) => e.toJson()).toList(),
@@ -130,6 +145,7 @@ Map<String, dynamic> _$CNPJNormalToJson(CNPJNormal instance) =>
           instance.dataSituacaoCadastral?.toIso8601String(),
       'descricaoMotivoSituacaoCadastral':
           instance.descricaoMotivoSituacaoCadastral,
+      'enteFederativoResponsavel': instance.enteFederativoResponsavel,
       'qualificacaoDoResponsavel': instance.qualificacaoDoResponsavel,
       'codigoQualificacaoDoResponsavel':
           instance.codigoQualificacaoDoResponsavel,
@@ -147,6 +163,7 @@ Map<String, dynamic> _$CNPJNormalToJson(CNPJNormal instance) =>
       'billingDatabase': instance.billingDatabase,
       'identificadorMatrizFilial': instance.identificadorMatrizFilial,
       'codigoMunicipio': instance.codigoMunicipio,
+      'codigo_municipio_ibge': instance.codigo_municipio_ibge,
       'motivoSituacaoCadastral': instance.motivoSituacaoCadastral,
       'nomeCidadeExterior': instance.nomeCidadeExterior,
       'descricaoTipoLogradouro': instance.descricaoTipoLogradouro,
@@ -157,6 +174,8 @@ Map<String, dynamic> _$CNPJNormalToJson(CNPJNormal instance) =>
       'dataOpcaoPeloSimples': instance.dataOpcaoPeloSimples?.toIso8601String(),
       'dataExclusaoDoSimples':
           instance.dataExclusaoDoSimples?.toIso8601String(),
+      'dataOpcaoPeloMei': instance.dataOpcaoPeloMei?.toIso8601String(),
+      'dataExclusaoDoMei': instance.dataExclusaoDoMei?.toIso8601String(),
       'opcaoPeloMei': instance.opcaoPeloMei,
       'pais': instance.pais,
       'nomeSocio': instance.nomeSocio,
@@ -173,4 +192,5 @@ Map<String, dynamic> _$CNPJNormalToJson(CNPJNormal instance) =>
       'qualificacaoRepresentanteLegal': instance.qualificacaoRepresentanteLegal,
       'codigoQualificacaoRepresentanteLegal':
           instance.codigoQualificacaoRepresentanteLegal,
+      'codigoPorte': instance.codigoPorte,
     };

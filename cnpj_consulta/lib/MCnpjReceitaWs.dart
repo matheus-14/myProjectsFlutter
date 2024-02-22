@@ -1,15 +1,17 @@
-// ignore_for_file: non_constant_identifier_names, avoid_print, unused_local_variable
+// ignore_for_file: non_constant_identifier_names, avoid_print, unused_local_variable, file_names
 //import 'dart:developer';
 //import 'package:flutter/services.dart';
 
 import 'dart:convert';
-import 'package:cnpj_consulta/qsa.dart';
+import 'package:cnpj_consulta/MCnpjQsa.dart';
+import 'package:cnpj_consulta/MCnpjAtividadePrincipal.dart';
+import 'package:cnpj_consulta/MCnpjAtividadesSecundarias.dart';
 import 'package:http/http.dart' as http;
 import 'package:json_annotation/json_annotation.dart';
 import '../funcoes/fJson.dart';
-import 'cnpj_normal.dart';
+import 'MCnpj.dart';
 
-part 'cnpj_receitaws.g.dart';
+part 'MCnpjReceitaWs.g.dart';
 
 
 @JsonSerializable(explicitToJson: true)

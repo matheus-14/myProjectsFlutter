@@ -1,14 +1,17 @@
-// ignore_for_file: non_constant_identifier_names, unnecessary_this, avoid_print, unused_local_variable, unused_import
+// ignore_for_file: non_constant_identifier_names, unnecessary_this, avoid_print, unused_local_variable, unused_import, file_names
 
 import 'dart:convert';
 //import 'dart:developer';
 import 'package:json_annotation/json_annotation.dart';
 import '../funcoes/fJson.dart';
-import 'cnpj_brasilapi.dart';
-import 'cnpj_receitaws.dart';
-import 'qsa.dart';
+import 'MCnpjBrasilAPI.dart';
+import 'MCnpjReceitaWs.dart';
+import 'MCnpjQsa.dart';
+import 'MCnpjAtividadePrincipal.dart';
+import 'MCnpjAtividadesSecundarias.dart';
+import 'MCnpjCnaesSecundarios.dart';
 
-part 'cnpj_normal.g.dart';
+part 'MCnpj.g.dart';
 
 
 @JsonSerializable(explicitToJson: true)
@@ -25,6 +28,7 @@ class CNPJNormal {
   String? uf;
   String? municipio;
   int? capitalSocial;
+  List<CnaesSecundarios>? cnaes_secundarios;
   List<Qsa>? qsa;
   List<AtividadePrincipal>? atividade_principal;
   List<AtividadesSecundarias>? atividades_secundarias;
@@ -39,6 +43,7 @@ class CNPJNormal {
   String? situacaoCadastral;
   DateTime? dataSituacaoCadastral;
   String? descricaoMotivoSituacaoCadastral;
+  String? enteFederativoResponsavel;
   String? qualificacaoDoResponsavel;
   int? codigoQualificacaoDoResponsavel;
   bool? opcaoPeloSimples;
@@ -57,6 +62,7 @@ class CNPJNormal {
   //brasilApi:
   int? identificadorMatrizFilial;
   int? codigoMunicipio;
+  int? codigo_municipio_ibge;
   int? motivoSituacaoCadastral;
   String? nomeCidadeExterior;
   String? descricaoTipoLogradouro;
@@ -66,6 +72,8 @@ class CNPJNormal {
   bool? pcaoPeloSimples;
   DateTime? dataOpcaoPeloSimples;
   DateTime? dataExclusaoDoSimples;
+  DateTime? dataOpcaoPeloMei;
+  DateTime? dataExclusaoDoMei;
   bool? opcaoPeloMei;
   String? pais;
   String? nomeSocio;
@@ -80,7 +88,8 @@ class CNPJNormal {
   String? nomeRepresentanteLegal;
   int? codigoQualificacaoSocio;
   String? qualificacaoRepresentanteLegal; 
-  int? codigoQualificacaoRepresentanteLegal; 
+  int? codigoQualificacaoRepresentanteLegal;
+  int? codigoPorte;
 
 CNPJNormal({
   this.cnpj = "",
@@ -95,6 +104,7 @@ CNPJNormal({
   this.uf = "",
   this.municipio = "",
   this.capitalSocial,
+  this.cnaes_secundarios,
   this.qsa,
   this.atividade_principal,
   this.atividades_secundarias,
@@ -108,8 +118,10 @@ CNPJNormal({
   this.situacaoCadastral = "",
   this.dataSituacaoCadastral,
   this.descricaoMotivoSituacaoCadastral = "",
+  this.enteFederativoResponsavel = "",
   this.identificadorMatrizFilial,
   this.codigoMunicipio,
+  this.codigo_municipio_ibge,
   this.motivoSituacaoCadastral,
   this.nomeCidadeExterior = "",
   this.descricaoTipoLogradouro = "",
@@ -121,6 +133,8 @@ CNPJNormal({
   this.opcaoPeloSimples,
   this.dataOpcaoPeloSimples,
   this.dataExclusaoDoSimples,
+  this.dataOpcaoPeloMei,
+  this.dataExclusaoDoMei,
   this.opcaoPeloMei,
   this.cnaesSecundarios = "",
   this.cnaeFiscal,
@@ -147,6 +161,7 @@ CNPJNormal({
   this.codigoQualificacaoSocio,
   this.qualificacaoRepresentanteLegal = "",
   this.codigoQualificacaoRepresentanteLegal,
+  this.codigoPorte,
   });
 
 CNPJNormal copyWit({
@@ -162,6 +177,7 @@ CNPJNormal copyWit({
   String? uf,
   String? municipio,
   int? capitalSocial,
+  List<CnaesSecundarios>? cnaes_secundarios,
   List<Qsa>? qsa,
   List<AtividadePrincipal>? atividade_principal,
   List<AtividadesSecundarias>? atividades_secundarias,
@@ -176,8 +192,10 @@ CNPJNormal copyWit({
   String? situacaoCadastral,
   DateTime? dataSituacaoCadastral,
   String? descricaoMotivoSituacaoCadastral,
+  String? enteFederativoResponsavel,
   int? identificadorMatrizFilial,
   int? codigoMunicipio,
+  int? codigo_municipio_ibge,
   int? motivoSituacaoCadastral,
   String? nomeCidadeExterior,
   String? descricaoTipoLogradouro,
@@ -189,6 +207,8 @@ CNPJNormal copyWit({
   bool? opcaoPeloSimples,
   DateTime? dataOpcaoPeloSimples,
   DateTime? dataExclusaoDoSimples,
+  DateTime? dataOpcaoPeloMei,
+  DateTime? dataExclusaoDoMei,
   bool? opcaoPeloMei,
   String? cnaesSecundarios,
   int? cnaeFiscal,
@@ -215,6 +235,7 @@ CNPJNormal copyWit({
   int? codigoQualificacaoSocio,
   String? qualificacaoRepresentanteLegal,
   int? codigoQualificacaoRepresentanteLegal,
+  int? codigoPorte,
   }) {
   return CNPJNormal(
     cnpj: cnpj ?? this.cnpj,
@@ -229,6 +250,7 @@ CNPJNormal copyWit({
     uf: uf ?? this.uf,
     municipio: municipio ?? this.municipio,
     capitalSocial: capitalSocial ?? this.capitalSocial,
+    cnaes_secundarios: cnaes_secundarios ?? this.cnaes_secundarios,
     qsa: qsa ?? this.qsa,
     atividade_principal: atividade_principal ?? this.atividade_principal,
     atividades_secundarias: atividades_secundarias ?? this.atividades_secundarias,
@@ -243,8 +265,10 @@ CNPJNormal copyWit({
     situacaoCadastral: situacaoCadastral ?? this.situacaoCadastral,
     dataSituacaoCadastral: dataSituacaoCadastral ?? this.dataSituacaoCadastral,
     descricaoMotivoSituacaoCadastral: descricaoMotivoSituacaoCadastral ?? this.descricaoMotivoSituacaoCadastral,
+    enteFederativoResponsavel: enteFederativoResponsavel ?? this.enteFederativoResponsavel,
     identificadorMatrizFilial: identificadorMatrizFilial ?? this.identificadorMatrizFilial,
     codigoMunicipio: codigoMunicipio ?? this.codigoMunicipio,
+    codigo_municipio_ibge: codigo_municipio_ibge ?? this.codigo_municipio_ibge,
     motivoSituacaoCadastral: motivoSituacaoCadastral ?? this.motivoSituacaoCadastral,
     nomeCidadeExterior: nomeCidadeExterior ?? this.nomeCidadeExterior,
     descricaoTipoLogradouro: descricaoTipoLogradouro ?? this.descricaoTipoLogradouro,
@@ -256,6 +280,8 @@ CNPJNormal copyWit({
     opcaoPeloSimples: opcaoPeloSimples ?? this.opcaoPeloSimples,
     dataOpcaoPeloSimples: dataOpcaoPeloSimples ?? this.dataOpcaoPeloSimples,
     dataExclusaoDoSimples: dataExclusaoDoSimples ?? this.dataExclusaoDoSimples,
+    dataOpcaoPeloMei: dataOpcaoPeloMei ?? this.dataOpcaoPeloMei,
+    dataExclusaoDoMei: dataExclusaoDoMei ?? this.dataExclusaoDoMei,
     opcaoPeloMei: opcaoPeloMei ?? this.opcaoPeloMei,
     cnaesSecundarios: cnaesSecundarios ?? this.cnaesSecundarios,
     cnaeFiscal: cnaeFiscal ?? this.cnaeFiscal,
@@ -281,6 +307,8 @@ CNPJNormal copyWit({
     codigoQualificacaoSocio: codigoQualificacaoSocio ?? this.codigoQualificacaoSocio,
     qualificacaoRepresentanteLegal: qualificacaoRepresentanteLegal ?? this.qualificacaoRepresentanteLegal,
     codigoQualificacaoRepresentanteLegal: codigoQualificacaoRepresentanteLegal ?? this.codigoQualificacaoRepresentanteLegal,
+    codigoPorte: codigoPorte ?? this.codigoPorte,
+
    );
   }
 

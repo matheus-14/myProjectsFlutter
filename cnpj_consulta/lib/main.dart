@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 //import 'cnpj_brasilapi.dart';
 //import 'cnpj_receitaws.dart';
-import 'cnpj_normal.dart';
+import 'MCnpj.dart';
 
 //import 'package:fluttertoast/fluttertoast.dart';
 

@@ -1,13 +1,10 @@
-// ignore_for_file: non_constant_identifier_names, unnecessary_this, avoid_print, unused_local_variable
+// ignore_for_file: non_constant_identifier_names, unnecessary_this, avoid_print, unused_local_variable, file_names
 
 import 'dart:convert';
 import 'package:json_annotation/json_annotation.dart';
 import '../funcoes/fJson.dart';
-// import 'cnpj_brasilapi.dart';
-// import 'cnpj_receitaws.dart';
-// import 'cnpj_normal.dart';
 
-part 'qsa.g.dart';
+part 'MCnpjQsa.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class Qsa {
@@ -97,75 +94,6 @@ class Qsa {
   static String lQsaToJson(List<Qsa> data) => jsonEncode(List<dynamic>.from(data.map((x) => x.toJson())), toEncodable: FJson.dataHoraSeralizer);
 }
 
-@JsonSerializable(explicitToJson: true)
-class AtividadePrincipal {
-  String? code = "";
-  String? text = "";
 
-	AtividadePrincipal({
-		this.code = "",
-		this.text = "",
-  });
 
-  AtividadePrincipal copyWith({
-	  String? code,
-		String? text,
-	}) {
-	  return AtividadePrincipal(
-		  code: code ?? this.code,
-		  text: text ?? this.text,
-	);
-	}
 
-  factory AtividadePrincipal.fromJson(Map<String, dynamic> json) => _$AtividadePrincipalFromJson(json);
-  Map<String, dynamic> toJson() => _$AtividadePrincipalToJson(this);
-
-  factory AtividadePrincipal.fromJsonString(String jsonS) => AtividadePrincipal.fromJson(jsonDecode(jsonS));
-  String toJsonString() => jsonEncode(_$AtividadePrincipalToJson(this));
-
-  static List<AtividadePrincipal> lAtividadePrincipalFromJson(String str) => List<AtividadePrincipal>.from(jsonDecode(str).map((x) => AtividadePrincipal.fromJson(x)));
-  static List<AtividadePrincipal> lAtividadePrincipalFromMap(List<Map<String, Object?>> lMap) => lMap.map((x) => AtividadePrincipal.fromJson(x)).toList();
-
-  static String lAtividadePrincipalToJson(List<AtividadePrincipal> data) => jsonEncode(List<dynamic>.from(data.map((x) => x.toJson())), toEncodable: FJson.dataHoraSeralizer);
-}
-
-@JsonSerializable(explicitToJson: true)
-class AtividadesSecundarias {
-  String? code = "";
-  String? text = "";
-  int? codigo;
-  String? descricao;
-
-	AtividadesSecundarias({
-		this.code = "",
-		this.text = "",
-    this.codigo,
-		this.descricao = "",
-  });
-
-  AtividadesSecundarias copyWith({
-	  String? code,
-		String? text,
-    int? codigo,
-    String? descricao,
-
-	}) {
-	  return AtividadesSecundarias(
-		  code: code ?? this.code,
-		  text: text ?? this.text,
-      codigo: codigo ?? this.codigo,
-      descricao: descricao ?? this.descricao,
-	);
-  }
-
-  factory AtividadesSecundarias.fromJson(Map<String, dynamic> json) => _$AtividadesSecundariasFromJson(json);
-  Map<String, dynamic> toJson() => _$AtividadesSecundariasToJson(this);
-
-  factory AtividadesSecundarias.fromJsonString(String jsonS) => AtividadesSecundarias.fromJson(jsonDecode(jsonS));
-  String toJsonString() => jsonEncode(_$AtividadesSecundariasToJson(this));
-
-  static List<AtividadesSecundarias> lAtividadesSecundariasFromJson(String str) => List<AtividadesSecundarias>.from(jsonDecode(str).map((x) => AtividadesSecundarias.fromJson(x)));
-  static List<AtividadesSecundarias> lAtividadesSecundariasFromMap(List<Map<String, Object?>> lMap) => lMap.map((x) => AtividadesSecundarias.fromJson(x)).toList();
-
-  static String lAtividadesSecundariasToJson(List<AtividadesSecundarias> data) => jsonEncode(List<dynamic>.from(data.map((x) => x.toJson())), toEncodable: FJson.dataHoraSeralizer);
-}

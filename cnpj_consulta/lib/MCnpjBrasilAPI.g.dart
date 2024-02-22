@@ -1,22 +1,10 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'cnpj_brasilapi.dart';
+part of 'MCnpjBrasilAPI.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
-
-CnaesSecundarios _$CnaesSecundariosFromJson(Map<String, dynamic> json) =>
-    CnaesSecundarios(
-      codigo: json['codigo'] as int?,
-      descricao: json['descricao'] as String? ?? "",
-    );
-
-Map<String, dynamic> _$CnaesSecundariosToJson(CnaesSecundarios instance) =>
-    <String, dynamic>{
-      'codigo': instance.codigo,
-      'descricao': instance.descricao,
-    };
 
 CNPJBrasilAPI _$CNPJBrasilAPIFromJson(Map<String, dynamic> json) =>
     CNPJBrasilAPI(
@@ -35,9 +23,12 @@ CNPJBrasilAPI _$CNPJBrasilAPIFromJson(Map<String, dynamic> json) =>
       motivo_situacao_cadastral: json['motivo_situacao_cadastral'] as int?,
       descricao_motivo_situacao_cadastral:
           json['descricao_motivo_situacao_cadastral'] as String? ?? "",
+      ente_federativo_responsavel:
+          json['ente_federativo_responsavel'] as String? ?? "",
       nome_cidade_exterior: json['nome_cidade_exterior'] as String? ?? "",
       natureza_juridica: json['natureza_juridica'] as String?,
       codigo_natureza_juridica: json['codigo_natureza_juridica'] as int?,
+      codigo_porte: json['codigo_porte'] as int?,
       data_inicio_atividade: json['data_inicio_atividade'] == null
           ? null
           : DateTime.parse(json['data_inicio_atividade'] as String),
@@ -53,6 +44,7 @@ CNPJBrasilAPI _$CNPJBrasilAPIFromJson(Map<String, dynamic> json) =>
       uf: json['uf'] as String? ?? "",
       codigo_municipio: json['codigo_municipio'] as int?,
       municipio: json['municipio'] as String? ?? "",
+      codigo_municipio_ibge: json['codigo_municipio_ibge'] as int?,
       ddd_telefone_1: json['ddd_telefone_1'] as String? ?? "",
       ddd_telefone_2: json['ddd_telefone_2'] as String? ?? "",
       ddd_fax: json['ddd_fax'] as String? ?? "",
@@ -64,6 +56,8 @@ CNPJBrasilAPI _$CNPJBrasilAPIFromJson(Map<String, dynamic> json) =>
       data_opcao_pelo_simples: json['data_opcao_pelo_simples'] as String? ?? "",
       data_exclusao_do_simples:
           json['data_exclusao_do_simples'] as String? ?? "",
+      data_exclusao_do_mei: json['data_exclusao_do_mei'] as String?,
+      data_opcao_pelo_mei: json['data_opcao_pelo_mei'] as String?,
       opcao_pelo_mei: json['opcao_pelo_mei'] as bool?,
       situacao_especial: json['situacao_especial'] as String? ?? "",
       data_situacao_especial: json['data_situacao_especial'] as String? ?? "",
@@ -97,9 +91,11 @@ Map<String, dynamic> _$CNPJBrasilAPIToJson(CNPJBrasilAPI instance) =>
       'motivo_situacao_cadastral': instance.motivo_situacao_cadastral,
       'descricao_motivo_situacao_cadastral':
           instance.descricao_motivo_situacao_cadastral,
+      'ente_federativo_responsavel': instance.ente_federativo_responsavel,
       'nome_cidade_exterior': instance.nome_cidade_exterior,
       'natureza_juridica': instance.natureza_juridica,
       'codigo_natureza_juridica': instance.codigo_natureza_juridica,
+      'codigo_porte': instance.codigo_porte,
       'data_inicio_atividade':
           instance.data_inicio_atividade?.toIso8601String(),
       'cnae_fiscal': instance.cnae_fiscal,
@@ -113,6 +109,7 @@ Map<String, dynamic> _$CNPJBrasilAPIToJson(CNPJBrasilAPI instance) =>
       'uf': instance.uf,
       'codigo_municipio': instance.codigo_municipio,
       'municipio': instance.municipio,
+      'codigo_municipio_ibge': instance.codigo_municipio_ibge,
       'ddd_telefone_1': instance.ddd_telefone_1,
       'ddd_telefone_2': instance.ddd_telefone_2,
       'ddd_fax': instance.ddd_fax,
@@ -123,6 +120,8 @@ Map<String, dynamic> _$CNPJBrasilAPIToJson(CNPJBrasilAPI instance) =>
       'opcao_pelo_simples': instance.opcao_pelo_simples,
       'data_opcao_pelo_simples': instance.data_opcao_pelo_simples,
       'data_exclusao_do_simples': instance.data_exclusao_do_simples,
+      'data_exclusao_do_mei': instance.data_exclusao_do_mei,
+      'data_opcao_pelo_mei': instance.data_opcao_pelo_mei,
       'opcao_pelo_mei': instance.opcao_pelo_mei,
       'situacao_especial': instance.situacao_especial,
       'data_situacao_especial': instance.data_situacao_especial,

@@ -1,47 +1,18 @@
-// ignore_for_file: non_constant_identifier_names, unnecessary_this, avoid_print, unused_local_variable
+// ignore_for_file: non_constant_identifier_names, unnecessary_this, avoid_print, unused_local_variable, file_names
 //import 'dart:developer';
 //import 'package:flutter/services.dart';
 
 import 'dart:convert';
-import 'package:cnpj_consulta/qsa.dart';
+import 'package:cnpj_consulta/MCnpjQsa.dart';
+import 'package:cnpj_consulta/MCnpjAtividadePrincipal.dart';
+import 'package:cnpj_consulta/MCnpjAtividadesSecundarias.dart';
 import 'package:http/http.dart' as http;
 import 'package:json_annotation/json_annotation.dart';
 import '../funcoes/fJson.dart';
-import 'cnpj_normal.dart';
+import 'MCnpj.dart';
+import 'MCnpjCnaesSecundarios.dart';
 
-part 'cnpj_brasilapi.g.dart';
-
-@JsonSerializable(explicitToJson: true)
-class CnaesSecundarios {
-  int? codigo;
-  String? descricao;
-
-  CnaesSecundarios({
-      this.codigo,
-      this.descricao = "",
-  });
-
-  CnaesSecundarios copyWith({
-    int? codigo,
-    String? descricao,
-  }) {
-    return CnaesSecundarios(
-      codigo: codigo ?? this.codigo,
-      descricao: descricao ?? this.descricao,
-    );
-  }
-
-   factory CnaesSecundarios.fromJson(Map<String, dynamic> json) => _$CnaesSecundariosFromJson(json);
-   Map<String, dynamic> toJson() => _$CnaesSecundariosToJson(this);
-
-   factory CnaesSecundarios.fromJsonString(String jsonS) => CnaesSecundarios.fromJson(jsonDecode(jsonS));
-   String toJsonString() => jsonEncode(_$CnaesSecundariosToJson(this));
-
-   static List<CnaesSecundarios> lCnaesSecundariosFromJson(String str) => List<CnaesSecundarios>.from(jsonDecode(str).map((x) => CnaesSecundarios.fromJson(x)));
-   static List<CnaesSecundarios> lCnaesSecundariosFromMap(List<Map<String, Object?>> lMap) => lMap.map((x) => CnaesSecundarios.fromJson(x)).toList();
-
-   static String lCnaesSecundariosToJson(List<CnaesSecundarios> data) => jsonEncode(List<dynamic>.from(data.map((x) => x.toJson())), toEncodable: FJson.dataHoraSeralizer);
- }
+part 'MCnpjBrasilAPI.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class CNPJBrasilAPI {
@@ -55,9 +26,11 @@ class CNPJBrasilAPI {
   DateTime? data_situacao_cadastral;
   int? motivo_situacao_cadastral;
   String? descricao_motivo_situacao_cadastral;
+  String? ente_federativo_responsavel;
   String? nome_cidade_exterior;
   String? natureza_juridica;
   int? codigo_natureza_juridica;
+  int? codigo_porte;
   DateTime? data_inicio_atividade;
   int? cnae_fiscal;
   String? cnae_fiscal_descricao;
@@ -70,6 +43,7 @@ class CNPJBrasilAPI {
   String? uf;
   int? codigo_municipio;
   String? municipio;
+  int? codigo_municipio_ibge;
   String? ddd_telefone_1;
   String? ddd_telefone_2;
   String? ddd_fax;
@@ -80,6 +54,8 @@ class CNPJBrasilAPI {
   bool? opcao_pelo_simples;
   String? data_opcao_pelo_simples;
   String? data_exclusao_do_simples;
+  String? data_exclusao_do_mei;
+  String? data_opcao_pelo_mei;
   bool? opcao_pelo_mei;
   String? situacao_especial;
   String? data_situacao_especial;
@@ -99,9 +75,11 @@ CNPJBrasilAPI({
   this.data_situacao_cadastral,
   this.motivo_situacao_cadastral,
   this.descricao_motivo_situacao_cadastral = "",
+  this.ente_federativo_responsavel = "",
   this.nome_cidade_exterior = "",
   this.natureza_juridica,
   this.codigo_natureza_juridica,
+  this.codigo_porte,
   this.data_inicio_atividade,
   this.cnae_fiscal,
   this.cnae_fiscal_descricao = "",
@@ -114,6 +92,7 @@ CNPJBrasilAPI({
   this.uf = "",
   this.codigo_municipio,
   this.municipio = "",
+  this.codigo_municipio_ibge,
   this.ddd_telefone_1 = "",
   this.ddd_telefone_2 = "",
   this.ddd_fax = "",
@@ -124,6 +103,8 @@ CNPJBrasilAPI({
   this.opcao_pelo_simples,
   this.data_opcao_pelo_simples = "",
   this.data_exclusao_do_simples = "",
+  this.data_exclusao_do_mei,
+  this.data_opcao_pelo_mei,
   this.opcao_pelo_mei,
   this.situacao_especial = "",
   this.data_situacao_especial = "",
@@ -144,9 +125,11 @@ CNPJBrasilAPI copyWith({
   DateTime? data_situacao_cadastral,
   int? motivo_situacao_cadastral,
   String? descricao_motivo_situacao_cadastral,
+  String? ente_federativo_responsavel,
   String? nome_cidade_exterior,
   String? natureza_juridica,
   int? codigo_natureza_juridica,
+  int? codigo_porte,
   DateTime? data_inicio_atividade,
   int? cnae_fiscal,
   String? cnae_fiscal_descricao,
@@ -159,6 +142,7 @@ CNPJBrasilAPI copyWith({
   String? uf,
   int? codigo_municipio,
   String? municipio,
+  int? codigo_municipio_ibge,
   String? ddd_telefone_1,
   String? ddd_telefone_2,
   String? ddd_fax,
@@ -169,6 +153,8 @@ CNPJBrasilAPI copyWith({
   bool? opcao_pelo_simples,
   String? data_opcao_pelo_simples,
   String? data_exclusao_do_simples,
+  String? data_exclusao_do_mei,
+  String? data_opcao_pelo_mei,
   bool? opcao_pelo_mei,
   String? situacao_especial,
   String? data_situacao_especial,
@@ -188,9 +174,11 @@ CNPJBrasilAPI copyWith({
     data_situacao_cadastral: data_situacao_cadastral ?? this.data_situacao_cadastral,
     motivo_situacao_cadastral: motivo_situacao_cadastral ?? this.motivo_situacao_cadastral,
     descricao_motivo_situacao_cadastral: descricao_motivo_situacao_cadastral ?? this.descricao_motivo_situacao_cadastral,
+    ente_federativo_responsavel: ente_federativo_responsavel ?? this.ente_federativo_responsavel,
     nome_cidade_exterior: nome_cidade_exterior ?? this.nome_cidade_exterior,
     natureza_juridica: natureza_juridica ?? this.natureza_juridica,
     codigo_natureza_juridica: codigo_natureza_juridica ?? this.codigo_natureza_juridica,
+    codigo_porte: codigo_porte ?? this.codigo_porte,
     data_inicio_atividade: data_inicio_atividade ?? this.data_inicio_atividade,
     cnae_fiscal: cnae_fiscal ?? this.cnae_fiscal,
     cnae_fiscal_descricao: cnae_fiscal_descricao ?? this.cnae_fiscal_descricao,
@@ -203,6 +191,7 @@ CNPJBrasilAPI copyWith({
     uf: uf ?? this.uf,
     codigo_municipio: codigo_municipio ?? this.codigo_municipio,
     municipio: municipio ?? this.municipio,
+    codigo_municipio_ibge: codigo_municipio_ibge ?? this.codigo_municipio_ibge,
     ddd_telefone_1: ddd_telefone_1 ?? this.ddd_telefone_1,
     ddd_telefone_2: ddd_telefone_2 ?? this.ddd_telefone_2,
     ddd_fax: ddd_fax ?? this.ddd_fax,
@@ -213,6 +202,8 @@ CNPJBrasilAPI copyWith({
     opcao_pelo_simples: opcao_pelo_simples ?? this.opcao_pelo_simples,
     data_opcao_pelo_simples: data_opcao_pelo_simples ?? this.data_opcao_pelo_simples,
     data_exclusao_do_simples: data_exclusao_do_simples ?? this.data_exclusao_do_simples,
+    data_exclusao_do_mei: data_exclusao_do_mei ?? this.data_exclusao_do_mei,
+    data_opcao_pelo_mei: data_opcao_pelo_mei ?? this.data_opcao_pelo_mei,
     opcao_pelo_mei: opcao_pelo_mei ?? this.opcao_pelo_mei,
     situacao_especial: situacao_especial ?? this.situacao_especial,
     data_situacao_especial: data_situacao_especial ?? this.data_situacao_especial,
@@ -250,15 +241,6 @@ CNPJBrasilAPI copyWith({
     cnpjbrasil = CNPJBrasilAPI.fromJsonString(response.body);
     cnpjNormal = CNPJNormal.fromJsonString(response.body);
     
-    // cnpjNormal.atividade_principal = [];
-    // for(var obj in cnpjbrasil.atividade_principal!){
-    //   cnpjNormal.atividade_principal!.add(obj);
-    // }
-
-    // cnpjNormal.atividades_secundarias = [];
-    // for(var obj in cnpjbrasil.atividades_secundarias!){
-    //   cnpjNormal.atividades_secundarias!.add(obj);
-    // }
 
 //iguais
     cnpjNormal.cnpj = cnpjbrasil.cnpj;
@@ -298,12 +280,22 @@ CNPJBrasilAPI copyWith({
     cnpjNormal.dddFax = cnpjbrasil.ddd_fax;
     cnpjNormal.descricaoPorte = cnpjbrasil.descricao_porte;
     cnpjNormal.opcaoPeloSimples = cnpjbrasil.opcao_pelo_simples;
+    cnpjNormal.codigoPorte = cnpjbrasil.codigo_porte;
+    cnpjNormal.codigoQualificacaoDoResponsavel = cnpjbrasil.qualificacao_do_responsavel;
 
     if(cnpjbrasil.data_opcao_pelo_simples != ""){
      cnpjNormal.dataOpcaoPeloSimples = DateTime.tryParse(cnpjbrasil.data_opcao_pelo_simples ?? '');
     }
 
     if(cnpjbrasil.data_exclusao_do_simples != ""){
+    cnpjNormal.dataExclusaoDoSimples = DateTime.tryParse(cnpjbrasil.data_exclusao_do_simples ?? '');
+    }
+
+    if(cnpjbrasil.data_opcao_pelo_mei != ""){
+    cnpjNormal.dataOpcaoPeloSimples = DateTime.tryParse(cnpjbrasil.data_opcao_pelo_simples ?? '');
+    }
+
+    if(cnpjbrasil.data_exclusao_do_mei != ""){
     cnpjNormal.dataExclusaoDoSimples = DateTime.tryParse(cnpjbrasil.data_exclusao_do_simples ?? '');
     }
 

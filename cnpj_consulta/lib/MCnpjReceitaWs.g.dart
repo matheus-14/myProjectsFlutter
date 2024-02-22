@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'cnpj_receitaws.dart';
+part of 'MCnpjReceitaWs.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
