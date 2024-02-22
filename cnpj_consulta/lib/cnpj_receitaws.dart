@@ -262,9 +262,19 @@ CNPJReceitaWS copyWith({
     cnpjReceita = CNPJReceitaWS.fromJsonString(response.body);
 
     cnpjNormal.qsa = [];
+    int numQsa = 0;
+
     for(var obj in cnpjReceita.qsa!){
     cnpjNormal.qsa!.add(obj);
+    cnpjNormal.qsa![numQsa].nome_socio = cnpjNormal.qsa![numQsa].nome;
+    cnpjNormal.qsa![numQsa].qualificacao_socio = cnpjNormal.qsa![numQsa].qual!.split('-').sublist(1).join(' ').trim();
+    numQsa++;
     }
+
+    // cnpjNormal.atividade_principal = [];
+    // for(var obj in cnpjReceita.atividade_principal){
+    //   cnpjNormal.atividade_principal!.add(obj);
+    // }
 
 
 //iguais

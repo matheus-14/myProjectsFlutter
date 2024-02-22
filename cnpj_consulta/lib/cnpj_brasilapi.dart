@@ -240,7 +240,6 @@ CNPJBrasilAPI copyWith({
     //  await Clipboard.setData(ClipboardData(text: response.body));
     cnpjbrasil = CNPJBrasilAPI.fromJsonString(response.body);
     cnpjNormal = CNPJNormal.fromJsonString(response.body);
-    //CnaesSecundarios cnaeAtvSecundaria = CnaesSecundarios();
     
 //iguais
     cnpjNormal.cnpj = cnpjbrasil.cnpj;
@@ -295,29 +294,6 @@ CNPJBrasilAPI copyWith({
     cnpjNormal.cnaeAtvSecundaria = cnpjbrasil.cnaes_secundarios![0].codigo;
     cnpjNormal.cnaeAtvSecundariaDescricao = cnpjbrasil.cnaes_secundarios![0].descricao;
 
-
-/*
-    var tamanhoQsa = cnpjbrasil.qsa!.length;  
-  for(int i = 0; i < tamanhoQsa; i++){  
- 
-    cnpjNormal.pais = cnpjbrasil.qsa![i].pais;
-    cnpjNormal.nomeSocio = cnpjbrasil.qsa![i].nome_socio;
-    cnpjNormal.codigoPais = cnpjbrasil.qsa![i].codigo_pais;
-    cnpjNormal.faixaEtaria = cnpjbrasil.qsa![i].faixa_etaria;
-    cnpjNormal.cnpjCpfDoSocio = cnpjbrasil.qsa![i].cnpj_cpf_do_socio;
-    cnpjNormal.qualificacaoSocio = cnpjbrasil.qsa![i].qualificacao_socio!.replaceAll('-', ' ');
-    cnpjNormal.codigoFaixaEtaria = cnpjbrasil.qsa![i].codigo_faixa_etaria;
-    cnpjNormal.dataEntradaSociedade = DateTime.tryParse(cnpjbrasil.qsa![i].data_entrada_sociedade ?? '');
-    cnpjNormal.identificadorDeSocio = cnpjbrasil.qsa![i].identificador_de_socio;
-    cnpjNormal.cpfRepresentanteLegal = cnpjbrasil.qsa![i].cpf_representante_legal;
-    cnpjNormal.nomeRepresentanteLegal = cnpjbrasil.qsa![i].nome_representante_legal;
-    cnpjNormal.codigoQualificacaoSocio = cnpjbrasil.qsa![i].codigo_qualificacao_socio;
-    cnpjNormal.qualificacaoRepresentanteLegal = cnpjbrasil.qsa![i].qualificacao_representante_legal;
-    cnpjNormal.codigoQualificacaoRepresentanteLegal = cnpjbrasil.qsa![i].codigo_qualificacao_representante_legal;
-    cnpjNormal.codigoQualificacaoDoResponsavel = cnpjbrasil.qsa![i].codigo_qualificacao_socio;
-    cnpjNormal.qualificacaoDoResponsavel = cnpjbrasil.qsa![i].qualificacao_socio!.replaceAll('-', ' ');
-  }
-*/
     /*} catch (e) {
       debugger();
     }*/
