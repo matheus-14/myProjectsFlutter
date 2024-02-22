@@ -25,6 +25,8 @@ class Qsa {
   int? codigo_qualificacao_socio;
   String? qualificacao_representante_legal; 
   int? codigo_qualificacao_representante_legal;  
+  String? nome;
+  String? qual;
 
   Qsa({
     this.pais = "",
@@ -41,6 +43,8 @@ class Qsa {
     this.codigo_qualificacao_socio,
     this.qualificacao_representante_legal = "",
     this.codigo_qualificacao_representante_legal,
+    this.nome = "",
+    this.qual = "",
     });
 
   Qsa copyWith({
@@ -58,6 +62,8 @@ class Qsa {
     int? codigo_qualificacao_socio,
     String? qualificacao_representante_legal,
     int? codigo_qualificacao_representante_legal,
+    String? nome,
+    String? qual,
 	}) {
 	  return Qsa(
     pais: pais ?? this.pais,
@@ -74,6 +80,8 @@ class Qsa {
     codigo_qualificacao_socio: codigo_qualificacao_socio ?? this.codigo_qualificacao_socio,
     qualificacao_representante_legal: qualificacao_representante_legal ?? this.qualificacao_representante_legal,
     codigo_qualificacao_representante_legal: codigo_qualificacao_representante_legal ?? this.codigo_qualificacao_representante_legal,
+    nome: nome ?? this.nome,
+    qual: qual ?? this.qual,
 	  );
   }
 

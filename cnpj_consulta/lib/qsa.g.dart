@@ -24,6 +24,8 @@ Qsa _$QsaFromJson(Map<String, dynamic> json) => Qsa(
           json['qualificacao_representante_legal'] as String? ?? "",
       codigo_qualificacao_representante_legal:
           json['codigo_qualificacao_representante_legal'] as int?,
+      nome: json['nome'] as String? ?? "",
+      qual: json['qual'] as String? ?? "",
     );
 
 Map<String, dynamic> _$QsaToJson(Qsa instance) => <String, dynamic>{
@@ -43,4 +45,6 @@ Map<String, dynamic> _$QsaToJson(Qsa instance) => <String, dynamic>{
           instance.qualificacao_representante_legal,
       'codigo_qualificacao_representante_legal':
           instance.codigo_qualificacao_representante_legal,
+      'nome': instance.nome,
+      'qual': instance.qual,
     };

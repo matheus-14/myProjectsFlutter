@@ -260,15 +260,14 @@ CNPJReceitaWS copyWith({
     //try {
     //await Clipboard.setData(ClipboardData(text: response.body));
     cnpjReceita = CNPJReceitaWS.fromJsonString(response.body);
-    //  cnpjNormal = CNPJNormal.fromJsonString(response.body);
-    
 
-    //AtividadePrincipal cnaeAtvPrincipal = AtividadePrincipal();
-    //AtividadesSecundarias cnaeAtvSecundaria = AtividadesSecundarias();
-    //Billing billing = Billing();
+    cnpjNormal.qsa = [];
+    for(var obj in cnpjReceita.qsa!){
+    cnpjNormal.qsa!.add(obj);
+    }
+
 
 //iguais
-//cnpjReceita.qsa
     cnpjNormal.cnpj = cnpjReceita.cnpj;
     cnpjNormal.porte = cnpjReceita.porte;
     cnpjNormal.logradouro = cnpjReceita.logradouro;
@@ -332,12 +331,6 @@ CNPJReceitaWS copyWith({
 
     cnpjNormal.cnaeAtvSecundaria = int.parse(cnpjReceita.atividades_secundarias![0].code!.replaceAll('.', '').replaceAll('-', '').trim());
     cnpjNormal.cnaeAtvSecundariaDescricao = cnpjReceita.atividades_secundarias![0].text;
-
-    //cnpjReceita.qsa![0].nome_socio = ;   // CONTINUAAAAAR
-
-    // cnpjNormal.codigoQualificacaoDoResponsavel = int.parse(cnpjReceita.qsa![0].qual!.split('-')[0]); 
-    // cnpjNormal.qualificacaoDoResponsavel = cnpjReceita.qsa![0].qual!.split('-').sublist(1).join(' ').trim();
-    // cnpjNormal.nomeSocio = cnpjReceita.qsa![0].nome;
 
     /*} catch (e) {
       debugger();
