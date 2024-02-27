@@ -324,13 +324,13 @@ CNPJNormal copyWit({
   static String lCNPJNormalToJson(List<CNPJNormal> data) => jsonEncode(List<dynamic>.from(data.map((x) => x.toJson())), toEncodable: FJson.dataHoraSeralizer);
 
   
-  static Future<CNPJNormal> consultarCNPJ(String selecionadaAPI, String cnpjEntrada) async {
+  static Future<CNPJNormal> consultarCNPJ(String selecionadaAPI, String cnpjEntrada, int days) async {
 
     if (selecionadaAPI == 'BrasilAPI') {
       return CNPJBrasilAPI.consultarCNPJ(cnpjEntrada);
     }
      else {
-      return CNPJReceitaWS.consultarCNPJ(cnpjEntrada);
+      return CNPJReceitaWS.consultarCNPJ(cnpjEntrada, days);
     }
 
   }

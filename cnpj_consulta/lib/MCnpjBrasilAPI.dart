@@ -7,7 +7,6 @@ import 'dart:developer';
 import 'package:cnpj_consulta/MCnpjQsa.dart';
 import 'package:cnpj_consulta/MCnpjAtividadePrincipal.dart';
 import 'package:cnpj_consulta/MCnpjAtividadesSecundarias.dart';
-import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart';
 import 'package:json_annotation/json_annotation.dart';
 import '../funcoes/fJson.dart';
@@ -230,9 +229,6 @@ CNPJBrasilAPI copyWith({
 
   static Future<CNPJNormal> consultarCNPJ(String cnpj) async {
 
-    // final url = Uri.parse("https://brasilapi.com.br/api/cnpj/v1/${cnpj.trim().replaceAll('.', '').replaceAll('-', '').replaceAll('/', '')}");
-    // final response = await http.get(url);
-
   final dio = Dio();
   final responseDio = await dio.get("https://brasilapi.com.br/api/cnpj/v1/${cnpj.trim().replaceAll('.', '').replaceAll('-', '').replaceAll('/', '')}");
 
@@ -240,11 +236,9 @@ CNPJBrasilAPI copyWith({
     CNPJNormal cnpjNormal = CNPJNormal();
     String sMensagem = "";
     CNPJBrasilAPI cnpjbrasil = CNPJBrasilAPI();
-    
-    //try {
+
     //  await Clipboard.setData(ClipboardData(text: response.body));
-    // cnpjbrasil = CNPJBrasilAPI.fromJsonString(response.body);
-    // cnpjNormal = CNPJNormal.fromJsonString(response.body);
+    // cnpjbrasil = CNPJBrasilAPI.fromJsonString(response.body); usando http
     
     cnpjbrasil = CNPJBrasilAPI.fromJson(responseDio.data);
 
@@ -322,10 +316,6 @@ CNPJBrasilAPI copyWith({
     
     cnpjNormal.cnaeAtvSecundaria = cnpjbrasil.cnaes_secundarios![0].codigo;
     cnpjNormal.cnaeAtvSecundariaDescricao = cnpjbrasil.cnaes_secundarios![0].descricao;
-
-    /*} catch (e) {
-      debugger();
-    }*/
 
     if(responseDio.statusCode != 200){
       sMensagem = "Aconteceu uma falha ao consultar o Cnpj na Brasil Api.";

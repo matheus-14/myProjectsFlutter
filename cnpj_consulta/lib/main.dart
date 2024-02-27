@@ -37,6 +37,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   String selecionadaAPI = 'BrasilAPI'; // Valor padrão
   String cnpjEntrada = '';
+  int? days;
   dynamic cnpjData;
 
   @override
@@ -52,6 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             const Text('Insira o Cnpj:', style: TextStyle(fontSize: 18),
             ),
+
             const SizedBox(height: 10),
             TextField(
               onChanged: (value) {
@@ -66,6 +68,22 @@ class _MyHomePageState extends State<MyHomePage> {
               maxLines: 1, 
               maxLength: 18, 
             ),
+
+            const SizedBox(height: 10),
+            TextField(
+              onChanged: (value) {
+                setState(() {
+                  days = int.parse(value);
+                });
+              },
+              decoration: const InputDecoration(
+                hintText: 'Digite o Days (Caso API Comercial na ReceitaWs)',
+                border: OutlineInputBorder(),
+              ),
+              maxLines: 1, 
+              maxLength: 3, 
+            ),
+
             const SizedBox(height: 10),
             DropdownButton<String>(
               value: selecionadaAPI,
@@ -81,6 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 });
               },
             ),
+
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
@@ -88,6 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               child: const Text('Consultar'),
             ),
+
             const SizedBox(height: 20),
             if (cnpjData != null)
               Text('CNPJ consultado: ${cnpjData!.cnpj}'),
@@ -101,11 +121,20 @@ class _MyHomePageState extends State<MyHomePage> {
     try {
       debugger();
 
-    final cnpjData = await CNPJNormal.consultarCNPJ(selecionadaAPI, cnpjEntrada);
+    if (days != null) { // CASO API COMERCIAL
+      final cnpjData = await CNPJNormal.consultarCNPJ(selecionadaAPI, cnpjEntrada, days!);
 
-    setState(() {
-      this.cnpjData = cnpjData;
-    });
+      setState(() {
+        this.cnpjData = cnpjData;
+      });
+    }else{  // CASO API PUBLICA
+      days = -1;
+      final cnpjData = await CNPJNormal.consultarCNPJ(selecionadaAPI, cnpjEntrada, days!);
+      
+      setState(() {
+        this.cnpjData = cnpjData;
+      });
+    }
 
     } catch (e) {
       setState(() {

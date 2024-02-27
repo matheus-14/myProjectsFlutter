@@ -1,4 +1,4 @@
-// ignore_for_file: non_constant_identifier_names, avoid_print, unused_local_variable, file_names
+// ignore_for_file: non_constant_identifier_names, avoid_print, unused_local_variable, file_names, unused_import
 //import 'dart:developer';
 //import 'package:flutter/services.dart';
 
@@ -7,7 +7,6 @@ import 'dart:developer';
 import 'package:cnpj_consulta/MCnpjQsa.dart';
 import 'package:cnpj_consulta/MCnpjAtividadePrincipal.dart';
 import 'package:cnpj_consulta/MCnpjAtividadesSecundarias.dart';
-import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart';
 import 'package:json_annotation/json_annotation.dart';
 import '../funcoes/fJson.dart';
@@ -192,26 +191,24 @@ CNPJReceitaWS copyWith({
   static String lCNPJReceitaWSToJson(List<CNPJReceitaWS> data) => jsonEncode(List<dynamic>.from(data.map((x) => x.toJson())), toEncodable: FJson.dataHoraSeralizer);
 
  
-  static Future<CNPJNormal> consultarCNPJ(String cnpj) async {
-
-    // final url = Uri.parse("https://receitaws.com.br/v1/cnpj/${cnpj.trim().replaceAll('.', '').replaceAll('-', '').replaceAll('/', '')}");
-    // final response = await http.get(url);
+  static Future<CNPJNormal> consultarCNPJ(String cnpj, int days) async {
 
     final dio = Dio();
-    final responseDio = await dio.get("https://receitaws.com.br/v1/cnpj/${cnpj.trim().replaceAll('.', '').replaceAll('-', '').replaceAll('/', '')}");
+    Response responseDio;
+
+    if(days > 0){     // Caso days esteja preenchido, é a API Comercial
+      responseDio = await dio.get("https://receitaws.com.br/v1/cnpj/${cnpj.trim().replaceAll('.', '').replaceAll('-', '').replaceAll('/', '')}/days/$days");
+    }else{        // Caso days esteja vazio, é a API Publica
+      responseDio = await dio.get("https://receitaws.com.br/v1/cnpj/${cnpj.trim().replaceAll('.', '').replaceAll('-', '').replaceAll('/', '')}");
+    }
 
     CNPJNormal cnpjNormal = CNPJNormal();
     String sMensagem = "";
     CNPJReceitaWS cnpjReceita = CNPJReceitaWS();
 
-    //try {
-    //await Clipboard.setData(ClipboardData(text: response.body));
-
-    //cnpjReceita = CNPJReceitaWS.fromJsonString(response.body);
     cnpjReceita = CNPJReceitaWS.fromJson(responseDio.data);
 
     int numQsa = 0;
-
     cnpjNormal.qsa = [];
     for(var obj in cnpjReceita.qsa!){
     cnpjNormal.qsa!.add(obj);
@@ -296,9 +293,6 @@ CNPJReceitaWS copyWith({
     cnpjNormal.cnaeAtvSecundaria = int.parse(cnpjReceita.atividades_secundarias![0].code!.replaceAll('.', '').replaceAll('-', '').trim());
     cnpjNormal.cnaeAtvSecundariaDescricao = cnpjReceita.atividades_secundarias![0].text;
 
-    /*} catch (e) {
-      debugger();
-    }*/
 
     if(responseDio.statusCode != 200){
       sMensagem = "Aconteceu uma falha ao consultar o Cnpj na ReceitaWS.";
