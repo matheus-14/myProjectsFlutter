@@ -1,12 +1,14 @@
-// ignore_for_file: non_constant_identifier_names, unnecessary_this, avoid_print, unused_local_variable, file_names
+// ignore_for_file: non_constant_identifier_names, unnecessary_this, avoid_print, unused_local_variable, file_names, unused_import
 //import 'dart:developer';
 //import 'package:flutter/services.dart';
 
 import 'dart:convert';
+import 'dart:developer';
 import 'package:cnpj_consulta/MCnpjQsa.dart';
 import 'package:cnpj_consulta/MCnpjAtividadePrincipal.dart';
 import 'package:cnpj_consulta/MCnpjAtividadesSecundarias.dart';
 import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 import 'package:json_annotation/json_annotation.dart';
 import '../funcoes/fJson.dart';
 import 'MCnpj.dart';
@@ -228,9 +230,12 @@ CNPJBrasilAPI copyWith({
 
   static Future<CNPJNormal> consultarCNPJ(String cnpj) async {
 
-    final url = Uri.parse("https://brasilapi.com.br/api/cnpj/v1/${cnpj.trim().replaceAll('.', '').replaceAll('-', '').replaceAll('/', '')}");
+    // final url = Uri.parse("https://brasilapi.com.br/api/cnpj/v1/${cnpj.trim().replaceAll('.', '').replaceAll('-', '').replaceAll('/', '')}");
+    // final response = await http.get(url);
 
-    final response = await http.get(url);
+  final dio = Dio();
+  final responseDio = await dio.get("https://brasilapi.com.br/api/cnpj/v1/${cnpj.trim().replaceAll('.', '').replaceAll('-', '').replaceAll('/', '')}");
+
 
     CNPJNormal cnpjNormal = CNPJNormal();
     String sMensagem = "";
@@ -238,9 +243,21 @@ CNPJBrasilAPI copyWith({
     
     //try {
     //  await Clipboard.setData(ClipboardData(text: response.body));
-    cnpjbrasil = CNPJBrasilAPI.fromJsonString(response.body);
-    cnpjNormal = CNPJNormal.fromJsonString(response.body);
+    // cnpjbrasil = CNPJBrasilAPI.fromJsonString(response.body);
+    // cnpjNormal = CNPJNormal.fromJsonString(response.body);
     
+    cnpjbrasil = CNPJBrasilAPI.fromJson(responseDio.data);
+
+    cnpjNormal.qsa = [];
+    for(var obj in cnpjbrasil.qsa!){
+      cnpjNormal.qsa!.add(obj);
+    }
+
+    cnpjNormal.cnaes_secundarios = [];
+    for(var obj in cnpjbrasil.cnaes_secundarios!){
+      cnpjNormal.cnaes_secundarios!.add(obj);
+    }
+
 
 //iguais
     cnpjNormal.cnpj = cnpjbrasil.cnpj;
@@ -310,9 +327,9 @@ CNPJBrasilAPI copyWith({
       debugger();
     }*/
 
-    if(response.statusCode != 200){
+    if(responseDio.statusCode != 200){
       sMensagem = "Aconteceu uma falha ao consultar o Cnpj na Brasil Api.";
-      sMensagem += "\n(${response.statusCode})";
+      sMensagem += "\n(${responseDio.statusCode})";
     }
 
     return cnpjNormal;

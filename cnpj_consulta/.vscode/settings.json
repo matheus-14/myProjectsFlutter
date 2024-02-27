@@ -1,5 +1,7 @@
 {
   "files.exclude": {
-     "**/*.g.dart": true
-  }
+     "**/*.g.dart": true,
+  },
+
+  "dart.openDevTools": "never"
 }

@@ -3,10 +3,12 @@
 //import 'package:flutter/services.dart';
 
 import 'dart:convert';
+import 'dart:developer';
 import 'package:cnpj_consulta/MCnpjQsa.dart';
 import 'package:cnpj_consulta/MCnpjAtividadePrincipal.dart';
 import 'package:cnpj_consulta/MCnpjAtividadesSecundarias.dart';
 import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 import 'package:json_annotation/json_annotation.dart';
 import '../funcoes/fJson.dart';
 import 'MCnpj.dart';
@@ -50,6 +52,7 @@ class Billing {
 class CNPJReceitaWS {
   String? status = "";
   DateTime? ultima_atualizacao;
+  int? days;
   String? cnpj = "";
   String? tipo = "";
   String? porte = "";
@@ -81,6 +84,7 @@ class CNPJReceitaWS {
 CNPJReceitaWS({
     this.status = "",
     this.ultima_atualizacao,
+    this.days,
     this.cnpj = "",  
     this.tipo = "", 
     this.porte = "",
@@ -113,6 +117,7 @@ CNPJReceitaWS({
 CNPJReceitaWS copyWith({
   String? status,
   DateTime? ultima_atualizacao,
+  int? days,
   String? cnpj,
   String? tipo,
   String? porte,
@@ -144,6 +149,7 @@ CNPJReceitaWS copyWith({
   return CNPJReceitaWS(
     status: status ?? this.status,
     ultima_atualizacao: ultima_atualizacao ?? this.ultima_atualizacao,
+    days: days ?? this.days,
     cnpj: cnpj ?? this.cnpj,
     tipo: tipo ?? this.tipo,
     porte: porte ?? this.porte,
@@ -188,9 +194,11 @@ CNPJReceitaWS copyWith({
  
   static Future<CNPJNormal> consultarCNPJ(String cnpj) async {
 
-    final url = Uri.parse("https://receitaws.com.br/v1/cnpj/${cnpj.trim().replaceAll('.', '').replaceAll('-', '').replaceAll('/', '')}");
+    // final url = Uri.parse("https://receitaws.com.br/v1/cnpj/${cnpj.trim().replaceAll('.', '').replaceAll('-', '').replaceAll('/', '')}");
+    // final response = await http.get(url);
 
-    final response = await http.get(url);
+    final dio = Dio();
+    final responseDio = await dio.get("https://receitaws.com.br/v1/cnpj/${cnpj.trim().replaceAll('.', '').replaceAll('-', '').replaceAll('/', '')}");
 
     CNPJNormal cnpjNormal = CNPJNormal();
     String sMensagem = "";
@@ -198,11 +206,13 @@ CNPJReceitaWS copyWith({
 
     //try {
     //await Clipboard.setData(ClipboardData(text: response.body));
-    cnpjReceita = CNPJReceitaWS.fromJsonString(response.body);
 
-    cnpjNormal.qsa = [];
+    //cnpjReceita = CNPJReceitaWS.fromJsonString(response.body);
+    cnpjReceita = CNPJReceitaWS.fromJson(responseDio.data);
+
     int numQsa = 0;
 
+    cnpjNormal.qsa = [];
     for(var obj in cnpjReceita.qsa!){
     cnpjNormal.qsa!.add(obj);
     cnpjNormal.qsa![numQsa].nome_socio = cnpjNormal.qsa![numQsa].nome;
@@ -290,9 +300,9 @@ CNPJReceitaWS copyWith({
       debugger();
     }*/
 
-    if(response.statusCode != 200){
+    if(responseDio.statusCode != 200){
       sMensagem = "Aconteceu uma falha ao consultar o Cnpj na ReceitaWS.";
-      sMensagem += "\n(${response.statusCode})";
+      sMensagem += "\n(${responseDio.statusCode})";
     }
 
     return cnpjNormal;

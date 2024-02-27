@@ -22,6 +22,7 @@ CNPJReceitaWS _$CNPJReceitaWSFromJson(Map<String, dynamic> json) =>
       ultima_atualizacao: json['ultima_atualizacao'] == null
           ? null
           : DateTime.parse(json['ultima_atualizacao'] as String),
+      days: json['days'] as int?,
       cnpj: json['cnpj'] as String? ?? "",
       tipo: json['tipo'] as String? ?? "",
       porte: json['porte'] as String? ?? "",
@@ -64,6 +65,7 @@ Map<String, dynamic> _$CNPJReceitaWSToJson(CNPJReceitaWS instance) =>
     <String, dynamic>{
       'status': instance.status,
       'ultima_atualizacao': instance.ultima_atualizacao?.toIso8601String(),
+      'days': instance.days,
       'cnpj': instance.cnpj,
       'tipo': instance.tipo,
       'porte': instance.porte,
