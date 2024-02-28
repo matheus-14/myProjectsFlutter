@@ -138,7 +138,7 @@ class _MyHomePageState extends State<MyHomePage> {
       });
     }
 
-    } catch (e) {
+    } catch (e, stackTrace) {
       setState(() {
         cnpjData = null;
       });

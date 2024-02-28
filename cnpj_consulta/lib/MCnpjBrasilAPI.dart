@@ -233,9 +233,8 @@ CNPJBrasilAPI copyWith({
 
 
     CNPJNormal cnpjNormal = CNPJNormal();
-    String sMensagem = "";
     CNPJBrasilAPI cnpjbrasil = CNPJBrasilAPI();
-
+    String sMensagem = "";
     //  await Clipboard.setData(ClipboardData(text: response.body));
     
     cnpjbrasil = CNPJBrasilAPI.fromJson(responseDio.data);

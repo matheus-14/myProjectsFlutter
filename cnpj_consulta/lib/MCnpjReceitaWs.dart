@@ -196,14 +196,21 @@ class CNPJReceitaWS {
     final dio = Dio();
     Response responseDio;
     String sUrl = "";
+    String sMensagem = "";
 
     if (days > 0) {     // Caso days esteja preenchido, é a API Comercial
 
-      sUrl = "https://receitaws.com.br/v1/cnpj/${cnpj.trim().replaceAll('.', '').replaceAll('-', '').replaceAll('/', '')}/days/$days";
+      sUrl = "http://receitaws.com.br/v1/cnpj/${cnpj.trim().replaceAll('.', '').replaceAll('-', '').replaceAll('/', '')}/days/$days";
 
       dio.options.headers = {
         "Authorization": "Bearer $token",
         "Content-Type": "application/json",
+         "Access-Control-Allow-Origin": "*",
+        // "Access-Control-Allow-Headers": "Content-Type",
+         "Referrer-Policy": "no-referrer-when-downgrade",
+          "Access-Control-Allow-Methods": "GET,PUT,PATCH,POST,DELETE",
+        //  "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
+
       };
 
     } else {      // Caso days esteja vazio, é a API Publica
@@ -213,7 +220,6 @@ class CNPJReceitaWS {
     responseDio = await dio.get(sUrl);
 
     CNPJNormal cnpjNormal = CNPJNormal();
-    String sMensagem = "";
     CNPJReceitaWS cnpjReceita = CNPJReceitaWS();
 
     cnpjReceita = CNPJReceitaWS.fromJson(responseDio.data);

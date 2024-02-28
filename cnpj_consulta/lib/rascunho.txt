@@ -1,3 +1,11 @@
+"The connection errored: The XMLHttpRequest onError callback was called. 
+This typically indicates an error on the network layer. This indicates an error 
+which most likely cannot be solved by the library."
+
+linha 214 receitaWS - responseDio = await dio.get(sUrl);
+ao consultar cnpj 04523992000192 com days = 1
+https://www.youtube.com/watch?v=GtgJyYFGvPQ
+
 **cnpjbrasil
 
 **FALTAM:
@@ -5,7 +13,6 @@
 identificadorMatrizFilial,
   "identificadorMatrizFilial"; //
   "codigoMunicipio"; //
- 
   "motivoSituacaoCadastral",
   "nomeCidadeExterior",
   "cnaeFiscal",
@@ -29,7 +36,6 @@ FALTAM:
 {
   "status",
   "ultimaAtualizacao",
-
   "atividadePrincipal",
   "atividadesSecundarias",
   "email",
@@ -41,50 +47,30 @@ FALTAM:
 *                                                   brasilAPI x receitaWS
 
 - cnpjNormal.tipoMatrizFilial > descricaoMatrizFilial (string) == tipo (string) 
-
 - cnpjNormal.naturezaJuridica (String) > naturezaJuridica (int) == naturezaJuridica (string)
-
 - cnpjNormal.codigoNaturezaJuridica (int) > codigoNaturezaJuridica (int) == naturezaJuridica (string)
-
-
 - cnpjNormal.dataSituacaoEspecial (datetime) > dataSituacaoEspecial (string)  == dataSituacaoEspecial (string)
-
 - cnpjNormal.abertura > dataInicioAtividade (string) == abertura (string)
-
 - cnpjNormal.telefone > dddTelefone1 (string) == telefone (string)
-
 - cnpjNormal.situacaoCadastral > descricaoSituacaoCadastral (string) == situacao (string)
-
 - cnpjNormal.dataSituacaoCadastral > dataSituacaoCadastral (string) == dataSituacao (string)
-
 - cnpjNormal.descricaoMotivoSituacaoCadastral > descricaoMotivoSituacaoCadastral (string) == motivoSituacao (string)
-
 - cnpjNormal.dataSituacaoCadastral > dataSituacaoCadastral (string) == abertura (string)
-
 - cnpjNormal.capitalSocial (int) > capitalSocial (int) == capitalSocial (String) 
-
 - cnpjNormal.qualificacaoDoResponsavel (string) > qualificacaoDoResponsavel (int) == qsa (qual) (string)
-
-
 //----------
 .			                          brasilApi x receitaWs
 
 /-
 cnpjNormal.cnaeFiscal (int) > cnae_fiscal (int) == atividadePrincipal (code) (string)
-
 cnpjNormal.cnaeAtvPrincipalDescricao (String) > cnaeFiscalDescricao == cnaeAtvPrincipal (text) (string)
 /-------
 
 cnpjNormal.cnaeAtvSecundaria (int) > cnae_secundarios (codigo) (int) == cnaeAtvSecundaria (code) (string)
-
 cnpjNormal.cnaeAtvSecundariaDescricao (string) > cnae_secundarios (descricao) (string) == cnaeAtvSecundaria (text) (string)
 
 //----------
 03637885000122  - cnpj versa
-
-//---------------
-
-cnpjreceita.abertura duas vezes
 
 //---------------
 https://brasilapi.com.br/api/cnpj/v1/03637885000122
