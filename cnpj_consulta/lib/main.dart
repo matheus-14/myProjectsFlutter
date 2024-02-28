@@ -35,7 +35,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String selecionadaAPI = 'BrasilAPI'; // Valor padrão
+  String selecionadaAPI = 'ReceitaWS'; // Valor padrão
   String cnpjEntrada = '';
   int? days;
   dynamic cnpjData;
