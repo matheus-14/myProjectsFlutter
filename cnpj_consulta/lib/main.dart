@@ -38,6 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
   String selecionadaAPI = 'ReceitaWS'; // Valor padrão
   String cnpjEntrada = '';
   int? days;
+  String? token = ""; 
   dynamic cnpjData;
 
   @override
@@ -73,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
             TextField(
               onChanged: (value) {
                 setState(() {
-                  days = int.parse(value);
+                  days = int.tryParse(value);
                 });
               },
               decoration: const InputDecoration(
@@ -121,15 +122,16 @@ class _MyHomePageState extends State<MyHomePage> {
     try {
       debugger();
 
-    if (days != null) { // CASO API COMERCIAL
-      final cnpjData = await CNPJNormal.consultarCNPJ(selecionadaAPI, cnpjEntrada, days!);
+    if (days != null) { // Receitaws(API Comercial)
+      token = "9c6bde7c95d6c05ec2225a24d53b286f38b962248c2ef76763f9b4b3a2200da4";
+      final cnpjData = await CNPJNormal.consultarCNPJ(selecionadaAPI, cnpjEntrada, days!, token!);
 
       setState(() {
         this.cnpjData = cnpjData;
       });
-    }else{  // CASO API PUBLICA
+    }else{  // Receitaws(API Publica) OU BrasilAPI
       days = -1;
-      final cnpjData = await CNPJNormal.consultarCNPJ(selecionadaAPI, cnpjEntrada, days!);
+      final cnpjData = await CNPJNormal.consultarCNPJ(selecionadaAPI, cnpjEntrada, days!, token!);
       
       setState(() {
         this.cnpjData = cnpjData;

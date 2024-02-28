@@ -1,5 +1,4 @@
 // ignore_for_file: non_constant_identifier_names, unnecessary_this, avoid_print, unused_local_variable, file_names, unused_import
-//import 'dart:developer';
 //import 'package:flutter/services.dart';
 
 import 'dart:convert';
@@ -238,7 +237,6 @@ CNPJBrasilAPI copyWith({
     CNPJBrasilAPI cnpjbrasil = CNPJBrasilAPI();
 
     //  await Clipboard.setData(ClipboardData(text: response.body));
-    // cnpjbrasil = CNPJBrasilAPI.fromJsonString(response.body); usando http
     
     cnpjbrasil = CNPJBrasilAPI.fromJson(responseDio.data);
 
@@ -251,7 +249,6 @@ CNPJBrasilAPI copyWith({
     for(var obj in cnpjbrasil.cnaes_secundarios!){
       cnpjNormal.cnaes_secundarios!.add(obj);
     }
-
 
 //iguais
     cnpjNormal.cnpj = cnpjbrasil.cnpj;

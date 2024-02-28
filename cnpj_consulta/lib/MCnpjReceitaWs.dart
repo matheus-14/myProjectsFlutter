@@ -1,5 +1,4 @@
 // ignore_for_file: non_constant_identifier_names, avoid_print, unused_local_variable, file_names, unused_import
-//import 'dart:developer';
 //import 'package:flutter/services.dart';
 
 import 'dart:convert';
@@ -34,22 +33,16 @@ class Billing {
     );
   }
 
-  factory Billing.fromJson(Map<String, dynamic> json) =>
-      _$BillingFromJson(json);
+  factory Billing.fromJson(Map<String, dynamic> json) => _$BillingFromJson(json);
   Map<String, dynamic> toJson() => _$BillingToJson(this);
 
-  factory Billing.fromJsonString(String jsonS) =>
-      Billing.fromJson(jsonDecode(jsonS));
+  factory Billing.fromJsonString(String jsonS) => Billing.fromJson(jsonDecode(jsonS));
   String toJsonString() => jsonEncode(_$BillingToJson(this));
 
-  static List<Billing> lBillingFromJson(String str) =>
-      List<Billing>.from(jsonDecode(str).map((x) => Billing.fromJson(x)));
-  static List<Billing> lBillingFromMap(List<Map<String, Object?>> lMap) =>
-      lMap.map((x) => Billing.fromJson(x)).toList();
+  static List<Billing> lBillingFromJson(String str) => List<Billing>.from(jsonDecode(str).map((x) => Billing.fromJson(x)));
+  static List<Billing> lBillingFromMap(List<Map<String, Object?>> lMap) => lMap.map((x) => Billing.fromJson(x)).toList();
 
-  static String lBillingToJson(List<Billing> data) =>
-      jsonEncode(List<dynamic>.from(data.map((x) => x.toJson())),
-          toEncodable: FJson.dataHoraSeralizer);
+  static String lBillingToJson(List<Billing> data) => jsonEncode(List<dynamic>.from(data.map((x) => x.toJson())), toEncodable: FJson.dataHoraSeralizer);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -72,6 +65,7 @@ class CNPJReceitaWS {
   String? cep = "";
   String? bairro = "";
   String? municipio = "";
+  int? codigo_municipio_ibge;
   String? uf = "";
   String? email = "";
   String? telefone = "";
@@ -104,6 +98,7 @@ class CNPJReceitaWS {
     this.cep = "",
     this.bairro = "",
     this.municipio = "",
+    this.codigo_municipio_ibge,
     this.uf = "",
     this.email = "",
     this.telefone = "",
@@ -137,6 +132,7 @@ class CNPJReceitaWS {
     String? cep,
     String? bairro,
     String? municipio,
+    int? codigo_municipio_ibge,
     String? uf,
     String? email,
     String? telefone,
@@ -161,8 +157,7 @@ class CNPJReceitaWS {
       fantasia: fantasia ?? this.fantasia,
       abertura: abertura ?? this.abertura,
       atividade_principal: atividade_principal ?? this.atividade_principal,
-      atividades_secundarias:
-          atividades_secundarias ?? this.atividades_secundarias,
+      atividades_secundarias: atividades_secundarias ?? this.atividades_secundarias,
       natureza_juridica: natureza_juridica ?? this.natureza_juridica,
       logradouro: logradouro ?? this.logradouro,
       numero: numero ?? this.numero,
@@ -170,6 +165,7 @@ class CNPJReceitaWS {
       cep: cep ?? this.cep,
       bairro: bairro ?? this.bairro,
       municipio: municipio ?? this.municipio,
+      codigo_municipio_ibge: codigo_municipio_ibge ?? this.codigo_municipio_ibge,
       uf: uf ?? this.uf,
       email: email ?? this.email,
       telefone: telefone ?? this.telefone,
@@ -178,41 +174,31 @@ class CNPJReceitaWS {
       data_situacao: data_situacao ?? this.data_situacao,
       motivo_situacao: motivo_situacao ?? this.motivo_situacao,
       situacao_especial: situacao_especial ?? this.situacao_especial,
-      data_situacao_especial:
-          data_situacao_especial ?? this.data_situacao_especial,
+      data_situacao_especial: data_situacao_especial ?? this.data_situacao_especial,
       capital_social: capital_social ?? this.capital_social,
       qsa: qsa ?? this.qsa,
       billing: billing ?? this.billing,
     );
   }
 
-  factory CNPJReceitaWS.fromJson(Map<String, dynamic> json) =>
-      _$CNPJReceitaWSFromJson(json);
+  factory CNPJReceitaWS.fromJson(Map<String, dynamic> json) => _$CNPJReceitaWSFromJson(json);
   Map<String, dynamic> toJson() => _$CNPJReceitaWSToJson(this);
 
-  factory CNPJReceitaWS.fromJsonString(String jsonS) =>
-      CNPJReceitaWS.fromJson(jsonDecode(jsonS));
+  factory CNPJReceitaWS.fromJsonString(String jsonS) => CNPJReceitaWS.fromJson(jsonDecode(jsonS));
   String toJsonString() => jsonEncode(_$CNPJReceitaWSToJson(this));
 
-  static List<CNPJReceitaWS> lCNPJReceitaWSFromJson(String str) =>
-      List<CNPJReceitaWS>.from(
-          jsonDecode(str).map((x) => CNPJReceitaWS.fromJson(x)));
-  static List<CNPJReceitaWS> lCNPJReceitaWSFromMap(
-          List<Map<String, Object?>> lMap) =>
-      lMap.map((x) => CNPJReceitaWS.fromJson(x)).toList();
+  static List<CNPJReceitaWS> lCNPJReceitaWSFromJson(String str) => List<CNPJReceitaWS>.from(jsonDecode(str).map((x) => CNPJReceitaWS.fromJson(x)));
+  static List<CNPJReceitaWS> lCNPJReceitaWSFromMap(List<Map<String, Object?>> lMap) => lMap.map((x) => CNPJReceitaWS.fromJson(x)).toList();
 
-  static String lCNPJReceitaWSToJson(List<CNPJReceitaWS> data) =>
-      jsonEncode(List<dynamic>.from(data.map((x) => x.toJson())),
-          toEncodable: FJson.dataHoraSeralizer);
+  static String lCNPJReceitaWSToJson(List<CNPJReceitaWS> data) => jsonEncode(List<dynamic>.from(data.map((x) => x.toJson())), toEncodable: FJson.dataHoraSeralizer);
 
-  static Future<CNPJNormal> consultarCNPJ(String cnpj, int days) async {
+  static Future<CNPJNormal> consultarCNPJ(String cnpj, int days, String token) async {
     final dio = Dio();
     Response responseDio;
     String sUrl = "";
 
     if (days > 0) {     // Caso days esteja preenchido, é a API Comercial
 
-      String token = "9c6bde7c95d6c05ec2225a24d53b286f38b962248c2ef76763f9b4b3a2200da4";
       sUrl = "https://receitaws.com.br/v1/cnpj/${cnpj.trim().replaceAll('.', '').replaceAll('-', '').replaceAll('/', '')}/days/$days";
 
       dio.options.headers = {
@@ -221,14 +207,10 @@ class CNPJReceitaWS {
       };
 
     } else {      // Caso days esteja vazio, é a API Publica
-      sUrl =
-          "https://receitaws.com.br/v1/cnpj/${cnpj.trim().replaceAll('.', '').replaceAll('-', '').replaceAll('/', '')}";
+      sUrl = "https://receitaws.com.br/v1/cnpj/${cnpj.trim().replaceAll('.', '').replaceAll('-', '').replaceAll('/', '')}";
     }
 
-    responseDio = await dio.get(
-      sUrl,
-      //queryParameters: {'cnpj': cnpj, 'days': days},
-    );
+    responseDio = await dio.get(sUrl);
 
     CNPJNormal cnpjNormal = CNPJNormal();
     String sMensagem = "";
@@ -241,8 +223,7 @@ class CNPJReceitaWS {
     for (var obj in cnpjReceita.qsa!) {
       cnpjNormal.qsa!.add(obj);
       cnpjNormal.qsa![numQsa].nome_socio = cnpjNormal.qsa![numQsa].nome;
-      cnpjNormal.qsa![numQsa].qualificacao_socio =
-          cnpjNormal.qsa![numQsa].qual!.split('-').sublist(1).join(' ').trim();
+      cnpjNormal.qsa![numQsa].qualificacao_socio = cnpjNormal.qsa![numQsa].qual!.split('-').sublist(1).join(' ').trim();
       numQsa++;
     }
 
@@ -268,15 +249,13 @@ class CNPJReceitaWS {
     cnpjNormal.municipio = cnpjReceita.municipio;
 
     if (cnpjReceita.capital_social != "") {
-      cnpjNormal.capitalSocial = int.parse(
-          double.parse(cnpjReceita.capital_social!).toStringAsFixed(0));
+      cnpjNormal.capitalSocial = int.parse(double.parse(cnpjReceita.capital_social!).toStringAsFixed(0));
     }
 
     cnpjNormal.situacaoEspecial = cnpjReceita.situacao_especial;
 
     if (cnpjReceita.data_situacao_especial != "") {
-      cnpjNormal.dataSituacaoEspecial =
-          DateTime.tryParse(cnpjReceita.data_situacao_especial ?? '');
+      cnpjNormal.dataSituacaoEspecial = DateTime.tryParse(cnpjReceita.data_situacao_especial ?? '');
     }
 //equivalentes
     cnpjNormal.nome = cnpjReceita.fantasia;
@@ -284,13 +263,8 @@ class CNPJReceitaWS {
     cnpjNormal.tipoMatrizFilial = cnpjReceita.tipo;
 
     if (cnpjReceita.natureza_juridica != "") {
-      cnpjNormal.naturezaJuridica =
-          cnpjReceita.natureza_juridica!.split('-')[2].trim();
-      cnpjNormal.codigoNaturezaJuridica = int.parse(cnpjReceita
-          .natureza_juridica!
-          .split(' ')[0]
-          .replaceAll('-', '')
-          .trim());
+      cnpjNormal.naturezaJuridica = cnpjReceita.natureza_juridica!.split('-')[2].trim();
+      cnpjNormal.codigoNaturezaJuridica = int.parse(cnpjReceita.natureza_juridica!.split(' ')[0].replaceAll('-', '').trim());
     }
 
     if (cnpjReceita.abertura != "") {
@@ -321,19 +295,11 @@ class CNPJReceitaWS {
     cnpjNormal.billingFree = cnpjReceita.billing!.free;
     cnpjNormal.billingDatabase = cnpjReceita.billing!.database;
 
-    cnpjNormal.cnaeFiscal = int.parse(cnpjReceita.atividade_principal![0].code!
-        .replaceAll('.', '')
-        .replaceAll('-', '')
-        .trim());
+    cnpjNormal.cnaeFiscal = int.parse(cnpjReceita.atividade_principal![0].code!.replaceAll('.', '').replaceAll('-', '').trim());
     cnpjNormal.cnaeFiscalDescricao = cnpjReceita.atividade_principal![0].text;
 
-    cnpjNormal.cnaeAtvSecundaria = int.parse(cnpjReceita
-        .atividades_secundarias![0].code!
-        .replaceAll('.', '')
-        .replaceAll('-', '')
-        .trim());
-    cnpjNormal.cnaeAtvSecundariaDescricao =
-        cnpjReceita.atividades_secundarias![0].text;
+    cnpjNormal.cnaeAtvSecundaria = int.parse(cnpjReceita.atividades_secundarias![0].code!.replaceAll('.', '').replaceAll('-', '').trim());
+    cnpjNormal.cnaeAtvSecundariaDescricao = cnpjReceita.atividades_secundarias![0].text;
 
     if (responseDio.statusCode != 200) {
       sMensagem = "Aconteceu uma falha ao consultar o Cnpj na ReceitaWS.";
