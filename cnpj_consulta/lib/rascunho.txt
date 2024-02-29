@@ -2,9 +2,15 @@
 This typically indicates an error on the network layer. This indicates an error 
 which most likely cannot be solved by the library."
 
-linha 214 receitaWS - responseDio = await dio.get(sUrl);
-ao consultar cnpj 04523992000192 com days = 1
+linha 219 receitaWS - responseDio = await dio.get(sUrl);
+
 https://www.youtube.com/watch?v=GtgJyYFGvPQ
+
+
+----------------
+
+
+
 
 **cnpjbrasil
 
