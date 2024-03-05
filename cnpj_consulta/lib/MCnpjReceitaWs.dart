@@ -10,6 +10,7 @@ import 'package:dio/dio.dart';
 import 'package:json_annotation/json_annotation.dart';
 import '../funcoes/fJson.dart';
 import 'MCnpj.dart';
+import 'package:http/http.dart' as http;
 
 part 'MCnpjReceitaWs.g.dart';
 
@@ -193,36 +194,43 @@ class CNPJReceitaWS {
   static String lCNPJReceitaWSToJson(List<CNPJReceitaWS> data) => jsonEncode(List<dynamic>.from(data.map((x) => x.toJson())), toEncodable: FJson.dataHoraSeralizer);
 
   static Future<CNPJNormal> consultarCNPJ(String cnpj, int days, String token) async {
-    final dio = Dio();
-    Response responseDio;
+    //final dio = Dio();
+    //Response responseDio;
     String sUrl = "";
     String sMensagem = "";
+    Map<String, String> headers = {};
 
-    if (days > 0) {     // Caso days esteja preenchido, é a API Comercial
+    if (days > 0) {
+      // Caso days esteja preenchido, é a API Comercial
 
       sUrl = "https://receitaws.com.br/v1/cnpj/${cnpj.trim().replaceAll('.', '').replaceAll('-', '').replaceAll('/', '')}/days/$days";
 
-      dio.options.headers = {
+      headers = {
         "Authorization": "Bearer $token",
         "Accept": "application/json",
 
-        //"Access-Control-Allow-Origin": "*",
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, OPTIONS',
+        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Cookie, token, Access-Control-Allow-Origin',
+        "Access-Control-Allow-Credentials": 'true',
+        "Access-Control-Expose-Headers": "Authorization, authenticated"
+
         //  "Access-Control-Allow-Headers": "Content-Type",
         //  "Referrer-Policy": "no-referrer-when-downgrade",
         //  "Access-Control-Allow-Methods": "GET,PUT,PATCH,POST,DELETE",
         //   "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
       };
-
     } else {      // Caso days esteja vazio, é a API Publica
       sUrl = "https://receitaws.com.br/v1/cnpj/${cnpj.trim().replaceAll('.', '').replaceAll('-', '').replaceAll('/', '')}";
     }
 
-    responseDio = await dio.get(sUrl);
+    // responseDio = await dio.get(sUrl);
+    final response = await http.get(Uri.parse(sUrl), headers: headers);
 
     CNPJNormal cnpjNormal = CNPJNormal();
     CNPJReceitaWS cnpjReceita = CNPJReceitaWS();
 
-    cnpjReceita = CNPJReceitaWS.fromJson(responseDio.data);
+    //cnpjReceita = CNPJReceitaWS.fromJson(responseDio.data);
 
     int numQsa = 0;
     cnpjNormal.qsa = [];
@@ -307,10 +315,10 @@ class CNPJReceitaWS {
     cnpjNormal.cnaeAtvSecundaria = int.parse(cnpjReceita.atividades_secundarias![0].code!.replaceAll('.', '').replaceAll('-', '').trim());
     cnpjNormal.cnaeAtvSecundariaDescricao = cnpjReceita.atividades_secundarias![0].text;
 
-    if (responseDio.statusCode != 200) {
-      sMensagem = "Aconteceu uma falha ao consultar o Cnpj na ReceitaWS.";
-      sMensagem += "\n(${responseDio.statusCode})";
-    }
+    // if (responseDio.statusCode != 200) {
+    //   sMensagem = "Aconteceu uma falha ao consultar o Cnpj na ReceitaWS.";
+    //   sMensagem += "\n(${responseDio.statusCode})";
+    // }
 
     return cnpjNormal;
   }

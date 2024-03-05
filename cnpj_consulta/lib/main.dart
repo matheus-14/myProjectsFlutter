@@ -124,6 +124,10 @@ class _MyHomePageState extends State<MyHomePage> {
     try {
       debugger();
 
+      cnpjEntrada = "03637885000122";
+      days = 20;
+
+
     if (days != null) { // Receitaws(API Comercial)
       token = "9c6bde7c95d6c05ec2225a24d53b286f38b962248c2ef76763f9b4b3a2200da4"; //Teste1
       //token = "5dd5f29948f4f6fd7add087655145ff5a641fb48aafdad72b245ca6de0c7dab4";  //Teste29/02

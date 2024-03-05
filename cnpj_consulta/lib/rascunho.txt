@@ -84,3 +84,12 @@ https://brasilapi.com.br/api/cnpj/v1/03637885000122
 https://receitaws.com.br/v1/cnpj/03637885000122
 
 
+
+https://medium.com/@mustafatahirhussein/xmlhttprequest-blocked-by-cors-policy-flutter-web-fix-6bebe09d059f
+
+
+https://github.com/cfug/dio/issues/1664
+
+https://github.com/cfug/dio/tree/main/dio#cross-origin-resource-sharing-on-web-cors
+
+https://receitaws.com.br/account/billing
