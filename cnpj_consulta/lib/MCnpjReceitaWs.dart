@@ -3,6 +3,8 @@
 
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:html';
+import 'dart:io';
 import 'package:cnpj_consulta/MCnpjQsa.dart';
 import 'package:cnpj_consulta/MCnpjAtividadePrincipal.dart';
 import 'package:cnpj_consulta/MCnpjAtividadesSecundarias.dart';
@@ -34,16 +36,22 @@ class Billing {
     );
   }
 
-  factory Billing.fromJson(Map<String, dynamic> json) => _$BillingFromJson(json);
+  factory Billing.fromJson(Map<String, dynamic> json) =>
+      _$BillingFromJson(json);
   Map<String, dynamic> toJson() => _$BillingToJson(this);
 
-  factory Billing.fromJsonString(String jsonS) => Billing.fromJson(jsonDecode(jsonS));
+  factory Billing.fromJsonString(String jsonS) =>
+      Billing.fromJson(jsonDecode(jsonS));
   String toJsonString() => jsonEncode(_$BillingToJson(this));
 
-  static List<Billing> lBillingFromJson(String str) => List<Billing>.from(jsonDecode(str).map((x) => Billing.fromJson(x)));
-  static List<Billing> lBillingFromMap(List<Map<String, Object?>> lMap) => lMap.map((x) => Billing.fromJson(x)).toList();
+  static List<Billing> lBillingFromJson(String str) =>
+      List<Billing>.from(jsonDecode(str).map((x) => Billing.fromJson(x)));
+  static List<Billing> lBillingFromMap(List<Map<String, Object?>> lMap) =>
+      lMap.map((x) => Billing.fromJson(x)).toList();
 
-  static String lBillingToJson(List<Billing> data) => jsonEncode(List<dynamic>.from(data.map((x) => x.toJson())), toEncodable: FJson.dataHoraSeralizer);
+  static String lBillingToJson(List<Billing> data) =>
+      jsonEncode(List<dynamic>.from(data.map((x) => x.toJson())),
+          toEncodable: FJson.dataHoraSeralizer);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -158,7 +166,8 @@ class CNPJReceitaWS {
       fantasia: fantasia ?? this.fantasia,
       abertura: abertura ?? this.abertura,
       atividade_principal: atividade_principal ?? this.atividade_principal,
-      atividades_secundarias: atividades_secundarias ?? this.atividades_secundarias,
+      atividades_secundarias:
+          atividades_secundarias ?? this.atividades_secundarias,
       natureza_juridica: natureza_juridica ?? this.natureza_juridica,
       logradouro: logradouro ?? this.logradouro,
       numero: numero ?? this.numero,
@@ -166,7 +175,8 @@ class CNPJReceitaWS {
       cep: cep ?? this.cep,
       bairro: bairro ?? this.bairro,
       municipio: municipio ?? this.municipio,
-      codigo_municipio_ibge: codigo_municipio_ibge ?? this.codigo_municipio_ibge,
+      codigo_municipio_ibge:
+          codigo_municipio_ibge ?? this.codigo_municipio_ibge,
       uf: uf ?? this.uf,
       email: email ?? this.email,
       telefone: telefone ?? this.telefone,
@@ -175,25 +185,35 @@ class CNPJReceitaWS {
       data_situacao: data_situacao ?? this.data_situacao,
       motivo_situacao: motivo_situacao ?? this.motivo_situacao,
       situacao_especial: situacao_especial ?? this.situacao_especial,
-      data_situacao_especial: data_situacao_especial ?? this.data_situacao_especial,
+      data_situacao_especial:
+          data_situacao_especial ?? this.data_situacao_especial,
       capital_social: capital_social ?? this.capital_social,
       qsa: qsa ?? this.qsa,
       billing: billing ?? this.billing,
     );
   }
 
-  factory CNPJReceitaWS.fromJson(Map<String, dynamic> json) => _$CNPJReceitaWSFromJson(json);
+  factory CNPJReceitaWS.fromJson(Map<String, dynamic> json) =>
+      _$CNPJReceitaWSFromJson(json);
   Map<String, dynamic> toJson() => _$CNPJReceitaWSToJson(this);
 
-  factory CNPJReceitaWS.fromJsonString(String jsonS) => CNPJReceitaWS.fromJson(jsonDecode(jsonS));
+  factory CNPJReceitaWS.fromJsonString(String jsonS) =>
+      CNPJReceitaWS.fromJson(jsonDecode(jsonS));
   String toJsonString() => jsonEncode(_$CNPJReceitaWSToJson(this));
 
-  static List<CNPJReceitaWS> lCNPJReceitaWSFromJson(String str) => List<CNPJReceitaWS>.from(jsonDecode(str).map((x) => CNPJReceitaWS.fromJson(x)));
-  static List<CNPJReceitaWS> lCNPJReceitaWSFromMap(List<Map<String, Object?>> lMap) => lMap.map((x) => CNPJReceitaWS.fromJson(x)).toList();
+  static List<CNPJReceitaWS> lCNPJReceitaWSFromJson(String str) =>
+      List<CNPJReceitaWS>.from(
+          jsonDecode(str).map((x) => CNPJReceitaWS.fromJson(x)));
+  static List<CNPJReceitaWS> lCNPJReceitaWSFromMap(
+          List<Map<String, Object?>> lMap) =>
+      lMap.map((x) => CNPJReceitaWS.fromJson(x)).toList();
 
-  static String lCNPJReceitaWSToJson(List<CNPJReceitaWS> data) => jsonEncode(List<dynamic>.from(data.map((x) => x.toJson())), toEncodable: FJson.dataHoraSeralizer);
+  static String lCNPJReceitaWSToJson(List<CNPJReceitaWS> data) =>
+      jsonEncode(List<dynamic>.from(data.map((x) => x.toJson())),
+          toEncodable: FJson.dataHoraSeralizer);
 
-  static Future<CNPJNormal> consultarCNPJ(String cnpj, int days, String token) async {
+  static Future<CNPJNormal> consultarCNPJ(
+      String cnpj, int days, String token) async {
     //final dio = Dio();
     //Response responseDio;
     String sUrl = "";
@@ -203,29 +223,57 @@ class CNPJReceitaWS {
     if (days > 0) {
       // Caso days esteja preenchido, é a API Comercial
 
-      sUrl = "https://receitaws.com.br/v1/cnpj/${cnpj.trim().replaceAll('.', '').replaceAll('-', '').replaceAll('/', '')}/days/$days";
+      sUrl =
+          "https://receitaws.com.br/v1/cnpj/${cnpj.trim().replaceAll('.', '').replaceAll('-', '').replaceAll('/', '')}/days/$days";
 
       headers = {
-        "Authorization": "Bearer $token",
-        "Accept": "application/json",
-
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, OPTIONS',
-        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Cookie, token, Access-Control-Allow-Origin',
-        "Access-Control-Allow-Credentials": 'true',
-        "Access-Control-Expose-Headers": "Authorization, authenticated"
-
-        //  "Access-Control-Allow-Headers": "Content-Type",
-        //  "Referrer-Policy": "no-referrer-when-downgrade",
-        //  "Access-Control-Allow-Methods": "GET,PUT,PATCH,POST,DELETE",
-        //   "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
+        HttpHeaders.authorizationHeader: "Bearer $token",
+        HttpHeaders.accessControlAllowCredentialsHeader: 'true',
+        HttpHeaders.accessControlAllowOriginHeader: '*',
+        HttpHeaders.connectionHeader: 'keep-alive',
+        HttpHeaders.accessControlAllowHeadersHeader:
+            'Origin, keep-alive, X-Requested-With, Content-Type, Accept, Authorization, Cookie, token, Methods, Credentials, Headers, authenticated, Content-Encoding, Kuma-Revision',
+        HttpHeaders.contentTypeHeader: "application/json",
+        HttpHeaders.accessControlAllowMethodsHeader: 'GET',
+        HttpHeaders.accessControlRequestHeadersHeader:
+            'Origin, keep-alive, X-Requested-With, Content-Type, Accept, Authorization, Cookie, token, Methods, Credentials, Headers, authenticated, Content-Encoding, Kuma-Revision',
+        HttpHeaders.accessControlRequestMethodHeader: 'GET',
+        HttpHeaders.allowHeader: 'true',
+        HttpHeaders.expiresHeader: 'false',
+        HttpHeaders.accessControlExposeHeadersHeader:
+            "Authorization, authenticated, Content-Encoding, Kuma-Revision"
       };
-    } else {      // Caso days esteja vazio, é a API Publica
-      sUrl = "https://receitaws.com.br/v1/cnpj/${cnpj.trim().replaceAll('.', '').replaceAll('-', '').replaceAll('/', '')}";
+
+      // 'Access-Control-Allow-Headers': 'Origin, keep-alive, X-Requested-With, Content-Type, Accept, Authorization, Cookie, token, Methods, Credentials, Headers, authenticated, Content-Encoding, Kuma-Revision',
+      // "Content-Type": "application/json",
+
+      // 'Access-Control-Allow-Origin': 'receitaws.com.br',
+      // 'Access-Control-Allow-Methods': 'GET',
+      // "Access-Control-Allow-Credentials": 'true',
+      // "Access-Control-Expose-Headers": "Authorization, authenticated, Content-Encoding, Kuma-Revision",
+      // 'Connection': 'keep-alive',
+      // // 'Accept-Encoding': 'gzip, deflate, br',
+      // // 'Host': 'receitaws.com.br'
+
+      // //  "Access-Control-Allow-Headers": "Content-Type",
+      // //  "Referrer-Policy": "no-referrer-when-downgrade",
+      // //  "Access-Control-Allow-Methods": "GET,PUT,PATCH,POST,DELETE",
+      // //   "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
+    } else {
+      // Caso days esteja vazio, é a API Publica
+      sUrl =
+          "https://receitaws.com.br/v1/cnpj/${cnpj.trim().replaceAll('.', '').replaceAll('-', '').replaceAll('/', '')}";
     }
 
     // responseDio = await dio.get(sUrl);
-    final response = await http.get(Uri.parse(sUrl), headers: headers);
+
+    var dd = http.Client();
+    var request = http.Request('GET', Uri.parse(sUrl));
+    request.headers.addAll(headers);
+
+    var response = await dd.send(request);
+
+    //final response = await http.get(Uri.parse(sUrl), headers: headers);
 
     CNPJNormal cnpjNormal = CNPJNormal();
     CNPJReceitaWS cnpjReceita = CNPJReceitaWS();
@@ -237,7 +285,8 @@ class CNPJReceitaWS {
     for (var obj in cnpjReceita.qsa!) {
       cnpjNormal.qsa!.add(obj);
       cnpjNormal.qsa![numQsa].nome_socio = cnpjNormal.qsa![numQsa].nome;
-      cnpjNormal.qsa![numQsa].qualificacao_socio = cnpjNormal.qsa![numQsa].qual!.split('-').sublist(1).join(' ').trim();
+      cnpjNormal.qsa![numQsa].qualificacao_socio =
+          cnpjNormal.qsa![numQsa].qual!.split('-').sublist(1).join(' ').trim();
       numQsa++;
     }
 
@@ -263,13 +312,15 @@ class CNPJReceitaWS {
     cnpjNormal.municipio = cnpjReceita.municipio;
 
     if (cnpjReceita.capital_social != "") {
-      cnpjNormal.capitalSocial = int.parse(double.parse(cnpjReceita.capital_social!).toStringAsFixed(0));
+      cnpjNormal.capitalSocial = int.parse(
+          double.parse(cnpjReceita.capital_social!).toStringAsFixed(0));
     }
 
     cnpjNormal.situacaoEspecial = cnpjReceita.situacao_especial;
 
     if (cnpjReceita.data_situacao_especial != "") {
-      cnpjNormal.dataSituacaoEspecial = DateTime.tryParse(cnpjReceita.data_situacao_especial ?? '');
+      cnpjNormal.dataSituacaoEspecial =
+          DateTime.tryParse(cnpjReceita.data_situacao_especial ?? '');
     }
 //equivalentes
     cnpjNormal.nome = cnpjReceita.fantasia;
@@ -277,8 +328,13 @@ class CNPJReceitaWS {
     cnpjNormal.tipoMatrizFilial = cnpjReceita.tipo;
 
     if (cnpjReceita.natureza_juridica != "") {
-      cnpjNormal.naturezaJuridica = cnpjReceita.natureza_juridica!.split('-')[2].trim();
-      cnpjNormal.codigoNaturezaJuridica = int.parse(cnpjReceita.natureza_juridica!.split(' ')[0].replaceAll('-', '').trim());
+      cnpjNormal.naturezaJuridica =
+          cnpjReceita.natureza_juridica!.split('-')[2].trim();
+      cnpjNormal.codigoNaturezaJuridica = int.parse(cnpjReceita
+          .natureza_juridica!
+          .split(' ')[0]
+          .replaceAll('-', '')
+          .trim());
     }
 
     if (cnpjReceita.abertura != "") {
@@ -309,16 +365,24 @@ class CNPJReceitaWS {
     cnpjNormal.billingFree = cnpjReceita.billing!.free;
     cnpjNormal.billingDatabase = cnpjReceita.billing!.database;
 
-    cnpjNormal.cnaeFiscal = int.parse(cnpjReceita.atividade_principal![0].code!.replaceAll('.', '').replaceAll('-', '').trim());
+    cnpjNormal.cnaeFiscal = int.parse(cnpjReceita.atividade_principal![0].code!
+        .replaceAll('.', '')
+        .replaceAll('-', '')
+        .trim());
     cnpjNormal.cnaeFiscalDescricao = cnpjReceita.atividade_principal![0].text;
 
-    cnpjNormal.cnaeAtvSecundaria = int.parse(cnpjReceita.atividades_secundarias![0].code!.replaceAll('.', '').replaceAll('-', '').trim());
-    cnpjNormal.cnaeAtvSecundariaDescricao = cnpjReceita.atividades_secundarias![0].text;
+    cnpjNormal.cnaeAtvSecundaria = int.parse(cnpjReceita
+        .atividades_secundarias![0].code!
+        .replaceAll('.', '')
+        .replaceAll('-', '')
+        .trim());
+    cnpjNormal.cnaeAtvSecundariaDescricao =
+        cnpjReceita.atividades_secundarias![0].text;
 
-    // if (responseDio.statusCode != 200) {
-    //   sMensagem = "Aconteceu uma falha ao consultar o Cnpj na ReceitaWS.";
-    //   sMensagem += "\n(${responseDio.statusCode})";
-    // }
+    if (response.statusCode != 200) {
+      sMensagem = "Aconteceu uma falha ao consultar o Cnpj na ReceitaWS.";
+      sMensagem += "\n(${response.statusCode})";
+    }
 
     return cnpjNormal;
   }
