@@ -1,13 +1,10 @@
-// ignore_for_file: unused_catch_stack
+//ignore_for_file: unused_catch_stack
 
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 //import 'cnpj_brasilapi.dart';
 //import 'cnpj_receitaws.dart';
 import 'MCnpj.dart';
-
-//import 'package:fluttertoast/fluttertoast.dart';
 
 
 void main() {

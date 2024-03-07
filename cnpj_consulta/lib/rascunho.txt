@@ -13,6 +13,10 @@ https://www.youtube.com/watch?v=GtgJyYFGvPQ
 
 ----------------
 
+linha 214 receitaWS - responseDio = await dio.get(sUrl);
+ao consultar cnpj 04523992000192 com days = 1
+https://www.youtube.com/watch?v=GtgJyYFGvPQ
+
 **cnpjbrasil
 
 **FALTAM:
@@ -34,20 +38,6 @@ identificadorMatrizFilial,
   "dataExclusaoDoSimples",
   "opcaoPeloMei",
   "cnaesSecundarios"
-}
-
-//------------------------------
-**cnpjreceita.
-
-FALTAM:
-{
-  "status",
-  "ultimaAtualizacao",
-  "atividadePrincipal",
-  "atividadesSecundarias",
-  "email",
-  "efr",
-  "billing"
 }
 
 //-----------------------

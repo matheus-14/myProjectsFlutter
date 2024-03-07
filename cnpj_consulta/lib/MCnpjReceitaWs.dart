@@ -3,7 +3,6 @@
 
 import 'dart:convert';
 import 'dart:developer';
-import 'dart:html';
 import 'dart:io';
 import 'package:cnpj_consulta/MCnpjQsa.dart';
 import 'package:cnpj_consulta/MCnpjAtividadePrincipal.dart';
@@ -193,92 +192,60 @@ class CNPJReceitaWS {
     );
   }
 
-  factory CNPJReceitaWS.fromJson(Map<String, dynamic> json) =>
-      _$CNPJReceitaWSFromJson(json);
+  factory CNPJReceitaWS.fromJson(Map<String, dynamic> json) => _$CNPJReceitaWSFromJson(json);
   Map<String, dynamic> toJson() => _$CNPJReceitaWSToJson(this);
 
-  factory CNPJReceitaWS.fromJsonString(String jsonS) =>
-      CNPJReceitaWS.fromJson(jsonDecode(jsonS));
+  factory CNPJReceitaWS.fromJsonString(String jsonS) => CNPJReceitaWS.fromJson(jsonDecode(jsonS));
   String toJsonString() => jsonEncode(_$CNPJReceitaWSToJson(this));
 
-  static List<CNPJReceitaWS> lCNPJReceitaWSFromJson(String str) =>
-      List<CNPJReceitaWS>.from(
-          jsonDecode(str).map((x) => CNPJReceitaWS.fromJson(x)));
-  static List<CNPJReceitaWS> lCNPJReceitaWSFromMap(
-          List<Map<String, Object?>> lMap) =>
-      lMap.map((x) => CNPJReceitaWS.fromJson(x)).toList();
+  static List<CNPJReceitaWS> lCNPJReceitaWSFromJson(String str) => List<CNPJReceitaWS>.from(jsonDecode(str).map((x) => CNPJReceitaWS.fromJson(x)));
+  static List<CNPJReceitaWS> lCNPJReceitaWSFromMap(List<Map<String, Object?>> lMap) => lMap.map((x) => CNPJReceitaWS.fromJson(x)).toList();
 
-  static String lCNPJReceitaWSToJson(List<CNPJReceitaWS> data) =>
-      jsonEncode(List<dynamic>.from(data.map((x) => x.toJson())),
-          toEncodable: FJson.dataHoraSeralizer);
+  static String lCNPJReceitaWSToJson(List<CNPJReceitaWS> data) => jsonEncode(List<dynamic>.from(data.map((x) => x.toJson())), toEncodable: FJson.dataHoraSeralizer);
 
-  static Future<CNPJNormal> consultarCNPJ(
-      String cnpj, int days, String token) async {
-    //final dio = Dio();
-    //Response responseDio;
+  static Future<CNPJNormal> consultarCNPJ(String cnpj, int days, String token) async {
+    final dio = Dio();
+    Response responseDio;
     String sUrl = "";
     String sMensagem = "";
-    Map<String, String> headers = {};
 
-    if (days > 0) {
-      // Caso days esteja preenchido, é a API Comercial
+    if (days > 0) {     // Caso days esteja preenchido, é a API Comercial
 
-      sUrl =
-          "https://receitaws.com.br/v1/cnpj/${cnpj.trim().replaceAll('.', '').replaceAll('-', '').replaceAll('/', '')}/days/$days";
+      sUrl = "https://receitaws.com.br/v1/cnpj/${cnpj.trim().replaceAll('.', '').replaceAll('-', '').replaceAll('/', '')}/days/$days";
 
-      headers = {
-        HttpHeaders.authorizationHeader: "Bearer $token",
-        HttpHeaders.accessControlAllowCredentialsHeader: 'true',
-        HttpHeaders.accessControlAllowOriginHeader: '*',
-        HttpHeaders.connectionHeader: 'keep-alive',
-        HttpHeaders.accessControlAllowHeadersHeader:
-            'Origin, keep-alive, X-Requested-With, Content-Type, Accept, Authorization, Cookie, token, Methods, Credentials, Headers, authenticated, Content-Encoding, Kuma-Revision',
-        HttpHeaders.contentTypeHeader: "application/json",
-        HttpHeaders.accessControlAllowMethodsHeader: 'GET',
-        HttpHeaders.accessControlRequestHeadersHeader:
-            'Origin, keep-alive, X-Requested-With, Content-Type, Accept, Authorization, Cookie, token, Methods, Credentials, Headers, authenticated, Content-Encoding, Kuma-Revision',
-        HttpHeaders.accessControlRequestMethodHeader: 'GET',
-        HttpHeaders.allowHeader: 'true',
-        HttpHeaders.expiresHeader: 'false',
-        HttpHeaders.accessControlExposeHeadersHeader:
-            "Authorization, authenticated, Content-Encoding, Kuma-Revision"
+      dio.options.headers = {
+        "Accept": "application/json",
+        "Authorization": "Bearer $token",        
       };
-
       // 'Access-Control-Allow-Headers': 'Origin, keep-alive, X-Requested-With, Content-Type, Accept, Authorization, Cookie, token, Methods, Credentials, Headers, authenticated, Content-Encoding, Kuma-Revision',
       // "Content-Type": "application/json",
-
-      // 'Access-Control-Allow-Origin': 'receitaws.com.br',
+      // 'Access-Control-Allow-Origin': '*',
       // 'Access-Control-Allow-Methods': 'GET',
       // "Access-Control-Allow-Credentials": 'true',
       // "Access-Control-Expose-Headers": "Authorization, authenticated, Content-Encoding, Kuma-Revision",
       // 'Connection': 'keep-alive',
       // // 'Accept-Encoding': 'gzip, deflate, br',
       // // 'Host': 'receitaws.com.br'
-
       // //  "Access-Control-Allow-Headers": "Content-Type",
       // //  "Referrer-Policy": "no-referrer-when-downgrade",
       // //  "Access-Control-Allow-Methods": "GET,PUT,PATCH,POST,DELETE",
       // //   "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
-    } else {
-      // Caso days esteja vazio, é a API Publica
-      sUrl =
-          "https://receitaws.com.br/v1/cnpj/${cnpj.trim().replaceAll('.', '').replaceAll('-', '').replaceAll('/', '')}";
+    } else {      // Caso days esteja vazio, é a API Publica
+      sUrl = "https://receitaws.com.br/v1/cnpj/${cnpj.trim().replaceAll('.', '').replaceAll('-', '').replaceAll('/', '')}";
     }
 
-    // responseDio = await dio.get(sUrl);
+     responseDio = await dio.get(sUrl);
 
-    var dd = http.Client();
-    var request = http.Request('GET', Uri.parse(sUrl));
-    request.headers.addAll(headers);
-
-    var response = await dd.send(request);
-
+    // var dd = http.Client();
+    // var request = http.Request('GET', Uri.parse(sUrl));
+    // request.headers.addAll(headers);
+    // var response = await dd.send(request);
     //final response = await http.get(Uri.parse(sUrl), headers: headers);
 
     CNPJNormal cnpjNormal = CNPJNormal();
     CNPJReceitaWS cnpjReceita = CNPJReceitaWS();
 
-    //cnpjReceita = CNPJReceitaWS.fromJson(responseDio.data);
+    cnpjReceita = CNPJReceitaWS.fromJson(responseDio.data);
 
     int numQsa = 0;
     cnpjNormal.qsa = [];
@@ -379,9 +346,9 @@ class CNPJReceitaWS {
     cnpjNormal.cnaeAtvSecundariaDescricao =
         cnpjReceita.atividades_secundarias![0].text;
 
-    if (response.statusCode != 200) {
+    if (responseDio.statusCode != 200) {
       sMensagem = "Aconteceu uma falha ao consultar o Cnpj na ReceitaWS.";
-      sMensagem += "\n(${response.statusCode})";
+      sMensagem += "\n(${responseDio.statusCode})";
     }
 
     return cnpjNormal;
