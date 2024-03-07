@@ -69,7 +69,6 @@ class CNPJNormal {
   String? dddTelefone2;
   String? dddFax;
   String? descricaoPorte;
-  bool? pcaoPeloSimples;
   DateTime? dataOpcaoPeloSimples;
   DateTime? dataExclusaoDoSimples;
   DateTime? dataOpcaoPeloMei;

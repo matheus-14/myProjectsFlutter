@@ -208,6 +208,7 @@ class CNPJReceitaWS {
     Response responseDio;
     String sUrl = "";
     String sMensagem = "";
+    // Map<String, String> headers = {};
 
     if (days > 0) {     // Caso days esteja preenchido, é a API Comercial
 
@@ -235,7 +236,8 @@ class CNPJReceitaWS {
     }
 
      responseDio = await dio.get(sUrl);
-
+    // final response = await http.get(Uri.parse(sUrl), headers: headers);
+    
     // var dd = http.Client();
     // var request = http.Request('GET', Uri.parse(sUrl));
     // request.headers.addAll(headers);
@@ -252,8 +254,7 @@ class CNPJReceitaWS {
     for (var obj in cnpjReceita.qsa!) {
       cnpjNormal.qsa!.add(obj);
       cnpjNormal.qsa![numQsa].nome_socio = cnpjNormal.qsa![numQsa].nome;
-      cnpjNormal.qsa![numQsa].qualificacao_socio =
-          cnpjNormal.qsa![numQsa].qual!.split('-').sublist(1).join(' ').trim();
+      cnpjNormal.qsa![numQsa].qualificacao_socio = cnpjNormal.qsa![numQsa].qual!.split('-').sublist(1).join(' ').trim();
       numQsa++;
     }
 
@@ -279,15 +280,13 @@ class CNPJReceitaWS {
     cnpjNormal.municipio = cnpjReceita.municipio;
 
     if (cnpjReceita.capital_social != "") {
-      cnpjNormal.capitalSocial = int.parse(
-          double.parse(cnpjReceita.capital_social!).toStringAsFixed(0));
+      cnpjNormal.capitalSocial = int.parse(double.parse(cnpjReceita.capital_social!).toStringAsFixed(0));
     }
 
     cnpjNormal.situacaoEspecial = cnpjReceita.situacao_especial;
 
     if (cnpjReceita.data_situacao_especial != "") {
-      cnpjNormal.dataSituacaoEspecial =
-          DateTime.tryParse(cnpjReceita.data_situacao_especial ?? '');
+      cnpjNormal.dataSituacaoEspecial = DateTime.tryParse(cnpjReceita.data_situacao_especial ?? '');
     }
 //equivalentes
     cnpjNormal.nome = cnpjReceita.fantasia;
@@ -295,13 +294,8 @@ class CNPJReceitaWS {
     cnpjNormal.tipoMatrizFilial = cnpjReceita.tipo;
 
     if (cnpjReceita.natureza_juridica != "") {
-      cnpjNormal.naturezaJuridica =
-          cnpjReceita.natureza_juridica!.split('-')[2].trim();
-      cnpjNormal.codigoNaturezaJuridica = int.parse(cnpjReceita
-          .natureza_juridica!
-          .split(' ')[0]
-          .replaceAll('-', '')
-          .trim());
+      cnpjNormal.naturezaJuridica = cnpjReceita.natureza_juridica!.split('-')[2].trim();
+      cnpjNormal.codigoNaturezaJuridica = int.parse(cnpjReceita.natureza_juridica!.split(' ')[0].replaceAll('-', '').trim());
     }
 
     if (cnpjReceita.abertura != "") {
@@ -332,19 +326,11 @@ class CNPJReceitaWS {
     cnpjNormal.billingFree = cnpjReceita.billing!.free;
     cnpjNormal.billingDatabase = cnpjReceita.billing!.database;
 
-    cnpjNormal.cnaeFiscal = int.parse(cnpjReceita.atividade_principal![0].code!
-        .replaceAll('.', '')
-        .replaceAll('-', '')
-        .trim());
+    cnpjNormal.cnaeFiscal = int.parse(cnpjReceita.atividade_principal![0].code!.replaceAll('.', '').replaceAll('-', '').trim());
     cnpjNormal.cnaeFiscalDescricao = cnpjReceita.atividade_principal![0].text;
 
-    cnpjNormal.cnaeAtvSecundaria = int.parse(cnpjReceita
-        .atividades_secundarias![0].code!
-        .replaceAll('.', '')
-        .replaceAll('-', '')
-        .trim());
-    cnpjNormal.cnaeAtvSecundariaDescricao =
-        cnpjReceita.atividades_secundarias![0].text;
+    cnpjNormal.cnaeAtvSecundaria = int.parse(cnpjReceita.atividades_secundarias![0].code!.replaceAll('.', '').replaceAll('-', '').trim());
+    cnpjNormal.cnaeAtvSecundariaDescricao = cnpjReceita.atividades_secundarias![0].text;
 
     if (responseDio.statusCode != 200) {
       sMensagem = "Aconteceu uma falha ao consultar o Cnpj na ReceitaWS.";

@@ -110,7 +110,7 @@ CNPJNormal _$CNPJNormalFromJson(Map<String, dynamic> json) => CNPJNormal(
       codigoQualificacaoRepresentanteLegal:
           json['codigoQualificacaoRepresentanteLegal'] as int?,
       codigoPorte: json['codigoPorte'] as int?,
-    )..pcaoPeloSimples = json['pcaoPeloSimples'] as bool?;
+    );
 
 Map<String, dynamic> _$CNPJNormalToJson(CNPJNormal instance) =>
     <String, dynamic>{
@@ -170,7 +170,6 @@ Map<String, dynamic> _$CNPJNormalToJson(CNPJNormal instance) =>
       'dddTelefone2': instance.dddTelefone2,
       'dddFax': instance.dddFax,
       'descricaoPorte': instance.descricaoPorte,
-      'pcaoPeloSimples': instance.pcaoPeloSimples,
       'dataOpcaoPeloSimples': instance.dataOpcaoPeloSimples?.toIso8601String(),
       'dataExclusaoDoSimples':
           instance.dataExclusaoDoSimples?.toIso8601String(),
