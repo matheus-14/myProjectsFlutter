@@ -231,6 +231,9 @@ CNPJBrasilAPI copyWith({
   final dio = Dio();
   final responseDio = await dio.get("https://brasilapi.com.br/api/cnpj/v1/${cnpj.trim().replaceAll('.', '').replaceAll('-', '').replaceAll('/', '')}");
 
+    Map<String, dynamic> valores = {
+      "cnpjCpf": cnpj
+    };
 
     CNPJNormal cnpjNormal = CNPJNormal();
     CNPJBrasilAPI cnpjbrasil = CNPJBrasilAPI();

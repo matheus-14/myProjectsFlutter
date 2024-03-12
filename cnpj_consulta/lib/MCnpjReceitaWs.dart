@@ -35,22 +35,16 @@ class Billing {
     );
   }
 
-  factory Billing.fromJson(Map<String, dynamic> json) =>
-      _$BillingFromJson(json);
+  factory Billing.fromJson(Map<String, dynamic> json) => _$BillingFromJson(json);
   Map<String, dynamic> toJson() => _$BillingToJson(this);
 
-  factory Billing.fromJsonString(String jsonS) =>
-      Billing.fromJson(jsonDecode(jsonS));
+  factory Billing.fromJsonString(String jsonS) => Billing.fromJson(jsonDecode(jsonS));
   String toJsonString() => jsonEncode(_$BillingToJson(this));
 
-  static List<Billing> lBillingFromJson(String str) =>
-      List<Billing>.from(jsonDecode(str).map((x) => Billing.fromJson(x)));
-  static List<Billing> lBillingFromMap(List<Map<String, Object?>> lMap) =>
-      lMap.map((x) => Billing.fromJson(x)).toList();
+  static List<Billing> lBillingFromJson(String str) => List<Billing>.from(jsonDecode(str).map((x) => Billing.fromJson(x)));
+  static List<Billing> lBillingFromMap(List<Map<String, Object?>> lMap) => lMap.map((x) => Billing.fromJson(x)).toList();
 
-  static String lBillingToJson(List<Billing> data) =>
-      jsonEncode(List<dynamic>.from(data.map((x) => x.toJson())),
-          toEncodable: FJson.dataHoraSeralizer);
+  static String lBillingToJson(List<Billing> data) => jsonEncode(List<dynamic>.from(data.map((x) => x.toJson())), toEncodable: FJson.dataHoraSeralizer);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -205,6 +199,11 @@ class CNPJReceitaWS {
 
   static Future<CNPJNormal> consultarCNPJ(String cnpj, int days, String token) async {
     final dio = Dio();
+    Map<String, dynamic> valores = {
+      "dias": days,
+      "cnpjCpf": cnpj
+    };
+
     Response responseDio;
     String sUrl = "";
     String sMensagem = "";
