@@ -1,3 +1,87 @@
+
+Em UI > detalhesRegistros > " detalhesRegistros.dart " - 
+//**************************************** */
+[...]
+
+                      message: "Exibe o menu de opções individuais",
+                      child: InkWell(
+                        customBorder: const CircleBorder(),
+                        onTapDown: (details) =>
+                            tapPosition = FFields().getTapPosition(details),
+                        onTap: () async {
+                          if (FConfig().bScreenLock) {
+                            return;
+                          }
+
+//**************************************** */
+
+                          //String cnpjEntrada = "03637885000122";
+                          String cnpjEntrada = "17.155.730/0001-64";
+                          int days = 20;
+
+                          //String sUrl = "${FConfig().enderecoUltimo}wscVersa/consultaCnpj/receitawsComercial";
+                          String sUrl =
+                              "http://192.168.0.112:5000/wscVersa/consultaCnpj/brasilAPI";
+
+                          //brasilAPI
+                          //receitawsComercial
+                          //receitawsPublica
+
+                          Map<String, String> dictHeaders = {
+                            "x-versa-dias": FGeral.criptografarTexto("$days"),
+                            "x-versa-cnpjcpf":
+                                FGeral.criptografarTexto(cnpjEntrada)
+                          };
+                          try {
+                            Response response =
+                                await RestClient.executarGetASync(
+                                    sUrl: sUrl,
+                                    bJsonType: true,
+                                    oCancelToken: FConfig().tokenCancel,
+                                    oAtivacaoAcesso: FConfig().aA,
+                                    mHeadersOutros: dictHeaders);
+                            MCnpj cnpj = MCnpj();
+                            if (response.data != null &&
+                                response.statusCode == 200) {
+                              cnpj = MCnpj.fromJsonString(response.data);
+                            }
+                            debugger();
+                          } catch (e) {
+                            debugger();
+                          }
+
+//**************************************** */
+
+                          showMenuLongPressF1(
+                            context,
+                            ref,
+                            tapPosition,
+                            widget.menu,
+                            tituloFinal,
+                            listaF2,
+                            listaF7,
+                            widget.objeto,
+                            objetoPaiFinal,
+                            widget.sCamposDeRelacao,
+                            mOpcoesIAED,
+                            listaF2.length > 1 ? dragEnabled : null,
+                            true,
+                          );
+                        },
+                        child: Padding(
+                          padding: edgeIAll5,
+                          child: Icon(Icons.more_vert_rounded,
+                              color: FCoresBasicas().branco),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+
+[...]
+
+----------------------------------------------------------------------------
+
 "The connection errored: The XMLHttpRequest onError callback was called. 
 This typically indicates an error on the network layer. This indicates an error 
 which most likely cannot be solved by the library."
