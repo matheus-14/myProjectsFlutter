@@ -6,7 +6,7 @@ part of 'MCnpj.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-CNPJNormal _$CNPJNormalFromJson(Map<String, dynamic> json) => CNPJNormal(
+MCnpj _$MCnpjFromJson(Map<String, dynamic> json) => MCnpj(
       cnpj: json['cnpj'] as String? ?? "",
       porte: json['porte'] as String? ?? "",
       razao: json['razao'] as String? ?? "",
@@ -18,7 +18,7 @@ CNPJNormal _$CNPJNormalFromJson(Map<String, dynamic> json) => CNPJNormal(
       cep: json['cep'] as String? ?? "",
       uf: json['uf'] as String? ?? "",
       municipio: json['municipio'] as String? ?? "",
-      capitalSocial: json['capitalSocial'] as int?,
+      capitalSocial: json['capitalSocial'] as String? ?? "",
       cnaes_secundarios: (json['cnaes_secundarios'] as List<dynamic>?)
           ?.map((e) => CnaesSecundarios.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -112,8 +112,7 @@ CNPJNormal _$CNPJNormalFromJson(Map<String, dynamic> json) => CNPJNormal(
       codigoPorte: json['codigoPorte'] as int?,
     );
 
-Map<String, dynamic> _$CNPJNormalToJson(CNPJNormal instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$MCnpjToJson(MCnpj instance) => <String, dynamic>{
       'cnpj': instance.cnpj,
       'porte': instance.porte,
       'razao': instance.razao,

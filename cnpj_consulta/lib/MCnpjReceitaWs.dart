@@ -197,7 +197,7 @@ class CNPJReceitaWS {
 
   static String lCNPJReceitaWSToJson(List<CNPJReceitaWS> data) => jsonEncode(List<dynamic>.from(data.map((x) => x.toJson())), toEncodable: FJson.dataHoraSeralizer);
 
-  static Future<CNPJNormal> consultarCNPJ(String cnpj, int days, String token) async {
+  static Future<MCnpj> consultarCNPJ(String cnpj, int days, String token) async {
     final dio = Dio();
     Map<String, dynamic> valores = {
       "dias": days,
@@ -243,7 +243,7 @@ class CNPJReceitaWS {
     // var response = await dd.send(request);
     //final response = await http.get(Uri.parse(sUrl), headers: headers);
 
-    CNPJNormal cnpjNormal = CNPJNormal();
+    MCnpj cnpjNormal = MCnpj();
     CNPJReceitaWS cnpjReceita = CNPJReceitaWS();
 
     cnpjReceita = CNPJReceitaWS.fromJson(responseDio.data);
@@ -277,10 +277,7 @@ class CNPJReceitaWS {
     cnpjNormal.cep = cnpjReceita.cep;
     cnpjNormal.uf = cnpjReceita.uf;
     cnpjNormal.municipio = cnpjReceita.municipio;
-
-    if (cnpjReceita.capital_social != "") {
-      cnpjNormal.capitalSocial = int.parse(double.parse(cnpjReceita.capital_social!).toStringAsFixed(0));
-    }
+    cnpjNormal.capitalSocial = cnpjReceita.capital_social;
 
     cnpjNormal.situacaoEspecial = cnpjReceita.situacao_especial;
 

@@ -15,7 +15,7 @@ part 'MCnpj.g.dart';
 
 
 @JsonSerializable(explicitToJson: true)
-class CNPJNormal {
+class MCnpj {
   String? cnpj;
   String? porte;
   String? razao;
@@ -27,7 +27,7 @@ class CNPJNormal {
   String? cep;
   String? uf;
   String? municipio;
-  int? capitalSocial;
+  String? capitalSocial;
   List<CnaesSecundarios>? cnaes_secundarios;
   List<Qsa>? qsa;
   List<AtividadePrincipal>? atividade_principal;
@@ -90,7 +90,7 @@ class CNPJNormal {
   int? codigoQualificacaoRepresentanteLegal;
   int? codigoPorte;
 
-CNPJNormal({
+MCnpj({
   this.cnpj = "",
   this.porte = "",
   this.razao = "",
@@ -102,7 +102,7 @@ CNPJNormal({
   this.cep = "",
   this.uf = "",
   this.municipio = "",
-  this.capitalSocial,
+  this.capitalSocial = "",
   this.cnaes_secundarios,
   this.qsa,
   this.atividade_principal,
@@ -163,7 +163,7 @@ CNPJNormal({
   this.codigoPorte,
   });
 
-CNPJNormal copyWit({
+MCnpj copyWit({
   String? cnpj,
   String? porte,
   String? razao,
@@ -175,7 +175,7 @@ CNPJNormal copyWit({
   String? cep,
   String? uf,
   String? municipio,
-  int? capitalSocial,
+  String? capitalSocial,
   List<CnaesSecundarios>? cnaes_secundarios,
   List<Qsa>? qsa,
   List<AtividadePrincipal>? atividade_principal,
@@ -236,7 +236,7 @@ CNPJNormal copyWit({
   int? codigoQualificacaoRepresentanteLegal,
   int? codigoPorte,
   }) {
-  return CNPJNormal(
+  return MCnpj(
     cnpj: cnpj ?? this.cnpj,
     porte: porte ?? this.porte,
     razao: razao ?? this.razao,
@@ -311,19 +311,19 @@ CNPJNormal copyWit({
    );
   }
 
-  factory CNPJNormal.fromJson(Map<String, dynamic> json) => _$CNPJNormalFromJson(json);
-  Map<String, dynamic> toJson() => _$CNPJNormalToJson(this);
+  factory MCnpj.fromJson(Map<String, dynamic> json) => _$MCnpjFromJson(json);
+  Map<String, dynamic> toJson() => _$MCnpjToJson(this);
 
-  factory CNPJNormal.fromJsonString(String jsonS) => CNPJNormal.fromJson(jsonDecode(jsonS));
-  String toJsonString() => jsonEncode(_$CNPJNormalToJson(this));
+  factory MCnpj.fromJsonString(String jsonS) => MCnpj.fromJson(jsonDecode(jsonS));
+  String toJsonString() => jsonEncode(_$MCnpjToJson(this));
 
-  static List<CNPJNormal> lCNPJNormalFromJson(String str) => List<CNPJNormal>.from(jsonDecode(str).map((x) => CNPJNormal.fromJson(x)));
-  static List<CNPJNormal> lCNPJNormalFromMap(List<Map<String, Object?>> lMap) => lMap.map((x) => CNPJNormal.fromJson(x)).toList();
+  static List<MCnpj> lMCnpjFromJson(String str) => List<MCnpj>.from(jsonDecode(str).map((x) => MCnpj.fromJson(x)));
+  static List<MCnpj> lMCnpjFromMap(List<Map<String, Object?>> lMap) => lMap.map((x) => MCnpj.fromJson(x)).toList();
 
-  static String lCNPJNormalToJson(List<CNPJNormal> data) => jsonEncode(List<dynamic>.from(data.map((x) => x.toJson())), toEncodable: FJson.dataHoraSeralizer);
+  static String lMCnpjToJson(List<MCnpj> data) => jsonEncode(List<dynamic>.from(data.map((x) => x.toJson())), toEncodable: FJson.dataHoraSeralizer);
 
   
-  static Future<CNPJNormal> consultarCNPJ(String selecionadaAPI, String cnpjEntrada, int days, String token) async {
+  static Future<MCnpj> consultarCNPJ(String selecionadaAPI, String cnpjEntrada, int days, String token) async {
 
     if (selecionadaAPI == 'BrasilAPI') {
       return CNPJBrasilAPI.consultarCNPJ(cnpjEntrada);

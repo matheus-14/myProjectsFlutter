@@ -48,7 +48,7 @@ class CNPJBrasilAPI {
   String? ddd_telefone_2;
   String? ddd_fax;
   int? qualificacao_do_responsavel;
-  int? capital_social;
+  String? capital_social;
   String? porte;
   String? descricao_porte;
   bool? opcao_pelo_simples;
@@ -61,8 +61,6 @@ class CNPJBrasilAPI {
   String? data_situacao_especial;
   List<CnaesSecundarios>? cnaes_secundarios;
   List<Qsa>? qsa;
-  List<AtividadePrincipal>? atividade_principal;
-  List<AtividadesSecundarias>? atividades_secundarias;
 
 CNPJBrasilAPI({
   this.cnpj = "",
@@ -97,7 +95,7 @@ CNPJBrasilAPI({
   this.ddd_telefone_2 = "",
   this.ddd_fax = "",
   this.qualificacao_do_responsavel,
-  this.capital_social,
+  this.capital_social = "",
   this.porte = "",
   this.descricao_porte = "",
   this.opcao_pelo_simples,
@@ -110,8 +108,6 @@ CNPJBrasilAPI({
   this.data_situacao_especial = "",
   this.cnaes_secundarios,
   this.qsa,
-  this.atividade_principal,
-  this.atividades_secundarias,
   });
 
 CNPJBrasilAPI copyWith({
@@ -147,7 +143,7 @@ CNPJBrasilAPI copyWith({
   String? ddd_telefone_2,
   String? ddd_fax,
   int? qualificacao_do_responsavel,
-  int? capital_social,
+  String? capital_social,
   String? porte,
   String? descricao_porte,
   bool? opcao_pelo_simples,
@@ -160,8 +156,6 @@ CNPJBrasilAPI copyWith({
   String? data_situacao_especial,
   List<CnaesSecundarios>? cnaes_secundarios,
   List<Qsa>? qsa,
-  List<AtividadePrincipal>? atividade_principal,
-  List<AtividadesSecundarias>? atividades_secundarias,
   }) {
   return CNPJBrasilAPI(
     cnpj: cnpj ?? this.cnpj,
@@ -209,9 +203,6 @@ CNPJBrasilAPI copyWith({
     data_situacao_especial: data_situacao_especial ?? this.data_situacao_especial,
     cnaes_secundarios: cnaes_secundarios ?? this.cnaes_secundarios,
     qsa: qsa ?? this.qsa,
-    atividade_principal: atividade_principal ?? this.atividade_principal,
-    atividades_secundarias: atividades_secundarias ?? this.atividades_secundarias,
- 
    );
   }
 
@@ -226,7 +217,7 @@ CNPJBrasilAPI copyWith({
 
   static String lCNPJBrasilAPIToJson(List<CNPJBrasilAPI> data) => jsonEncode(List<dynamic>.from(data.map((x) => x.toJson())), toEncodable: FJson.dataHoraSeralizer);
 
-  static Future<CNPJNormal> consultarCNPJ(String cnpj) async {
+  static Future<MCnpj> consultarCNPJ(String cnpj) async {
 
   final dio = Dio();
   final responseDio = await dio.get("https://brasilapi.com.br/api/cnpj/v1/${cnpj.trim().replaceAll('.', '').replaceAll('-', '').replaceAll('/', '')}");
@@ -235,7 +226,7 @@ CNPJBrasilAPI copyWith({
       "cnpjCpf": cnpj
     };
 
-    CNPJNormal cnpjNormal = CNPJNormal();
+    MCnpj cnpjNormal = MCnpj();
     CNPJBrasilAPI cnpjbrasil = CNPJBrasilAPI();
     String sMensagem = "";
     //  await Clipboard.setData(ClipboardData(text: response.body));

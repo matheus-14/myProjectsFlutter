@@ -49,7 +49,7 @@ CNPJBrasilAPI _$CNPJBrasilAPIFromJson(Map<String, dynamic> json) =>
       ddd_telefone_2: json['ddd_telefone_2'] as String? ?? "",
       ddd_fax: json['ddd_fax'] as String? ?? "",
       qualificacao_do_responsavel: json['qualificacao_do_responsavel'] as int?,
-      capital_social: json['capital_social'] as int?,
+      capital_social: json['capital_social'] as String? ?? "",
       porte: json['porte'] as String? ?? "",
       descricao_porte: json['descricao_porte'] as String? ?? "",
       opcao_pelo_simples: json['opcao_pelo_simples'] as bool?,
@@ -66,13 +66,6 @@ CNPJBrasilAPI _$CNPJBrasilAPIFromJson(Map<String, dynamic> json) =>
           .toList(),
       qsa: (json['qsa'] as List<dynamic>?)
           ?.map((e) => Qsa.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      atividade_principal: (json['atividade_principal'] as List<dynamic>?)
-          ?.map((e) => AtividadePrincipal.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      atividades_secundarias: (json['atividades_secundarias'] as List<dynamic>?)
-          ?.map(
-              (e) => AtividadesSecundarias.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -128,8 +121,4 @@ Map<String, dynamic> _$CNPJBrasilAPIToJson(CNPJBrasilAPI instance) =>
       'cnaes_secundarios':
           instance.cnaes_secundarios?.map((e) => e.toJson()).toList(),
       'qsa': instance.qsa?.map((e) => e.toJson()).toList(),
-      'atividade_principal':
-          instance.atividade_principal?.map((e) => e.toJson()).toList(),
-      'atividades_secundarias':
-          instance.atividades_secundarias?.map((e) => e.toJson()).toList(),
     };
