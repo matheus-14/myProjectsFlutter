@@ -76,7 +76,6 @@ class MCnpj {
   bool? opcaoPeloMei;
   String? pais;
   String? nomeSocio;
-  int? codigoPais; 
   String? faixaEtaria; 
   String? cnpjCpfDoSocio;
   String? qualificacaoSocio;
@@ -148,7 +147,6 @@ MCnpj({
   this.billingDatabase,
   this.pais = "",
   this.nomeSocio = "",
-  this.codigoPais,
   this.faixaEtaria = "",
   this.cnpjCpfDoSocio = "",
   this.qualificacaoSocio = "",
@@ -222,7 +220,6 @@ MCnpj copyWit({
   bool? billingDatabase,
   String? pais,
   String? nomeSocio,
-  int? codigoPais,
   String? faixaEtaria,
   String? cnpjCpfDoSocio,
   String? qualificacaoSocio,
@@ -294,7 +291,6 @@ MCnpj copyWit({
     billingDatabase: billingDatabase ?? this.billingDatabase,
     pais: pais ?? this.pais,
     nomeSocio: nomeSocio ?? this.nomeSocio,
-    codigoPais: codigoPais ?? this.codigoPais,
     faixaEtaria: faixaEtaria ?? this.faixaEtaria,
     cnpjCpfDoSocio: cnpjCpfDoSocio ?? this.cnpjCpfDoSocio,
     qualificacaoSocio: qualificacaoSocio ?? this.qualificacaoSocio,
